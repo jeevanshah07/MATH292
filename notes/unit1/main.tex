@@ -1,0 +1,179 @@
+\section{Unit 1}
+\subsection{Lecture 1}
+\subsubsection{What is a Differential Equation?}
+A \textbf{differential equation} relates a function to its derivatives. An \textbf{ordinary differential equation} (ODE) is a differential equation in which the function only has one independent variable. Differential equations often arise from physical laws such as Newtons second law: 
+\[
+    x''(t) = \frac{1}{m}F(x(t))
+\]
+
+\subsubsection{First Order ODEs}
+\begin{defbox}{Order}
+    The order of a differential equation refers to highest derivative found in the differential equation.
+\end{defbox}
+
+It follows that a first order ODE refer to an ODE that only contains first derivatives. The general form for a first order ODE is 
+\begin{equation}{\label{eq:1}}
+    G(x, y, y') = 0
+\end{equation}
+for some real-valued function $G$. We can apply the \textit{Implicit Function Theorem} on $G$ if $G$ is continuously differentiable and 
+\[
+    G(x_{0}, y_{0}, z_{0}) = 0 \quad\text{ and }\quad \frac{\partial}{\partial z}G(x_{0}, y_{0}, z_{0}) \neq 0
+\]
+to give a much `nicer' form of 
+\[
+    y' = g(x, y)
+\]
+The solution to a first order ODE is the function $y(x)$ that satisfies~(\ref{eq:1}). The \textbf{standard form} of a first order ODE is an equation that gives the derivative $y'$ as a function of $y$. There are two main types of standard forms. 
+
+\begin{defbox}{Standard Forms}
+    An \textbf{autonomous} first order ODE is one in which the derivative only depends on $y$. The standard form of an autonomous first order ODE is 
+    \[
+        y' = f(y).
+    \]
+    A \textbf{non-autonomous} first order ODE is one in which the derivative depends on $x$ as well as the value of the function $y$ itself. The standard form of a non-autonomous first order ODE is 
+    \[
+        y' = g(x, y).
+    \]
+\end{defbox}
+
+\begin{defbox}{Seperable ODEs}
+    Seperable first order ODEs are ODEs in the form 
+    \[
+        f(y)y' = g(x).
+    \] 
+    These can be solved with (relative) ease byt integrating both sides and then solving algebraically.
+\end{defbox}
+
+\begin{example}{A Seperable First Order ODE}{}
+    Solve the differential equation 
+    \[
+        y' = \e^{x+y}
+    \]
+    \begin{solution}
+        \begin{align*}
+            y' = \e^{x+y} &\Rightarrow \e^{-y}y' = e^{x} \\
+            &\Rightarrow \int \e^{-y} dy = \int e^{x} dx \\
+            &\Rightarrow -\e^{-y} = \e^{x} + C \\
+            &\Rightarrow \e^{-y} = -\e^{x} + C \\
+            &\Rightarrow y = - \ln\left(\e^{x} + C\right)
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\subsubsection{Vector Fields and Integral Curves}
+Consider a function $\vec{x}'(t) = v(\vec{x}(t))$ that is continuous on some open subset $U \subseteq \RR^{n}$ and has values in $\RR^{n}$. Then, $v(x)$ is a \textbf{vector field}. To solve this equation means to find all continuously differentiable functions $\vec{x}(t)$ defined on some time interval $(a, b)$ with values in $U$ for which the equation is satisfied $\forall t \in (a, b)$. 
+
+\begin{defbox}{Vector Function and Integral Curves}
+    An \textbf{autonomous first order system of ODEs} in standard form is an equation in the form 
+    \[
+        \vec{x}'(t) = v(\vec{x}(t)).
+    \]
+    A \textbf{non-autonomous first order system of ODEs} in standard form is an equation in the form 
+    \[
+        \vec{x}'(t) = v(t, \vec{x}(t)).
+    \]
+    The solutions to either an autonomous or non-autonomous system, $\vec{x}(t)$ are called \textbf{integral curves} of the vector field.
+\end{defbox}
+
+As a basic example consider the vector field on $\RR^{2}$ given by $v(x, y) = (-y, x)$. Then, the differential equation $\vec{x}'(t) = v(\vec{x}(t))$
+is simply a more efficient way to write 
+\begin{align*}
+    x'(t) &= -y(t) \\
+    y'(t) &= x(t)
+\end{align*}
+We might solve this by considering the function $f(\vec{x}) = \|\vec{x}\| = x^2 + y^2$ (don't worry about where this function came from for now!) and apply the multivariable chain rule, 
+\[
+    \frac{d}{dt}\left[f(\vec{x}(t))\right] = \nabla f(\vec{x}(t)) \cdot \vec{x}'(t) = (2x, 2y) \cdot (-y, x) = 0.
+\]
+Recall that $\vec{x}'(t) = v(\vec{x}(t)) = (-y, x)$. Since 
+\[
+    \frac{df(\vec{x}(t))}{dt} = 0
+\]
+we know that $f(\vec{x}(t))$ must be a constant function. Thus, $f(\vec{x}(t)) = f(x, y) = C = x^2 + y^2$ for some constant $C \in \RR$. It should be clear to see that $f(\vec{x}(t))$ simply represents a circle centered at the origin with radius $\sqrt{C}$.
+
+\begin{defbox}{Slope Function}
+    let $v(x, y) = (f(x, y), g(x, y))$ be any continuous vector field on an open set $U$ of $\RR^{2}$. On the subset open $V$ on which $f(x, y) \neq 0$, define the slope function fo the vector field to be 
+    \[
+        s(x, y) = \frac{g(x, y)}{f(x, y)}.
+    \]
+\end{defbox}
+
+We define the slope function because aan integral curve of $V$ is the function $y(x)$ that satisfies the differential equation $y' = s(x, y)$. This is important because there can be occasions in which you may be able to solve the slope equation $y' = s(x, y)$ despite not being able to explicitly solve for the integral curves of a vector field.
+
+\subsubsection{First Order Linear Equations}
+Differential equations in the form 
+\begin{equation}{\label{eq:2}}
+    x'(t) = p(t)x(t) + q(t)
+\end{equation}
+are called \textbf{first order linear equations}. By letting $p$ and $q$ be continuous on some interval $(a, b)$ (with $a=-\infty$ and $b=\infty$ allowed) we consider the primative (or anti-derivative) of $p$, $P(t) = \int p(t)\,dt$. Now, notice that 
+\[
+    \frac{d}{dt}\left[x(t)\e^{-P(t)}\right] = \left[x'(t)-p(t)x(t)\right]\e^{-P(t)}.
+\]
+But, 
+\[
+    x'(t) - p(t)x(t) = q(t).
+\]
+So, 
+\begin{align}
+    &\frac{d}{dt}\left[x(t)\e^{-P(t)}\right] = \left[x'(t)-p(t)x(t)\right]\e^{-P(t)} \nonumber\\
+    \Rightarrow&\,\frac{d}{dt}\left[x(t)\e^{-P(t)}\right] = q(t)\e^{-P(t)} \nonumber\\
+    \Rightarrow&\,\int\frac{d}{dt}\left[x(t)\e^{-P(t)}\right]\,dt = \int q(t)\e^{-P(t)}\,dt \nonumber\\
+    \Rightarrow&\,x(t)\e^{-P(t)} + C = \int q(t)\e^{-P(t)}\,dt \nonumber\\
+    \Rightarrow&\,x(t) = \e^{P(t)}\left(\int q(t)\e^{-P(t)}\,dt + C\right). \label{eq:3}
+\end{align}
+And thus~(\ref{eq:3}) is the general solution to a first order linear differential equation.
+
+You may be asked to solve an \textbf{initial value problem} (IVP) which is simply when an initial condition is provided (i.e. $x(t_{0}) = x_{0}$). In order to solve an IVP for a first order linear ODE all you must do is solve for the general solution and then plug in the initial condition and solve for the constant of integration. Usually when solving an IVP we have two main questions: 
+\begin{enumerate}
+    \item Is there a solution? (existence)
+    \item If there is a solution, is it unique? (uniqueness)
+\end{enumerate}
+
+\begin{example}{First Order Linear Differential Equation}{}
+    Solve the differential equation 
+    \[
+        x'(t) = tx(t) + 1 
+    \]
+    \begin{solution}
+        We'll start by noticing that $p(t) = t$ so $P(t) = \frac{1}{2}t^2$. Thus, 
+        \begin{align*}
+            x'(t) = tx(t) + 1 \Rightarrow&\, \frac{d}{dt}\left[x(t)\e^{-\frac{1}{2}t^2}\right] = 1\e^{-\frac{1}{2}t^2} \\
+            \Rightarrow&\, \int \frac{d}{dt}\left[x(t)\e^{-\frac{1}{2}t^2}\right]\,dt = \int\e^{-\frac{1}{2}t^2}\,dt \\
+            \Rightarrow&\, x(t)\e^{-\frac{1}{2}t^2} + C = \int \e^{-\frac{1}{2}t^2}\, dt \\
+            \Rightarrow&\, x(t) = \boxed{e^{\frac{1}{2}t^2}\left(\int \e^{-\frac{1}{2}t^2}\,dt + C\right)}
+        \end{align*}
+        For those curious, the integral on the right handside is not an easy integral to evaluate (it requires the power series for $\e^{x}$) so for simplicity sake we leave it as is and thus the boxed answer is our general solution in simplest form.
+    \end{solution}
+\end{example}
+
+\subsubsection{Extras}
+\begin{defbox}{Flow Transformation}
+    For a first order linear equation in the form $x'(t) = p(t)x(t) + q(t)$ with $p$ and $q$ continuous on $(a, b)$, define 
+    \[
+        \Phi_{t_{1},t_{0}}(x) = x(t_1) 
+    \]
+    for all $t_{0} \neq t_{1} \in (a, b)$ and where $x(t)$ is the unique solution to the IVP $x(t_{0})=x_{0}$.
+\end{defbox}
+
+\begin{defbox}{Matrix Exponentials}
+    Consider $\e^{A}$ where $A$ is an $n\times\,n$ matrix over $\CC$ defined as 
+    \[
+        \e^{A} = \sum_{n=0}^{\infty} \frac{A^{n}}{n\mathbf{!}}.
+    \]
+    If $A=PDP^{-1}$ (i.e. if $A$ is diagonalized) then, 
+    \[
+        \e^{A} = P\e^{D}P^{-1}
+    \]
+    where 
+    \[
+        \e^{D} = \begin{pmatrix}
+            e^{\lambda_1} & 0 \\
+            0 & e^{\lambda_2}
+        \end{pmatrix}
+        \text{ if }
+        D = \begin{pmatrix}
+            \lambda_1 & 0 \\
+            0 & \lambda_2
+        \end{pmatrix}.
+    \]
+\end{defbox}
