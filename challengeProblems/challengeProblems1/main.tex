@@ -1,0 +1,295 @@
+\documentclass{exam}
+\usepackage{amsmath}
+\usepackage{nicematrix}
+\usepackage{extpfeil}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage[x11names]{xcolor}
+\usepackage[most]{tcolorbox}
+
+\pgfplotsset{compat=1.18}
+\printanswers
+
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\braces}[1]{\ensuremath{\left\{#1 \right\}}}
+\newcommand{\Span}[1]{\ensuremath\text{Span}\braces{#1}}
+\newcommand{\ee}{\mathbf{e}}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Challenge Problems 1}{Jeevan Shah}
+\runningheader{Differential Equations \\ Challenge Problems \#1}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+    \underline{Exercise \#1}: Consider the system of second order differential equations
+    \begin{align*}
+        x''(t) &= -x(t) \\
+        y''(t) &= -y(t).
+    \end{align*}
+    As well, consider the vector function 
+    \[
+        \vec{x}(t) = (x(t), y(t)) = A\vec{u}(t) 
+    \]
+    for 
+    \[
+        A = \begin{bmatrix}
+            x_0 & u_0 \\
+            y_0 & v_0
+        \end{bmatrix}
+        \quad\text{and}\quad
+        \vec{u}(t) = (\cos t, \sin t)
+    \]
+    where
+    \begin{align*}
+        x(0) = x_{0} \quad &\text{and} \quad x'(0) = u_0 \\
+        y(0) = y_{0} \quad &\text{and} \quad y'(0) = v_0.
+    \end{align*}
+    Now, suppose $A$ is invertible, that is suppose that $A^{-1}$ exists. We will show that 
+    \[
+        \|A\vec{x}\left(t\right)\|^{2} = 1
+    \] 
+    It follows that 
+    \begin{align*}
+        \|A\vec{x}\left(t\right)\|^{2} &= \|A\left(A^{-1}\vec{u}\left(t\right)\right)\|^{2} \\
+        &= \|AA^{-1}\vec{u}\left(t\right)\|^{2} \\
+        &= \|I\vec{u}\left(t\right)\|^{2} \\
+        &= \|\vec{u}\left(t\right)\|^{2} \\
+        &= \sqrt{\cos^2(t) + \sin^{2}(t)} \\
+        &= \boxed{1}
+    \end{align*}
+    where $I$ is the identity matrix.  We now define the matrix $M$ as 
+    \begin{equation}{\label{eq:1}}
+        M = \left(A^{-1}\right)^{T}\left(A^{-1}\right) 
+    \end{equation}
+    where $\left(A^{-1}\right)^{T}$ denotes the transpose of $A^{-1}$. Next, we will show that 
+    \[
+        \vec{x}\left(t\right) \cdot M\vec{x}\left(t\right) = 1 
+    \]
+    Now, starting with $M\vec{x}(t)$, we can see that
+    \begin{align*}
+        M\vec{x}\left(t\right) &= \left(A^{-1}\right)\left(A^{-1}\right)\vec{x}\left(t\right)  \\
+        &= \left(A^{-1}\right)^{T}\left(A^{-1}\right)A\vec{u}\left(t\right) \\
+        &= \left(A^{-1}\right)^{T}\vec{u}\left(t\right)
+    \end{align*}
+    Taking the dot product of shows, 
+    \begin{align}
+        \vec{x}\left(t\right) \cdot M\vec{x}\left(t\right) &= \vec{x}\left(t\right) \cdot \left(A^{-1}\right)^{T}\vec{u}\left(t\right) \nonumber \\
+        &= \vec{x}^{T}\left(A^{-1}\right)^{T}\vec{u}\left(t\right) \label{eq:2}\\
+        &= \vec{x}^{T}\left(A^{-1}\right)^{T}A^{-1}\vec{x} \nonumber \\
+        &= \left(\vec{x}A^{-1}\right)^{T}\left(A^{-1}\vec{x}\right) \nonumber \\
+        &= \boxed{\|A^{-1}\vec{x}\|^{2} = 1} \nonumber 
+    \end{align}
+    Note that the parenthesis in~(\ref{eq:2}) were dropped for notions sake. Finally, we will show that if 
+    \[
+        M = \begin{bmatrix}
+            a & c \\
+            c & b
+        \end{bmatrix} 
+    \]
+    then
+    \[
+        \vec{x}\left(t\right) \cdot M\vec{x}\left(t\right) = ax^2(t) + by(t)^2 + 2cx(t)y(t) = 1.
+    \]
+    We show this through the direct calculation of the multiplication of matricies:
+    \begin{align*}
+        \vec{x}\left(t\right) \cdot M\vec{x}\left(t\right) &= \begin{bmatrix}
+            x(t) \\ y(t)
+        \end{bmatrix} \cdot \begin{bmatrix}
+            a & c \\
+            c & b
+        \end{bmatrix}
+        \begin{bmatrix}
+            x(t) \\ y(t)
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            x(t) \\ y(t)
+        \end{bmatrix}^{T}
+        \begin{bmatrix}
+            ax(t) + cy(t) \\
+            cx(t) + by(t)
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            x(t) & y(t)
+        \end{bmatrix}
+        \begin{bmatrix}
+            ax(t) + cy(t) \\
+            cx(t) + by(t)
+        \end{bmatrix} \\
+        &= \boxed{ax(t)^2 + by(t)^2 + 2cx(t)y(t) = 1}
+    \end{align*}
+
+    \underline{Exercise \#2}: We now assume the existance of an orthonormal basis of $\RR^{2}$, $\braces{\mathbf{u}_1, \mathbf{u}_2}$ such that $\mathbf{u}_1$ and $\mathbf{u}_2$ are eigenvectors of $M$ corresponding to eigenvalues $\lambda_1$ and $\lambda_2$ such that 
+    \begin{equation}{\label{eq:3}}
+        M\mathbf{u}_1 = \lambda_1\mathbf{u}_1 \quad\text{and}\quad M\mathbf{u}_1 = \lambda_2\mathbf{u}_2.
+    \end{equation}
+    In order to show that both $\lambda_1$ and $\lambda_2$ are positive, we will consider the expression $\|A^{-1}\mathbf{u}_1\|^{2}$. Upon inspection of this expression we can expand it using the definition of norm to get, 
+    \[
+        \|A^{-1}\mathbf{u}_{1}\|^2 = \left(\mathbf{u}_{1}A^{-1}\right)^{T}\left(A^{-1}\mathbf{u}_1\right) = \mathbf{u}_{1}^{T}\left(A^{-1}\right)^{T}A^{-1}\mathbf{u}_1.
+    \]
+    But, from~(\ref{eq:1}), we know that $M=\left(A^{-1}\right)^{T}\left(A^{-1}\right)$. So, 
+    \begin{align*}
+        \|A^{-1}\mathbf{u}_{1}\|^2 = \mathbf{u}_{1}^{T}\left(A^{-1}\right)^{T}A^{-1}\mathbf{u}_{1} &= \mathbf{u}_{1}^{T}M\mathbf{u}_1 \\
+        &= \mathbf{u}_{1}^{T}\lambda_{1}\mathbf{u}_1 \tag{from~(\ref{eq:3})} \\
+        &= \lambda_{1}\mathbf{u}_{1}^{T}\mathbf{u}_{1} \tag{since $\lambda_1 \in \RR$} \\
+        &= \lambda_1\|\mathbf{u}_1\|^{2}.
+    \end{align*}
+    However, since the left hand side is positive and the norm of $\mathbf{u}_1$ is also positive, \underline{$\lambda_1$ must also be positive}. An identical argument can be followed for $\lambda_2$ using the expression $\|A^{-1}\mathbf{u}_2\|^2$ to arrive at the same conclusion that it must also be positive. \\
+    We will show that the major axis of the ellipse has endpoints at $\displaystyle\pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2$ and the minor axis of the ellipse has endpoints at $\displaystyle\pm\frac{1}{\sqrt{\lambda_1}}\mathbf{u}_1$. 
+    Now, without the loss of generality we suppose that 
+    \[
+        \lambda_1 \geq \lambda_2 > 0.
+    \]
+    Since $M$ is a symmetric matrix, $M$ must also be diagonalizable. We consider the diagonalization of $M$, 
+    \[
+        M = PDP^{T}, \quad D = \begin{bmatrix}
+            \lambda_1 & 0 \\
+            0 & \lambda_2
+        \end{bmatrix}.
+    \]
+    It follows that 
+    \begin{align}
+        \vec{x}(t) \cdot M\vec{x}(t) &= \vec{x}^{T}Mx \nonumber\\
+        &= \vec{x}^{T}\left(PDP^{T}\right)\vec{x} \nonumber\\
+        &= \left(P^{T}x\right)^{T}D\left(P^{T}\vec{x}\right). {\label{eq:4}}
+    \end{align}
+    We define 
+    \begin{equation}{\label{eq:5}}
+        \vec{x}' = \begin{bmatrix}
+            x' \\ y'
+        \end{bmatrix} = P^{T}\vec{x}.
+    \end{equation}
+    Substituting~(\ref{eq:5}) into~(\ref{eq:4}),
+    \begin{align}
+        1 = \vec{x}(t) \cdot M\vec{x}(t) &= \left(P^{T}x\right)^{T}D\left(P^{T}\vec{x}\right) \nonumber \\ 
+        &= (\vec{x}')^{T}D\vec{x}' \nonumber \\
+        &= \lambda_1\left(x'\right)^2 + \lambda_2\left(y'\right)^2 = 1 {\label{eq:6}}
+    \end{align}
+    Since the major/minor axis occur when $x'=0$ or $y'=0$ we can solve~(\ref{eq:6}) for $x'$ and $y'$ with the other equal to $0$, which shows that 
+    \[
+        x' = \frac{1}{\sqrt{\lambda_1}} \quad\text{and}\quad y' = \frac{1}{\sqrt{\lambda_2}}
+    \]
+    Since $\lambda_1 \geq \lambda_2$ it follows that $\displaystyle\frac{1}{\sqrt{\lambda_2}} \geq \frac{1}{\sqrt{\lambda_1}}$ so $y'$ corresponds to the major axis and $x'$ the minor. Thus, the endpoints, $E_{\text{major}}$ and $E_{\text{minor}}$, are: 
+    \[
+        \boxed{
+            E_{\text{major}} = \pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2 \quad\text{and}\quad E_{\text{minor}} = \pm\frac{1}{\sqrt{\lambda_1}}\mathbf{u}_1
+        } 
+    \]
+    
+    We will now prove that $\|\vec{x}(t)\|$ is maximal if, and only if, 
+    \[
+        \vec{x}(t) = \pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2.
+    \]
+    To show that this condition is necessary we will assume that $\|\vec{x}\left(t\right)\|$ is maximal and show that
+    \[
+        \vec{x}\left(t\right) = \pm\frac{1}{\lambda_2}\mathbf{u}_2.
+    \]
+    We start with the fact that $\braces{\mathbf{u}_1, \mathbf{u}_2}$ is an orthonormal basis for $\RR^{2}$ which means that there exists $x', y' \in \RR$ such that 
+    \begin{equation}{\label{eq:9}}
+        \vec{x}(t) = x'\mathbf{u}_1 + y'\mathbf{u}_2.
+    \end{equation} So, 
+    \begin{align}
+        \|\vec{x}(t)\|^2 &= \vec{x}(t) \cdot \vec{x}(t) \nonumber\\
+        &= \left(x'\mathbf{u}_1 + y'\mathbf{u}_2\right) \cdot \left(x'\mathbf{u}_1 + y'\mathbf{u}_2\right) \nonumber\\
+        &= \left(x'\right)^{2}\left(\mathbf{u}_1 \cdot \mathbf{u}_2\right) + \left(y'\right)^{2}\left(\mathbf{u}_2 \cdot \mathbf{u}_2\right) + 2x'y'\left(\mathbf{u}_1 \cdot \mathbf{u}_2\right) \nonumber\\
+        &= (x')^2 + (y')^2 {\label{eq:7}}
+    \end{align}
+    with the last equality following directly from the fact that $\braces{\mathbf{u}_1, \mathbf{u}_2}$ is an orthonormal set. We can now optimize~(\ref{eq:7}) with the constraint of~(\ref{eq:6}). Solving~(\ref{eq:6}) for $(x')^2$ we can easily see that 
+    \[
+        (x')^2 = \frac{1-\lambda_2(y')^2}{\lambda_1}.
+    \]
+    Thus, 
+    \begin{align}
+        \|\vec{x}(t)\|^2 = (x')^2 + (y')^2 &= \frac{1-\lambda_2(y')^2}{\lambda_1} + (y')^2 \nonumber \\
+        &= \frac{1}{\lambda_1} - \frac{\lambda_2}{\lambda_1}(y')^2 + (y')^2 \nonumber \\
+        &= \frac{1}{\lambda_1} + (y')^2\left(1-\frac{\lambda_2}{\lambda_1}\right). {\label{eq:8}}
+    \end{align}
+    Since $\lambda_1 \geq \lambda_2$, the coefficient of $(y')^2$ will be nonnegative. It follows that the norm is at a maxium when $(y')^2$ is largest. From~(\ref{eq:6}) we can see that this will happen when $x' = 0$, therefore, $\displaystyle y' = \pm\frac{1}{\sqrt{\lambda_2}}$. Using these values of $x'$ and $y'$ in~(\ref{eq:9}) we can see that $\|\vec{x}\left(t\right)\|$ is at a max when 
+    \begin{equation}{\label{eq:0}}
+        \boxed{\vec{x}\left(t\right) = \pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2.}
+    \end{equation}
+    To show that this is a sufficient condition we will assume that 
+    \[
+        \vec{x}\left(t\right) = \pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2 
+    \]
+    and will show that $\|\vec{x}(t)\|$ is at a max. Consider any other vector satisfying~(\ref{eq:6}) such that $x' \neq 0$. Then, 
+    \[
+        y' = \pm\sqrt{\frac{1-\lambda_1(x')^2}{\lambda_2}}
+    \]
+    However, since $\lambda_1$ and $(x')^2$ are both positive quantities, 
+    \[
+        \left|\pm\sqrt{\frac{1-\lambda_1(x')^2}{\lambda_2}}\right| < \left|\pm\frac{1}{\sqrt{\lambda_2}}\right|.
+    \]
+    And so, no bigger norm is possible. An extremely similar argument can be made (by solving~(\ref{eq:6}) for $(y')$) to show the same conclusions for the minima. 
+
+    \underline{Exercise \#3:} We define 
+    \[
+        \mathbf{v}_1 = \frac{1}{\sqrt{\lambda_1}}A^{-1}\mathbf{u}_1 \quad\text{and}\quad \mathbf{v}_2 = \frac{1}{\sqrt{\lambda_2}}A^{-1}\mathbf{u}_2
+    \]
+    with $\mathbf{u}_1, \mathbf{u}_2, \lambda_1,$ and $\lambda_2$ defined as in exercise \#2. In order to show that $\braces{\mathbf{v}_1, \mathbf{v}_2}$ is an orthonormal basis for $\RR^{2}$ we must show that $\mathbf{v}_1$ and $\mathbf{v}_2$ are unit vectors and are orthogonal to each other. First we will show that the two vectors are unit vectors. Consider 
+    \begin{align*}
+        \|\mathbf{v_i}\|^2 &= \mathbf{v}_i \cdot \mathbf{v}_i \\
+        &= \frac{1}{\lambda_i}(A^{-1}\mathbf{u}_i) \cdot (A^{-1}\mathbf{u}_i) \\
+        &= \frac{1}{\lambda_i}\left(A^{-1}\mathbf{u}_i\right)^{T}\left(A^{-1}\mathbf{u}_i\right) \\
+        &= \frac{1}{\lambda_i}\mathbf{u}_i^{T}(A^{-1})^{T}A^{-1}\mathbf{u}_i \\
+        &= \frac{1}{\lambda_i}\mathbf{u}_i^{T}M\mathbf{u}_i \tag{from~(\ref{eq:1})} \\
+        &= \frac{1}{\lambda_i}\mathbf{u}_i^{T}\left(\lambda_i\mathbf{u}_i\right) = \mathbf{u}_{i}^{T}\mathbf{u}_{i} \\
+        &= 1 \Rightarrow \|\mathbf{v}_i\| = 1
+    \end{align*}
+    for $i = 1, 2$. Thus, $\mathbf{v}_1$ and $\mathbf{v}_2$ are unit vectors. Next to show that $\mathbf{v}_1$ and $\mathbf{v}_2$ are orthogonal consider, 
+    \begin{align*}
+        \mathbf{v}_1 \cdot \mathbf{v}_2 &= \frac{1}{\sqrt{\lambda_1 \lambda_2}}\left(A^{-1}\mathbf{u}_1\right) \cdot \left(A^{-1}\mathbf{u}_2\right) \\
+        &= \frac{1}{\sqrt{\lambda_1\lambda_2}}\left(A^{-1}\mathbf{u}_1\right)^{T}\left(A^{-1}\mathbf{u}_2\right) \\
+        &= \frac{1}{\sqrt{\lambda_1\lambda_2}}\mathbf{u}_{1}^{T}(A^{-1})^{T}A^{-1}\mathbf{u}_2 \\
+        &= \frac{1}{\sqrt{\lambda_1\lambda_2}}\mathbf{u}_{1}^{T}M\mathbf{u}_2 \tag{from~(\ref{eq:6})} \\
+        &= \frac{1}{\sqrt{\lambda_1\lambda_2}}\mathbf{u}_1^{T}\lambda_{2}\mathbf{u}_2 \\
+        &= \frac{\lambda_1}{\sqrt{\lambda_1\lambda_2}}\mathbf{u}_{1}^{T}\mathbf{u}_{2} = 0.
+    \end{align*}
+    Thus $\mathbf{v}_1$ and $\mathbf{v}_2$. Since $\braces{\mathbf{v}_1, \mathbf{v}_2}$ is an orthonormal set, it also forms a basis for $\RR^{2}$. \\
+    Next, we will show that $\|\vec{x}(t)\|$ is maximal if and only if $t$ satisfies
+    \[
+        (\cos t, \sin t) = \pm\mathbf{v}_2.
+    \]
+    Earlier we showed that $\|\vec{x}(t)\|$ is maximal if and only if $\displaystyle x(t) = \pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2$ which means that the max norm is 
+    \[
+        \|x(t)\| = \left\|\pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2\right\| = \left\|\frac{1}{\sqrt{\lambda_2}}\right\| = \frac{1}{\sqrt{\lambda_2}}
+    \]
+    since $\mathbf{u}_2$ is a unit vector. To show that $\|\vec{x}(t)\|$ is maximal if and only if $t$ satisfies
+    \[
+        (\cos t, \sin t) = \pm\mathbf{v}_2 
+    \]
+    recall from~(\ref{eq:0}) that if $\|\vec{x}(t)\|$ is maximal then 
+    \[
+        \vec{x}(t) = \pm\frac{1}{\sqrt{\lambda_2}}\mathbf{u}_2.
+    \]
+    Multiplying both sides by $A^{-1}$
+    \[
+        A^{-1}\vec{x}\left(t\right) = \pm\frac{1}{\sqrt{\lambda_2}}A^{-1}\mathbf{u}_2.
+    \]
+    But the left hand side is equal to $\vec{u}\left(t\right)$ and the right hand side is equal to $\mathbf{v}_2$. Thus, 
+    \[
+        \boxed{
+            \vec{v}(t) = (\cos t, \sin t) = \mathbf{v}_2
+        } 
+    \]
+    Following the same logic backwards provides the proof for the backwards direction. An identical argument follows for when $\|\vec{x}(t)\|$ is at a mimima. 
+
+    \footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH292/blob/main/challengeProblems/challengeProblems1/main.tex}{\underline{here}}}
+\end{document}
+% dont forget in collaboration with statement
