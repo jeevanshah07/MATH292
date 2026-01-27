@@ -177,3 +177,251 @@ You may be asked to solve an \textbf{initial value problem} (IVP) which is simpl
         \end{pmatrix}.
     \]
 \end{defbox}
+
+\newpage 
+
+\subsection{Lecture 2}
+\subsubsection{Solution Curves}
+\begin{defbox}{Solution Curves}{}
+    Consider the first order ODE given by 
+    \[ x'(t) = p(t)x(t) + q(t) \]
+    defined on an open interval $(a, b)$. A \textbf{solution curve} is the graph of any specific solution.
+\end{defbox}
+
+Note that the general solution of any first order ODE is of the form 
+\[
+    x(t) = cf(t) + g(t)
+\]
+with $c\in\RR$ and $f(t) \neq 0$.
+
+Any two different solutions curves of a given first order ODE will never intersect. This follows from the fact that any two different solutions of the ODE correspond to different values of the constant, $c$, and since $f(t) \neq 0$, the values of the two solutions at any $t$ must be different. Hence, through each point in the $(t, x)$ plane given by $(a, b) \times \RR$, there is exactly on solution curve. Conversely, every family of functions of the form 
+\[
+    x(t) = cf(t) + g(t)
+\]
+with $g$ and $f$ continuously differentiable and such that $f(t) \neq 0,\, \forall t \in (a, b)$ is the solution set of a first order linear equation on $(a, b)$. To see this combine 
+\[
+    x(t) = cf(t) + g(t)
+\]
+and 
+\[
+    c = \frac{1}{f(t)}(x(t) - g(t))
+\]
+to deduce 
+\begin{align*}
+    x'(t) &= \frac{f'(t)}{f(t)}(x(t) - g(t)) + g'(t) \\
+    &= \frac{f'(t)}{f(t)}x(t) + \left(g'(t) - \frac{f'(t)}{f(t)}g(t)\right)
+\end{align*}
+
+\subsubsection{Flow Transformations}
+Consider the ODE 
+\[
+    x'(t) = \frac{-x(t)}{t} + t
+\]
+on the interval $t > 0$. The field of solution curves extends over the entire right half of the $(t, x)$ plane. If we think of the equation as describing the motion of a point on the line, such that the point is at $x_0$ at time $t_0$, then by following the unique solution curves through $(t_0, x_0)$, we can see where the particle is at every other $t > 0$. Through each point in the right half of the plane there is exactly one solution curve. We define a function $\Phi_{t_{1},t_{0}}: \RR \to \RR$ as follows: $\Phi_{t_{1}, t_{0}}(x_0)$ is the intersection of the solution curve passing through $(t_0, x_0)$ with the line $t = t_1$. In our graph, locate the point at height $x_0$ in the vertical line $t=t_0$. Follow the solution curve $x(t)$ through this point until it intersects the line $t = t_1$. The height of the intersection, which is $x(t_1)$, is $\Phi_{t_{1}, t_{0}}(x_0)$.
+
+\begin{defbox}{Flow Transformations}
+    Consider the IVP 
+    \[
+        x'(t) = p(t)x(t) + q(t), \quad x(t_0) = x_0 
+    \]
+    with $p, q$ continuous on $(a, b)$. For every $t_0 \neq t_1 \in (a, b)$, define 
+    \[
+        \Phi_{t_{1}, t_{0}}(x_0) = x(t_1)
+    \]
+    where $x$ is the unique solution to the IVP.
+\end{defbox}
+One important fact about flow transformations is that for any distinct $t_{0}, t_{1}, t_{2} \in (a, b)$ and $x_0 \in \RR$, we have 
+\[
+    \Phi_{t_{2}, t_{1}}(\Phi_{t_{1}, t_{0}}(x_0)) = \Phi_{t_{2}, t_{0}}(x_0).
+\]
+\begin{proof}
+    The LHS is obtained by starting from the point $(t_0, x_0)$ and moving along the solution curve of the ODE to meet the vertical line $t=t_1$, then moving along the solution curve passing $(t_1, x(t_1))$ until it intersects the vertical line $t=t_2$ where $x$ is the unique solution to the IVP $x(t_0) = x_0$. The RHS is obtained by starting from the point $(t_0, x_0)$ and moving along the solution curve of the ODE to meet the vertical line $t=t_2$. Both sides are now the point $(t_2, x(t_2))$.
+\end{proof}
+
+\begin{example}{}{}
+    Compute the flow transformation for the IVP 
+    \[
+        x'(t) = \frac{-x(t)}{t} + t, \quad x(t_0) = x_0. 
+    \] 
+    \begin{solution}
+        This is a basic linear differential equation and be solved using an integrating factor of $\mu(t) = \e^{\int \frac{1}{t}dt} = t$. Upon solving you should arrive at a final solution of 
+        \[
+            x(t) = \frac{t^2}{3} + \frac{c}{t} 
+        \]
+        and so, solving for $c$, 
+        \[
+            c = t_0\left(x_0 - \frac{t_{0}^2}{t}\right) \Rightarrow x(t) = \frac{t^2}{3} + \frac{t_{0}x_{0} - \frac{t_{0}^{3}}{3}}{t}.
+        \]
+        Thus, 
+        \[
+            \Phi_{t_{1}, t_{0}}(x_0) = x(t_1) = \frac{t_{1}^{2}}{3} + \frac{3t_{0}x_{0} - t_{0}^{3}}{3t_1}
+        \]
+    \end{solution}
+\end{example}
+
+\subsubsection{Bernoulli Equations}
+\begin{defbox}{Bernoulli Equations}
+    Any ODE of the form 
+    \[
+        x'(t) = p(t)x(t) + q(t)x^{n}(t), \quad n\neq 0, 1 \in \RR 
+    \]
+    is called a \textbf{Bernoulli Equation}.
+\end{defbox}
+To solve a Bernoulli equation we use the change of variables 
+\[
+    v = x^{1-n} \Rightarrow v' = (1-n)x^{-n}x'
+\]
+under the assumption that $x(t) \neq 0$ for all $t$. We can then manipulate our Bernoulli Equation in the following manner:
+\begin{align*}
+    x'(t) = p(t)x(t) + q(t)x^{n}(t) &\Rightarrow x'(t) - p(t)x(t) = q(t)x^{n}(t) \\
+    &\Rightarrow x^{-n}(t)x'(t) - p(t)x^{1-n}(t) = q(t) \\
+    &\Rightarrow \frac{1}{1-n}v' - vp(t) = q(t).
+\end{align*}
+Thus resulting in a first order linear differential equation that we know how to solve. You will then solve for $v$, followed by using your solution for $v$ to solve for $x(t)$.
+
+\begin{example}{}{}
+    Solve the following ODE: 
+    \[
+        x'(t) = x^{2}(t) 
+    \] 
+    \begin{solution}
+        \begin{align*}
+            x'(t) = x^{2}(t) &\Rightarrow x^{-2}x' = 1 \\
+            &\Rightarrow v = x^{-1} \Rightarrow v' = -x^{-2}x' \\
+            &\Rightarrow -v' = 1 \\
+            &\Rightarrow v = -t + c \\
+            &\Rightarrow x^{-1} = -t + c \\
+            &\Rightarrow x(t) = \frac{1}{-t + c}
+        \end{align*}
+        for $c \in \RR$.
+    \end{solution}
+\end{example}
+
+\subsubsection{Riccati Equations}
+\begin{defbox}{Riccati Equations}
+    Any ODE of the form 
+    \[
+        x'(t) = p(t) + q(t)x(t) + r(t)x^{2}(t) 
+    \] 
+    is called a \textbf{Riccati Equation}.
+\end{defbox}
+There is no general method to solve a Riccati equation unless you're given a particular solution, $x_1(t)$, in which case the general solution will be of the form 
+\[
+    x(t) = x_1(t) + u(t)
+\]
+where $u(t)$ is the general solution of the Bernoulli equation 
+\begin{equation}{\label{eq:4}}
+    u'(t) = \left[q(t) + 2r(t)x_1(t)\right]u(t) + r(t)u^{2}(t).
+\end{equation}
+Now, substituting in for $x$ into the Riccati equation we see that 
+\begin{align*}
+    &(x_1 + u)' - p - q(x_1 + u) - r(x_1 + u)^2 = 0 \\
+    \Rightarrow&\, (x_1' - p - qx_1 - rx_{1}^{2}) + (u' - (q+2rx_1)u - ru^2) = 0 \\
+    \Rightarrow&\, u' - (q + 2rx_1)u - ru^2 = 0.
+\end{align*}
+With the last implication following from the fact that the first term is simply just the Riccati equation rewritten.
+
+\begin{example}{}{}
+    Solve the following ODE: 
+    \[
+        x'(t) = -\frac{1}{t}x(t) + \frac{1}{t^3}x^{2}(t) + 2t
+    \] 
+    \begin{solution}
+        Since all the coefficients are powers of $gt$, it is natural to see if there is a solution of the form 
+        \[
+            x_1(t) = ct^{\alpha} 
+        \]
+        for $c, \alpha \in \RR$. Substituting this in the ODE, we get 
+        \[
+            c\alpha{t}^{\alpha-1} = -ct^{\alpha-1} + c^{2}t^{2\alpha -3} + 2t.
+        \]
+        Since this is a functional equivalence, all the powers of $t$ on the LHS must be equal to all the powers of $t$ on the RHS. This leads us to the fact that 
+        \[
+            \alpha - 1 = \alpha -1 = 2\alpha - 3 = 1 \Rightarrow \alpha = 2.
+        \]
+        Now, since all the powers of $t$ are equal, we can cancel them which leaves us with
+        \[
+            2c = -c + c^2 + 2 \Rightarrow c^2 + c + 2 = 0 \Rightarrow \left(c-1\right)\left(c-2\right) = 0. 
+        \]
+        Thus, either $x_1 = t^2$ or $x_1 = 2t^2$. With this in mind, we can now solve for $u$ using~(\ref{eq:4}) and choosing $x_1 = t^2$.
+        \begin{align*}
+            u'(t) = \frac{1}{t}u + \frac{1}{t^3}u^2 &\Rightarrow u^{-2}u' - \frac{1}{t}u^{-1} = \frac{1}{t^3}\\
+            &\Rightarrow v = u^{-1} \Rightarrow v' = -u^{-2}u' \\
+            &\Rightarrow -v' - \frac{1}{t}v = \frac{1}{t^3} \\
+            &\Rightarrow v't + v = -\frac{1}{t^2} \tag{$\mu(t) = t$}\\
+            &\Rightarrow vt = \int -\frac{1}{t^2} dt = \frac{1}{t} + c \\
+            &\Rightarrow v = \frac{1}{t^2} + \frac{c}{t} = \frac{1+ct}{t^2} \\
+            &\Rightarrow u = \frac{1}{v} = \frac{t^2}{1+ct} \\
+            &\Rightarrow x(t) = x_1(t) + u(t) = t^2 + \frac{t^2}{1+ct}
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\subsubsection{Reduction of Order}
+Some second order ODEs can be reduced to first order equations that we know how to solve. General second order ODEs have the form 
+\[
+    F(t, x, x', x'') = 0
+\]
+for some real-valued function $F$ defined on a subset of $\RR^{4}$. There are two cases when dealing with reduction of order problems. \\
+\textbf{Case 1:} $F$ does not depend on $x$. In this case $F(t, x', x'') = 0$ so we let $y=x'$ which turns $F$ into $F(t, y, y')$ which is first order. 
+
+\begin{example}{}{}{}
+    Solve the following ODE: 
+    \[
+        tx'' + x' = t^3  
+    \] 
+    \begin{solution}
+        Let $y = x'$ and substitute, 
+        \begin{align*}
+            ty' + y = t^3 &\Rightarrow y' + t^{-1}y = t^{2} \\
+            &\Rightarrow \mu(t) = e^{\int t^{-1}dt} = t \\
+            &\Rightarrow ty' + y = t^3 \\
+            &\Rightarrow ty = \int t^3 \,dt = \frac{t^4}{4} + c \\
+            &\Rightarrow y = \frac{t^3}{4} + \frac{c}{t} \\
+            &\Rightarrow x = \int y(t)\,dt = \int \frac{t^3}{4} + \frac{c}{t}\, dt = \frac{t^4}{16} + c\ln(t) + d
+        \end{align*}
+        for $c, d \in \RR$.
+    \end{solution}
+\end{example}
+
+\textbf{Case 2:} $F$ does not depend on $t$. Once again we let $y = x'$, but also define $X(t) = (x(t), y(t))$ and the vector field $v(x, y) = (y, f(x, y))$. Then $x(t)$ solves $x'' = f(x, x')$ if, and only if, $X(t)$ solves $X'(t) = v(X(t))$. Our strategy is to first find a first order ODE for $y$. Solving this will tell us the curve traced out by $X(T)$ for $t$ near $t_0$. Once we know the explicity function, $y(x)$, recall that $y=x'$, and so $x'(t) = y(x(t))$ is a first order equation for $x(t)$. To actually find an equation for $y(x)$ note that the solope of the graph of this function, namely $y'(x)$, is given by the slope of the vector $v(x, y) = (y, f(x, y))$ which is 
+\begin{equation}{\label{eq:5}}
+    y' = \frac{f(x, y)}{y}.
+\end{equation}
+And so,~(\ref{eq:5}) is a seperable first order equation we can solve. 
+
+\begin{example}{Simple Harmonic Motion}{}{}
+    Solve the following ODE:
+    \[
+        x'' + \omega^{2}x = 0, \quad \omega \in \RR^{+} 
+    \] 
+    \begin{solution}
+        Notice that 
+        \begin{align*}
+            &\frac{dy}{dx} = \frac{f(x, y)}{y} = \frac{-\omega^{2}x}{y} \\
+            \Rightarrow&\, \int y\,dy = \int -\omega^{2}x\,dx \\
+            \Rightarrow&\, \frac{y^2}{2} = \frac{-\omega^{2}x^{2}}{2} + c \\
+            \Rightarrow&\, \omega^{2}x^2 + y^2 = 2c \\
+            \Rightarrow&\, \omega^{2}x^2 + (x')^2 = 2c
+        \end{align*}
+        for $c \in \RR$. The case $c=0$ is trivial so let $2c = r^2 \geq 0$. Then $\omega^{2}x^2 + (x')^2 = r^2$ so the point $(\omega{x(t)}, x'(t))$ is on the circle centered at the origin with radius $r$. Using this to convert to polar we can see that 
+        \[\begin{cases}
+            \omega{x(t)} &= r\cos\left(\theta(t)\right) \\
+            x'(t) &= r\sin\left(\theta(t)\right)
+        \end{cases}\]
+        But, 
+        \begin{align*}
+            (\omega{x(t)})' &= \omega{x'(t)} \\
+            &\Rightarrow \frac{d}{dt}(r\cos\left(\theta(t)\right)) = \omega{r}\sin\left(\theta(t)\right) \\
+            &\Rightarrow -r\sin\left(\theta(t)\right)\theta'(t) = \omega{r}\sin\left(\theta(t)\right) \\
+            &\Rightarrow -x'(t)\theta'(t) = \omega{x'(t)} \\
+            &\Rightarrow -\theta'(t) = \omega \\
+            &\Rightarrow \theta(t) = -\omega{t} + \theta_{0}
+        \end{align*}
+        for $\theta_{0} \in \RR$. Hence, 
+        \[
+            x(t) = \frac{r\cos\left(-\omega{t} + \theta_0\right)}{\omega} 
+        \]
+        where $r \geq 0$ and $\theta_0 \in [0, 2\pi)$
+    \end{solution}
+\end{example}
