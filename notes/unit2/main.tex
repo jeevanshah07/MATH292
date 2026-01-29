@@ -1,0 +1,173 @@
+\section{Unit 2}
+\subsection{Lecture 3}
+\subsubsection{Monotonicity on Maximal Intervals}
+\begin{defbox}{Equilibrium Points and Steady State Solutions}{}
+    If ${v}$ is a vector field on $\RR$ and $v(x_0)=0$, then $x_0$ is called an \textbf{equilibrium point} of $v$. For any $t_0 \in \RR$, the function $x(t) = x_0$ for all $t$ is a solution of the IVP
+    \[
+        x'(t) = v(x(t)), \quad x(t_0) = x_0. 
+    \]
+    Such a constant solution is called a \textbf{steady state solution} for $x'(t) = v(x(t))$.
+\end{defbox}
+
+\begin{defbox}{Maximal Intervals}{}
+    An interval $(a, b)$ is a maximal interval for $v$ if $v(x) \neq 0$ for all $x \in (a, b)$ and if either $a = -\infty$ or $v(a) = 0$ and either $b = \infty$ or $v(b) = 0$.
+\end{defbox}
+
+For example, consider $v: \RR \to \RR$ given by 
+\[
+    v(x) = x(1-x).
+\]
+Then, $v$ will have three maximal intervals. Namely $(-\infty, 0), (0, 1)$ and, $(1, \infty)$. Note that these maximal intervals were found by setting $v(x) = 0$ and solving for $x$ as the defining characteristic of a maximal interval is $v(x) \neq 0$.
+
+\begin{defbox}{Monotone functions}{}
+    Let $f: A \to B$ be a function. Then, $f$ is said to be \textbf{monotone increasing} if, and only if, 
+    \[
+        x_1 < x_2 \Rightarrow f(x_1) \leq f(x_2).
+    \] 
+    Similarly, $f$ is \textbf{monotone decreasing} if, and only if, 
+    \[
+        x_1 < x_2 \Rightarrow f(x_1) \geq f(x_2). 
+    \]
+    As well, $f$ is \textbf{strictly} monotone increasing if, and only if, 
+    \[
+        x_1 < x_2 \Rightarrow f(x_1) < f(x_2), 
+    \]
+    and \textbf{strictly} monotone decreasing if, and only if, 
+    \[
+        x_1 < x_2 \Rightarrow f(x_1) > f(x_2).
+    \]
+\end{defbox}
+\begin{impbox}{Fact}{\label{fact:1}}
+    Let $f: A \to B$ be a function. If $f$ is strictly monotone increasing or decreasing on an interval $(a, b) \subseteq A$, then the inverse function $f^{-1}: B \to A$ exists.
+\end{impbox}
+
+Suppose $(a, b)$ is a maximal interval for $v$ and $x_0 \in (a, b)$. Then $v(x_0) \neq 0$ by definition of a maximal interval. Now, assume that $v(x_0) > 0$. Since $v$ is continuous and $v(x) \neq 0$ through $(a, b)$, we can apply the intermediate value theorem to see that $v(x) > 0$ on $(a, b)$. It follows that $x(t)$ must be strictly increasing on $(a, b)$ since 
+\[
+    x'(t) = v(x(t)).
+\]
+A similar statement can be made for $v(x_0) < 0$ and $x(t)$ being strictly decreasing. Thus, $x(t)$ is strictly monotone (either increasing or decreasing) over $(a, b)$ and hence is an invertible function onto its range. We denote the inverse function $t(x)$.
+
+We define 
+\[
+    T_a = \lim_{x\to\,a}t(x) \quad\text{and}\quad T_b = \lim{x\to\,b}t(x)
+\]
+under the assumption that $v$ is positive on $(a, b)$ and that $x(t)$ and $t(x)$ both exist and are strictly increasing functions. Then, $x(t)$ is invertible from $(T_a, T_b)$ onto $(a, b)$ with $t(x)$ going the opposite way. \\ If $v$ is negative, and thus $x(t)$ and $t(x)$ are decreasing functions, then simply swap $T_a$ and $T_b$ such that $x(t)$ is invertible from $(T_b, T_a)$ onto $(a, b)$ and $t(x)$ invertible from $(a, b)$ onto $(T_a, T_b)$.
+
+\begin{example}{Solution on a Maximal Interval}{}{}
+    Consider the differential equation 
+    \[
+        v(x) = x'(t) = x(1-x), \quad x(t_0) = x_0 \in (0, 1).
+    \]
+    As previously mentioned, we know that $(0, 1)$ is a maximal interval for $v$. Observe that 
+    \[
+        \frac{1}{x(1-x)} = \frac{1}{x}+ \frac{1}{1-x} = \frac{d}{dx}\left[\ln\left(\frac{x}{1-x}\right)\right].
+    \] 
+    If we define 
+    \[
+        y = F(x) = \ln\left(\frac{x}{1-x}\right)
+    \]
+    then, 
+    \begin{equation}{\label{eq:6}}
+        \frac{d}{dt}F(x(t)) = 1 
+    \end{equation}
+    because 
+    \begin{align*}
+        \frac{d}{dt}F(x(t)) &= F'(x(t))x'(t) \\
+        &= \frac{d}{dt}\left[\ln\left(\frac{x}{1-x}\right)\right]x'(t) \\
+        &= \frac{1}{x(1-x)} \cdot x(1-x) = 1.
+    \end{align*}
+    Now, integrating both sides of~(\ref{eq:6}), 
+    \begin{equation}{\label{eq:8}}
+        \int_{t_{0}}^{t} \frac{d}{dt}F(x(t))\,dt = \int_{t_{0}}^{t}\,dt \Rightarrow F(x(t)) - F(x(t_0)) = t - t_0 \Rightarrow F(x(t)) = F(x_0) + t - t_0,
+    \end{equation}
+    recalling that $x(t_0) = x_0$. In order to solve this for $x(t)$ start by noticing that 
+    \begin{align*}
+        F(x) = y &\Rightarrow y = \ln\left(\frac{x}{1-x}\right) \\
+        &\Rightarrow e^y = \frac{x}{1-x} \\
+        &\Rightarrow e^{y}(1-x) = x \\
+        &\Rightarrow e^{y} = x + e^{y}x \\
+        &\Rightarrow \frac{e^{y}}{1 + e^{y}} = x.
+    \end{align*}
+    Since $y = F(x) = F(x_0) + t - t_0$, 
+    \begin{align}
+        x &= \frac{e^{y}}{1 + e^{y}} \nonumber\\
+        &= \frac{e^{F(x_0) + t - t_0}}{1 + e^{F(x_0) + t - t_0}} \nonumber\\
+        &= \frac{e^{F(x_0)}e^{t - t_0}}{1 + e^{F(x_0)}e^{t - t_0}}. {\label{eq:7}}
+    \end{align}
+    But 
+    \[
+        e^{F(x_0)} = e^{\ln\left(\frac{x_0}{1-x_0}\right)} = \frac{x_0}{1-x_0}.
+    \]
+    Applying this to~(\ref{eq:7}) and simplifying we can see that 
+    \begin{align*}
+        \frac{e^{F(x_0)e^{t - t_0}}}{1 + e^{F(x_0)}e^{t - t_0}}&= \frac{\frac{x_0}{1-x_0}e^{t-t_0}}{1 + \frac{x_0}{1-x_0}e^{t-t_0}} \\
+        &= \frac{x_{0}e^{t-t_0}}{(1-x_0) + x_{0}e^{t-t_0}}.
+    \end{align*}
+    It should be clear that $x(t_0) = x_0$. Since the denominator will never be $0$, it follows that $x(t)$ is defined for all $t$. Because 
+    \[
+        \lim_{t\to\,-\infty}x(t) = 0 \quad\text{and}\quad \lim_{t\to\,\infty} = 1, 
+    \]
+    we can see that $x(t)$ is a strictly monotone increasing function from $(-\infty, \infty)$ onto $(0, 1)$. Thus, the inverse function $t(x)$ must exist (from the earlier fact). Solving~(\ref{eq:8}) for $t$ we can see that 
+    \[
+        t(x) = t_0 + F(x) - F(x_0),
+    \]
+    but, 
+    \[
+        F(x) = \frac{1}{v} \Rightarrow F(x) - F(x_0) = \int_{x_0}^{x} \frac{1}{v(z)}\,dz. 
+    \]
+    So, 
+    \[
+        t(x) = t_0 + \int_{x_0}^{x}\frac{1}{v(z)}\,dz
+    \]
+    with 
+    \[
+        \int_{x_0}^{1}\frac{1}{v(z)}dz = \infty \quad\text{and}\quad \int_{x_0}^{0}\frac{1}{v(z)}dz = -\infty 
+    \]
+    for any $x_0 \in (0, 1)$. This implies that $T_0 = -\infty$ and $T_1 = \infty$.
+\end{example}
+
+\newpage 
+
+\subsubsection{Lipschitz Continuity}
+\begin{defbox}{Metric Spaces}{}
+    A metric space is a double $M = (M, d)$ that consists of a set $M$ and a distance \textit{metric}, $d$. In order for $M$ to be a metric space, the distance metric must satisfy the following axioms:
+    \begin{enumerate}
+        \item Non-negativity: For any $x, y \in M,\,d(x,y) \geq 0$
+        \item Identity: For any $x, y \in M,\, d(x, y) = 0 \Leftrightarrow x=y$
+        \item Symmetry: For any $x, y \in M\, d(x, y) = d(y, x)$
+        \item Triangle Inequality: For any $x, y, z \in M$ 
+        \[
+            d(x, z) \leq d(x, y) + d(y, z) 
+        \]
+    \end{enumerate}
+\end{defbox}
+The prototypical metric space is $\RR^{n}$ with the euclidean metric (the standard distance formula). 
+\begin{defbox}{Lipschitz Continuity}{}
+    Let $f: X \to Y$ be a function between metric spaces. It is $L$-Lipschitz if there is a constant $L > 0$ such that for any $x_1, x_2 \in X$
+    \[
+        d_{y}(f(x_1), f(x_2)) \leq L \cdot d_{x}(x_1, x_2) 
+    \]
+    where $d_x$ and $d_y$ are the metrics for $X$ and $Y$ respectively.
+\end{defbox}
+
+\begin{impbox}{Fact}
+    If $f: (a, b) \to \RR^{n}$ is differentiable and 
+    \[
+        |f'(x)| \leq L, \quad\forall x \in (a, b)
+    \]
+    then, $f$ is $L$-Lipschitz continuous. Formally, if $f$ is $L$-Lipschitz continous on $(a, b)$ then 
+    \[
+        |f(x) - f(y)| \leq L|x-y|, \quad \forall x,y \in (a, b).
+    \]
+\end{impbox}
+We can prove this fact as follows. 
+\begin{proof}
+    Let $x, y \in (a, b)$ such that $x < y$ and assume that $|f'(x)| \leq L$. By the Mean Value Theorem, 
+    \[
+        f(y) - f(x) = f'(c)(y - x) 
+    \]
+    for $c \in (x, y)$. So, 
+    \[
+        |f(y) - f(x)| \leq L|y - x| 
+    \]
+\end{proof}
