@@ -1,0 +1,365 @@
+\documentclass{exam}
+\usepackage{amsmath}
+\usepackage{nicematrix}
+\usepackage{extpfeil}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage[x11names]{xcolor}
+\usepackage[most]{tcolorbox}
+
+\pgfplotsset{compat=1.18}
+\printanswers
+
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\braces}[1]{\ensuremath{\left\{#1 \right\}}}
+\newcommand{\Span}[1]{\ensuremath\text{Span}\braces{#1}}
+\newcommand{\ee}{\mathbf{e}}
+
+\title{Challenge Problems 1}
+\author{Jeevan Shah}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Challenge Problems \#2}{Jeevan Shah}
+\runningheader{Differential Equations \\ Challenge Problems \#2}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+\colorbox{red}{\underline{Exercise 4:}} Consder the intial data of 
+\[
+    x_0 = 1, \quad u_0 = 0, \quad y_0 = 1, \quad v_0 = \sqrt{3},
+\]
+and find $R_2 = \max_{t \in \RR}\|\vec{x}(t)\|$ as well was $R_1 = \min_{t \in \RR}\|\vec{x}\|$ and the times that correspond to $R_1$ and $R_2$.
+\begin{solution}
+    We start by finding 
+    \[
+        A = \begin{pmatrix}
+            1 & 0 \\
+            1 & \sqrt{3}
+        \end{pmatrix} 
+        \Rightarrow A^{-1} = \frac{1}{\sqrt{3}}\begin{pmatrix}
+            \sqrt{3} & 0 \\
+            -1 & 1
+        \end{pmatrix} = \begin{pmatrix}
+            1 & 0 \\
+            -1/\sqrt{3} & 1/\sqrt{3}
+        \end{pmatrix}
+        \Rightarrow (A^{-1})^{T} = \begin{pmatrix}
+            1 & -1/\sqrt{3} \\
+            0 & 1/\sqrt{3}
+        \end{pmatrix}.
+    \]
+    It follows that 
+    \begin{align*}
+        M &= (A^{-1})^{T}(A^{-1}) \\
+        &= \begin{pmatrix}
+            1 & -1/\sqrt{3} \\
+            0 & 1/\sqrt{3}
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & 0 \\
+            -1/\sqrt{3} & 1/\sqrt{3}
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            4/3 & -1/3 \\
+            -1/3 & 1/3
+        \end{pmatrix}.
+    \end{align*}
+    To find the eigenvectors and eigenvalues of $M$ we start by solving the characteristic equation as follows:
+    \begin{align*}
+        \lambda^2 - \lambda\left(\frac{5}{3}\right) + 1/3 = 0 &\Rightarrow 3\lambda^2 - 5\lambda + 1 = 0 \\
+        &\Rightarrow \lambda = \frac{5 \pm \sqrt{25 - 4(3)}}{6} \\
+        &\Rightarrow \lambda_1 = \frac{5 + \sqrt{13}}{6}, \lambda_2 = \frac{5 - \sqrt{13}}{6}
+    \end{align*}
+    From the first set of challenge problems we know that $\|\vec{x}(t)\|$ is maximal if, and only if, 
+    \[
+        \vec{x}(t) = \pm\frac{1}{\sqrt{\lambda_2}}\vec{u_2},
+    \]
+    where $\vec{u}_2$ is an orthonormal eigenvector of $M$. It follows that 
+    \[
+        R_2 = \max\|\vec{x}(t)\| = \left\|\pm\frac{1}{\sqrt{\lambda_2}}\vec{u}_2\right\| = \frac{1}{\sqrt{\lambda_2}} = \sqrt{\frac{6}{5 - \sqrt{13}}} = \boxed{\sqrt{\frac{5 + \sqrt{13}}{2}}.}
+    \]
+    Using the conclusion also from the first set of challenge problems that $\|\vec{x}(t)]\|$ is minimal if, and only if, 
+    \[
+        \vec{x}(t) = \pm\frac{1}{\sqrt{\lambda_1}}\vec{u}_1,
+    \]
+    we can arrive at the conclusion 
+    \[
+        R_1 = \min\|\vec{x}(t)\| = \left\|\pm\frac{1}{\sqrt{\lambda_1}}\vec{u}_1\right\| = \frac{1}{\sqrt{\lambda_1}} = \sqrt{\frac{6}{5 + \sqrt{13}}} = \boxed{\sqrt{\frac{5 - \sqrt{13}}{2}}.}
+    \]
+    Now, in order to find the values of $t$ that correspond to $R_1$ and $R_2$ we must find the eigenvectors of $M$. For $\lambda_1$:
+    \begin{align*}
+        M - \lambda_{1}I_{2} = &\begin{pmatrix}
+            \frac{3 - \sqrt{13}}{6} & -\frac{1}{3} \\
+            -\frac{1}{3} & \frac{-3 - \sqrt{13}}{6} 
+        \end{pmatrix} \\
+        \xrightarrow[R_2 \to 6 R_2]{R_1 \to 6R_1} &\begin{pmatrix}
+            3 - \sqrt{13} & -2 \\
+            -2 & -3 - \sqrt{13}
+        \end{pmatrix} \\
+        \Rightarrow \vec{u}_1 = &\begin{pmatrix}
+            2 \\ 3 - \sqrt{13}
+        \end{pmatrix}.
+    \end{align*}
+    Similarly, for $\lambda_2$:
+    \begin{align*}
+        M - \lambda_{2}I_{2} = &\begin{pmatrix}
+            \frac{3 + \sqrt{13}}{6} & -\frac{1}{3} \\
+            -\frac{1}{3} & \frac{-3 + \sqrt{13}}{6}
+        \end{pmatrix} \\
+        \xrightarrow[R_2 \to 6 R_2]{R_1 \to 6R_1} &\begin{pmatrix}
+            3 + \sqrt{13} & -2 \\
+            -2 & -3 + \sqrt{13}
+        \end{pmatrix} \\
+        \Rightarrow \vec{u}_2 = &\begin{pmatrix}
+            2 \\ 3 - \sqrt{13}
+        \end{pmatrix}.
+    \end{align*}
+    Now, from the first set of challenge problems we know that when $\|\vec{x}(t)\|$ is maximal 
+    \[
+        \vec{u}(t) = \begin{pmatrix}
+            \cos t \\
+            \sin t
+        \end{pmatrix} = \pm \vec{v}_2
+    \]
+    But, 
+    \begin{align*}
+        \pm \vec{v}_2 = \pm\frac{1}{\sqrt{\lambda_2}}A^{-1}\vec{u}_2 &= \pm\frac{1}{\sqrt{\lambda_2}}\begin{pmatrix}
+            1 & 0 \\
+            -1/\sqrt{3} & 1/\sqrt{3}
+        \end{pmatrix}
+        \begin{pmatrix}
+            2 \\ 3 + \sqrt{13}
+        \end{pmatrix} \\
+        &= \pm\frac{1}{\sqrt{\lambda_2}}\begin{pmatrix}
+            2 \\ \frac{1 + \sqrt{13}}{\sqrt{3}}
+        \end{pmatrix}.
+    \end{align*}
+    Thus, $\|\vec{x}(t)\|$ is maximal when
+    \[
+        \tan t = \frac{\frac{1+\sqrt{13}}{\sqrt{3}}}{2} \Rightarrow \boxed{t = \arctan\left(\frac{1 + \sqrt{13}}{2\sqrt{3}}\right) + \pi n, \quad n \in \NN.}
+    \]
+    Using the fact that $\|\vec{x}(t)\|$ is minimal when
+    \[
+        \vec{u}(t) = \pm \vec{v}_2 = \pm \frac{1}{\sqrt{\lambda_1}}A^{-1}\vec{u_2},
+    \]
+    we can follow a similar manner of calculation to see that 
+    \[
+        \tan t = \frac{\frac{1-\sqrt{13}}{\sqrt{3}}}{2} \Rightarrow \boxed{t = \arctan\left(\frac{1 - \sqrt{13}}{2\sqrt{3}}\right) + \pi n, \quad n \in \NN.}
+    \]
+\end{solution}
+
+\newpage 
+
+\colorbox{red}{\underline{Exercise 5:}} Given 
+\[
+    V = \begin{pmatrix}
+        \vec{v_1} & \vec{v_1}
+    \end{pmatrix},
+    \quad S = \begin{pmatrix}
+        \sigma_1 & 0 \\
+        0 & \sigma_2
+    \end{pmatrix}, \quad U = \begin{pmatrix}
+        \vec{u_1} & \vec{u_2}
+    \end{pmatrix},
+\]
+we must show that 
+\[
+    A\vec{x} = \sigma(\vec{x} \cdot \vec{v_1})\vec{u_1} + \sigma_2(\vec{x} \cdot \vec{v_2})\vec{u_2} = USV^{T}\vec{x}
+\]
+\begin{solution}
+    Consider 
+    \begin{align*}
+        USV^{T}x &= \begin{pmatrix}
+            \vec{u_1} & \vec{u_2}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \sigma_1 & 0 \\
+            0 & \sigma_2
+        \end{pmatrix} 
+        \begin{pmatrix}
+            \vec{v_1} \\ \vec{v_2}
+        \end{pmatrix}
+        \vec{x} \\
+        &= \begin{pmatrix}
+            \vec{u_1} & \vec{u_2}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \sigma_1 & 0 \\
+            0 & \sigma_2
+        \end{pmatrix} 
+        \begin{pmatrix}
+            \vec{x} \cdot \vec{v_1} \\
+            \vec{x} \cdot \vec{v_2} \\
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            \vec{u_1} & \vec{u_2} 
+        \end{pmatrix}
+        \begin{pmatrix}
+            \sigma_1(\vec{x} \cdot \vec{v_1}) \\
+            \sigma_2(\vec{x} \cdot \vec{v_2}) 
+        \end{pmatrix} \\
+        &= \boxed{
+            \sigma_1(\vec{x} \cdot \vec{v_1})\vec{u_1} + \sigma_2(\vec{x} \cdot \vec{v_2})\vec{u_2}
+        }
+    \end{align*}
+\end{solution}
+
+\colorbox{red}{\underline{Exercise 6:}} Let 
+\[
+    A = \begin{pmatrix}
+        11 & -5 \\
+        2 & -10
+    \end{pmatrix}.
+\]
+Compute a singular value decomposition of $A$. 
+\begin{solution}
+    We start by finding 
+    \begin{align*}
+        &A^{T} = \begin{pmatrix}
+            11 & 2 \\
+            -5 & -10
+        \end{pmatrix} \\
+        \Rightarrow&\, A^{T}A = \begin{pmatrix}
+            11 & 2 \\
+            -5 & -10
+        \end{pmatrix}
+        \begin{pmatrix}
+            11 & -5 \\
+            2 & -10
+        \end{pmatrix}
+        = \begin{pmatrix}
+            125 & -75 \\
+            -75 & 125
+        \end{pmatrix}.
+    \end{align*}
+    Now, we solve for the eigenvalues using the characteristic equation: 
+    \[
+        0 = \lambda^2 - \lambda(250) + (10000) \Rightarrow (\lambda-50)(\lambda-200) = 0 \Rightarrow \lambda_1 = 50, \lambda_2 = 200.
+    \]
+    For $\lambda_1 = 50$: 
+    \begin{align*}
+        A^{T}A - 50I = \begin{pmatrix}
+            75 & -75 \\
+            -75 & 75
+        \end{pmatrix}
+        \xrightarrow{} 
+        \begin{pmatrix}
+            75 & -75 \\ 
+            0 & 0
+        \end{pmatrix}
+        \Rightarrow \vec{v_1} = \begin{pmatrix}
+            75 \\ 75
+        \end{pmatrix}
+        = \begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}.
+    \end{align*}
+    For $\lambda_2 = 200$:
+    \begin{align*}
+        A^{T}A - 200I = \begin{pmatrix}
+            -75 & -75 \\
+            -75 & -75
+        \end{pmatrix}
+        \xrightarrow{} 
+        \begin{pmatrix}
+            -75 & -75 \\
+            0 & 0 
+        \end{pmatrix} 
+        \Rightarrow \vec{v_2} = \begin{pmatrix}
+            75 \\ -75 
+        \end{pmatrix} = \begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}.
+    \end{align*}
+    We can normalize to get the following eigenvectors: 
+    \[
+        \vec{v_1} = \frac{1}{\sqrt{2}}\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix} 
+        \quad\text{and}\quad
+        \vec{v_2} = \frac{1}{\sqrt{2}}\begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}.
+    \]
+    This gives 
+    \[
+        V = \begin{pmatrix}
+            1/\sqrt{2} & 1/\sqrt{2} \\
+            1/\sqrt{2} & -1/\sqrt{2}
+        \end{pmatrix}.
+    \]
+    Since $\sigma_i = \sqrt{\lambda_i}$, we know that 
+    \[
+        \sigma_1 = \sqrt{50} \quad\text{and}\quad \sigma_2 = \sqrt{200},
+    \]
+    so, \\
+    \begin{minipage}{0.45\linewidth}
+        \begin{align*}
+            A\vec{v_1} = \sigma_{1}\vec{u_1} &\Rightarrow \frac{1}{\sigma_1}A\vec{v}_1 = \vec{u_1} \\
+            &\Rightarrow \frac{1}{\sqrt{50}}\begin{pmatrix}
+                11 & -5 \\
+                2 & -10
+            \end{pmatrix}
+            \begin{pmatrix}
+                1/\sqrt{2} \\ 1/\sqrt{2}
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                3/5 \\ -4/5
+            \end{pmatrix} = \vec{u}_1
+        \end{align*} 
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \begin{align*}
+            A\vec{v_2} = \sigma_2\vec{u_2} &\Rightarrow \frac{1}{\sigma_2}A\vec{v_2} = \vec{u_2} \\
+            &\Rightarrow \frac{1}{\sqrt{200}}\begin{pmatrix}
+                11 & -5 \\
+                2 & -10
+            \end{pmatrix}
+            \begin{pmatrix}
+                1/\sqrt{2} \\
+                -1/\sqrt{2}
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                4/5 \\ 3/5
+            \end{pmatrix} = \vec{u}_2
+        \end{align*}
+    \end{minipage}
+    Thus, $A = USV^{T}$ for 
+    \[
+        \boxed{
+            U = \begin{pmatrix}
+                3/5 & 4/5 \\
+                -4/5 & 3/5
+            \end{pmatrix}, 
+            \quad S = \begin{pmatrix}
+                \sqrt{50} & 0 \\
+                0 & \sqrt{200}
+            \end{pmatrix},
+            \quad V^{T} = \begin{pmatrix}
+                1/\sqrt{2} & 1/\sqrt{2} \\
+                1/\sqrt{2} & -1/\sqrt{2}
+            \end{pmatrix} 
+        }
+    \]
+\end{solution}
+
+\footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH292/blob/main/challengeProblems/challengeProblems2/main.tex}{\underline{here}}}
+\end{document}
