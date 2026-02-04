@@ -1,5 +1,6 @@
 \documentclass{exam}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{nicematrix}
 \usepackage{extpfeil}
 \usepackage{amsthm}
@@ -163,6 +164,7 @@ and find $R_2 = \max_{t \in \RR}\|\vec{x}(t)\|$ as well was $R_1 = \min_{t \in \
     \[
         \tan t = \frac{\frac{1-\sqrt{13}}{\sqrt{3}}}{2} \Rightarrow \boxed{t = \arctan\left(\frac{1 - \sqrt{13}}{2\sqrt{3}}\right) + \pi n, \quad n \in \NN.}
     \]
+    See~(\ref{fig:my-image}) for a possible sketch of the ellipse.
 \end{solution}
 
 \newpage 
@@ -360,6 +362,15 @@ Compute a singular value decomposition of $A$.
         }
     \]
 \end{solution}
+
+\newpage 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{IMG_1872.png}
+  \caption{Sketch of Ellipse}
+  \label{fig:my-image}
+\end{figure}
 
 \footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH292/blob/main/challengeProblems/challengeProblems2/main.tex}{\underline{here}}}
 \end{document}

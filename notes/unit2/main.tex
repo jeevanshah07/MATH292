@@ -171,3 +171,190 @@ We can prove this fact as follows.
         |f(y) - f(x)| \leq L|y - x| 
     \]
 \end{proof}
+
+\newpage 
+
+\subsection{Lecture 4}
+\subsubsection{Barrows Formula}
+\begin{thm}{}{}
+    Let $v$ be continous and let $(a, b)$ be a maximal interval for $v$ and $x_0 \in (a, b)$. Fix any $t_0 \in \RR$ and define $t(x)$ on $(a, b)$ by 
+    \begin{equation}{\label{eq:9}}
+        t(x) = t_0 + \int_{x_{0}}^{x} \frac{1}{v(z)}\,dz.
+    \end{equation}
+    Then $t(x)$ is a strictly montone function on $(a, b)$ so that 
+    \begin{equation}{\label{eq:10}}
+        T_a = \lim_{x \downarrow a} t(x) \quad\text{and}\quad T_b = \lim_{x \uparrow b} t(x)
+    \end{equation}
+    both exist. \\
+    If $v$ is positive on $(a, b)$ then $T_a < t_0 < T_b$, and if $x(t)$ is the inverse function to $t(x)$, then $x(t)$ is a solution of 
+    \begin{equation}{\label{eq:11}}
+        x'(t) = v(x(t)), \quad x(t_0) = x_0.
+    \end{equation}
+    Moreover, every solution to~(\ref{eq:11}) that is defined on any subinterval of $(T_a, T_b)$ containing $t_0$ equals the restriction of $x(t)$ to this subinterval. In particular, there is a unique solution of~(\ref{eq:11}) defined on $(T_a, T_b)$. If $v$ is negative on $(a, b)$ the same conclusion is valid provided we interchange $T_a$ and $T_b$.
+    \begin{proof}
+        We first suppose that $v$ is positive on $(a, b)$ and define the function $t(x)$ on $(a, b)$ by Barrows formula~(\ref{eq:9}). For any $x \in (a, b)$ that isn't $x_0$, let $J$ be the closed interval with endpoint $x$ and $x_0$, which is either $[x_0, x]$ in the case $x_0 < x < b$, or else $[x, x_0]$ in the case $a < x < x_0$. \\
+        Since $v$ is continuous on $J$, it has a minimum value attaained somewhere in $J$, and since $v$ is positive everywhere on $(a, b)$, and hence everywhere on $J$, there is a $c > 0$ so that $v(x) \geq c$ for all $x \in J$. There fore $1/v(x)$ is continuous and bounded on $J$. It follows that 
+        \[
+            \int_{x_0}^{x}\frac{1}{v(z)}\,dz
+        \]       
+        is a proper integral for each $x \in (a, b)$. Thus, 
+        \[
+            t(x) = t_0 + \int_{x_{0}}^{x} \frac{1}{v(z)}\,dz
+        \]
+        does define a function on $(a, b)$. By the Fundamental Theorem of Calculus, this function is differentiable, and 
+        \begin{equation}{\label{eq:12}}
+            \frac{d}{dx}t(x) = \frac{1}{v(z)}. 
+        \end{equation}
+        Since the right hand side is continuous, $t(x)$ is continuously differentiable on $(a, b)$. Since $v(x) > 0$ on $(a, b)$, $t(x)$ is strictly monotone increasing on $(a, b)$. Therefore, the limit defining $T_a$ and $T_b$ in~(\ref{eq:10}) both exist with $T_a = -\infty$ and $T_b = \infty$ allowed, and $t(x)$ is an invertible function from $(a, b)$ onto $(T_a, T_b)$. Since $t(x)$ is differentiable, by the Inverse Function Theorem, $x(t)$ is differentiable and 
+        \[
+            \frac{d}{dt} x(t) = \left.\left(\frac{d}{dx}t(x)\right)^{-1}\right|_{x = x(t)}.
+        \]
+        By~(\ref{eq:12})
+        \[
+            \left.\left(\frac{d}{dx}t(x)\right)^{-1}\right|_{x = x(t)} = v(x(t))
+        \]
+        which shows that $x'(t) = v(x(t))$, and clearly $t(x_0) = t_0$, so $x(t_0) = x_0$. \\
+        Now suppose that $y(t)$ is a continuously differentiable function defined on some interval $(S, T)$ with $t_0 \in (S, T)$. Suppose also that 
+        \[
+            y'(t) = v(y(t)) \quad\text{and}\quad y(t_0) = x_0, 
+        \]
+        and that $y(t) \in (a, b)$ for all $t \in (S, T)$. \\
+        Then, for alll $t \in (S, T)$, $y'(t) = v(y(t)) > 0$ and so $y(t)$ is  strictly increasing monotone and hence it is an invertible function from $(S, T)$ onto its range. Let $t(y)$ be the inverse function. By the Inverse Function Theorem, $t(y)$ is differentiable and 
+        \[
+            \frac{d}{dy} t(y) = \left.\left(\frac{d}{dt}y(t)\right)^{-1}\right|_{t=y(t)} = \frac{1}{v(y)}.
+        \]
+        Then, by the Fundamental Theorem of Calculus, 
+        \[
+            t(y) - t(x_0) = \int_{x_{0}}^{y} \frac{1}{v(z)}\,dz 
+        \]
+        for all $y$ such that $y=y(t)$ for some $t \in (S, T)$. That is, $t(y)$ is given by Barrows formula and hence $y(t)$ is the inverse of the function defined by Barrow's formula. In other words, $y(t) = x(t)$ on its domain of definiton $(S, T)$. THis proves the uniqueness of the solution - for as long as it stays inside $(a, b)$. 
+    \end{proof}
+\end{thm}
+
+\subsubsection{Existance and Uniqueness for First Order Autonomous Equations}
+Let $v$ be continuous and strictly positive on $(a, b)$ with $v(a) = v(b) = 0$. We can apply Barrows formula to compute $T_a$ and $T_b$ subject to $x(t_0) = x_0$ for any $x_0 \in (a, b)$. For example, 
+\[
+    T_b = \int_{x_{0}}^{b} \frac{1}{v(z)}\, dz.
+\]
+However, since $v(b) = 0$, 
+\[
+    T_b = t_0 + \lim_{x \to b}\int_{x_{0}}^{x}\frac{1}{v(z)}\, dz
+\]
+which is either convergent or divergent. If it is divergent, 
+\[
+    \lim_{x \to b}\int_{x_{0}}^{x}\frac{1}{v(z)}\, dz = \infty
+\]
+in which case it takes an infinitely long time for the solutions $x(t)$ to reach the endpoint $b$ of the maximal interval. Thus, the solution exists and remains in $(a, b)$ for all $t > t_0$ if, and only if, 
+\[
+    \int_{x_{0}}^{b}\frac{1}{v(z)}\,dz < \infty.
+\]
+A similar analysis shows that $T_a > -\infty$, and thus the solution exists and remains in $(a, b)$ for all $t < t_0$ if, and only if, 
+\[
+    \int_{x_{0}}^{a}\frac{1}{v(z)}\, dz = -\int_{a}^{x_{0}}\frac{1}{v(z)}\,dz > -\infty.
+\]
+\begin{thm}{}{\label{thm:2.2}}
+    Let $v$ be continuous and strictly positive on a maximal interval $(a, b)$. Then for any $t_0$ and any $x_0 \in (a, b)$, $x'(t) = v(x(t))$ with $x(t_0) = x_0$ has a unique solution that is defined for all $t$, and remains in $(a, b)$ for all $t \in \RR$ if, and only if, 
+    \[
+        \int_{a}^{x_0} \frac{1}{|v(z)|}\,dz = \int_{x_{0}}^{b}\frac{1}{|v(z)|}\, dz = \infty
+    \]
+\end{thm}
+
+\begin{thm}{}{}
+    Let $v(x)$ be continuous on $(a - \delta, a + \delta), \delta > 0$ and suppose that the only solution of $v(x) = 0$ in $(a - \delta, a + \delta)$ is $x = a$. Then, for any $t_0$, there is a solution of $x'(t) = v(x(t))$ for all $t$ if, and only if, either $v(x) > 0$ on $(a, a + \delta)$ and 
+    \[
+        \int_{a}^{a+\delta} \frac{1}{v(z)}\, dz < \infty 
+    \]
+    is satisfied, in which case there is a solution morving right or $v(x) < 0$ on $(a - \delta, a)$ and 
+    \[
+        \int_{a}^{a - \delta} \frac{1}{v(z)}\, dz < \infty 
+    \]
+    is satisfied, in which case there's a solution moving to the left. In particular, if 
+    \[
+        \int_{a - \delta}^{a} \frac{1}{|v(z)|}\, dz = \int_{a}^{a + \delta} \frac{1}{|v(z)|}\,dz = \infty,
+    \]
+    then the steady state solution is the unique solution.
+\end{thm}
+
+Consider the vector field $v: \RR \to \RR$ defined by 
+\[
+    v(x) = \begin{cases}
+        \sqrt{x^2 - 1}, &\quad \text{if } x < -1 \\
+        \sqrt{1 - x^2}, &\quad \text{if } -1 \leq x \leq x \\
+        \sqrt{x^2 - 1}, &\quad \text{if } x > 1
+    \end{cases} 
+\]
+It is easy to check that $v$ is continous and that $(-\infty, -1), (-1, 1), (1, \infty)$ are max intervals for $v$. Consider the IVP $x'(t) = v(x(t)), x(0) = 0$. By Barrows formula, 
+\begin{align*}
+    t(x) &= t_0 + \int_{x_{0}}^{x} \frac{1}{v(z)}\,dz \\
+    &= \int_{0}^{x} \frac{1}{\sqrt{1 - x^2}}\, dz = \arcsin(x) \quad \forall x \in (-1, 1).
+\end{align*}
+So, $x(t) = \sin t$ for $t \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$. Then 
+\[
+    \lim_{x \to -\frac{\pi}{2}} x(t) = -1 \quad\text{and}\quad \lim_{x \to \frac{\pi}{2}} x(t) = 1
+\]
+thus, $T_{-1} = -\frac{\pi}{2}$ and $T_{1} = \frac{\pi}{2}$. So, on $(T_{-1}, T_{1})$ the solution is unique. However, there are infinitely many choices to continue the solution $(T_{-1}, T_{1})$. Since $v(\pm 1) = 0$, the solution is instantaneously at rest at $x = \pm 1$. One solution is to let it stay at rest: 
+\[
+    x(t) = \begin{cases}
+        -1, &\quad \text{if } t < -\frac{\pi}{2} \\
+        \sin t, &\quad \text{if } -\frac{\pi}{2} \leq t \leq \frac{\pi}{2} \\
+        1, &\quad \text{if } t > \frac{\pi}{2}
+    \end{cases}
+\]
+For $x > 1$, we can integrate $\displaystyle\frac{1}{v(z)} = \frac{1}{\sqrt{x^2 - 1}}$ using Barrows Formula. Consider the IVP $x'(t) = v(x(t))$, $x\left(\frac{\pi}{2}\right) = 1$, for $t > \frac{\pi}{2}$. By Barrow's formula 
+\[
+    t(x) = \frac{\pi}{2} + \int_{1}^{x}\frac{1}{\sqrt{z^2 - 1}}\, dz = \frac{\pi}{2} + \ln\left(x + \sqrt{x^2 - 1}\right).
+\]
+Hence, 
+\[
+    x + \sqrt{x^2 - 1} = e^{t - \pi/2}.
+\]
+Let $a = e^{t - \pi/2}$. 
+\begin{align*}
+    &\Rightarrow x + \sqrt{x^2-1} = a \\
+    &\Rightarrow \sqrt{x^2-1} = a - x \\
+    &\Rightarrow x^2 - 1 = (a - x)^2 \\
+    &\Rightarrow x = \frac{a^2 + 1}{2a} = \cosh\left(t - \frac{\pi}{2}\right).
+\end{align*}
+We have another solution for the IVP: 
+\[
+    x(t) = \begin{cases}
+        -1, &\quad \text{if } t < -\frac{\pi}{2} \\
+        \sin t, &\quad \text{if }, -\frac{\pi}{2} \leq t \leq \frac{\pi}{2} \\
+        \cosh t, &\quad \text{if } t > \frac{\pi}{2}
+    \end{cases}
+\]
+
+\subsubsection{Existance and Uniqueness within Maximal Intervals}
+Let $(a, b)$ be a maximal interval for an $L$-Lipschitz vector field $v$ on $\RR$. For any $x_0 \in (a, b)$ the solution of the IVP $x'(t) = v(x(t))$, $x(t_0) = x_0$ exists and is well-defined for all $t \in \RR$. In particular for every $t_0 \in \RR$. In particular for every $t_0 \in \RR$, $x_0 \in (a, b)$, there is a unique solution curve of the IVP passing through $(t_0, x_0)$. 
+\begin{proof}
+    For simplicity assume $v(x) > 0$ on $(a, b)$, so the solution of the IVP is increasing. We now show that $x(t) < b$ for all $t \in \RR$. Since $x(t)$ is increasing, we only need to consider $t > t_0$, since otherwise $x(t) \leq x_0 < b$. There are two cases. Suppose $b = \infty$. Since $v$ is $L$-Lipschitz for all $z > x_0$, 
+    \[
+        v(z) - v(x_0) \leq |v(z) - v(x_0)| \leq L|z - x_0| = L(z - x_0).
+    \]
+    So, $v(z) \leq v(x_0) + L(z - x_0)$. By Barrows formula we have that 
+    \begin{align*}
+        t(x) &= t_0 + \int_{x_{0}}^{x} \frac{1}{v(z)}\,dz \\
+        &\geq t_0 + \int_{x_{0}}^{x} \frac{1}{v(x_0) + L(z - x_0)}\, dz \\
+        &= t_0 + \frac{1}{L}\ln\left(\frac{1 + L(z - x_0)}{v(x_0)}\right)
+    \end{align*}
+    for all $x > x_0$. Since, 
+    \[
+        \lim_{x \to \infty} \frac{1}{L}\ln\left(\frac{1 + L(z - x_0)}{v(x_0)}\right) = \infty \Rightarrow \lim_{x \to \infty} t(x) = \infty
+    \]
+    therefore, $x(t) < b = \infty$ for all $t$. \\
+    Now assume $b < \infty$. We know $v(b) = 0$ so by Thm~(\ref{thm:2.2}) we need to show 
+    \[
+        \int_{x_{0}}^{b}\frac{1}{v(z)}\, dz = \infty.
+    \]
+    The $L$-Lipschitz condition gives 
+    \begin{align*}
+        v(z) &= v(z) - v(b) \\
+        &= |v(z) - v(b)| \\
+        &\leq L|z - b| = L(z - b)
+    \end{align*}
+    So, $v(z) \leq L(b - z)$ and 
+    \[
+        \int_{x_{0}}^{b} \frac{1}{v(z)}\,dz \geq \int_{x_{0}}^{b} \frac{1}{L(b - z)}\, dz = \infty.
+    \]
+    Similar, $x(t) > a$ for all $t$ (regardless if $a = -\infty$ or $a > -\infty$).
+\end{proof}
