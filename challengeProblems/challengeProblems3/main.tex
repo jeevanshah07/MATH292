@@ -130,7 +130,7 @@ then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by
             2 & -1
         \end{bmatrix}
         \Rightarrow \mathbf{u}_1 = \begin{bmatrix}
-            1 \\ -2
+            1 \\ 2
         \end{bmatrix}.
     \end{align*}
     And for $\lambda_2 = 2$: 
@@ -152,15 +152,15 @@ then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by
     \begin{equation}{\label{eq:3}}
         K = \overbrace{\begin{bmatrix}
             1 & -2 \\
-            -2 & 1
+            2 & 1
         \end{bmatrix}}^{V}
         \underbrace{\begin{bmatrix}
             7 & 0 \\
             0 & 2
         \end{bmatrix}}_{D}
         \overbrace{\begin{bmatrix}
-            -1/3 & -2/3 \\
-            -2/3 & -1/3
+            1/5 & 2/5 \\
+            -2/5 & 1/5
         \end{bmatrix}}^{V^{-1}}.
     \end{equation}
     Now, since $\mathbf{x}'' = -K\mathbf{x}$ (we will use $\mathbf{x}_0$ and $\mathbf{x}$ interchangably for the rest of the proof), by~(\ref{eq:3}), 
@@ -186,14 +186,14 @@ then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by
             \mathbf{y}_2(0)
         \end{bmatrix}
         = \begin{bmatrix}
-            -5/3 \\ -4/3
+            1 \\ 0
         \end{bmatrix} \quad\text{and}, \nonumber \\
         &\mathbf{y}'(0) = V^{-1}\mathbf{x}'(0) \Rightarrow \begin{bmatrix}
             \mathbf{y}'_1(0) \\
             \mathbf{y}'_2(0)
         \end{bmatrix}
         = \begin{bmatrix}
-            -1 \\ -1
+            3/5 \\ -1/5
         \end{bmatrix}. \nonumber
     \end{align}
     Rewriting~(\ref{eq:5}) gives
@@ -218,8 +218,8 @@ then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by
     where $\mathbf{y}(0) = \mathbf{s}_0$ and $\mathbf{y'}(0) = \mathbf{t}_0$. Substituting in our known values we can find 
     \begin{equation}{\label{eq:6}}
         \mathbf{y}(t) = \begin{bmatrix}
-            -\frac{5}{3}\cos(\sqrt{7}t) - \sin(\sqrt{7}t) \\
-            -\frac{4}{3}\cos(\sqrt{2}t) - \sin(\sqrt{2}t)
+            \cos(\sqrt{7}t) + \frac{3}{5}\sin(\sqrt{7}t) \\
+            -\frac{1}{5}\sin(\sqrt{2}t)
         \end{bmatrix}.
     \end{equation}
     Using our change of variable we can solve for $\mathbf{x} = V\mathbf{y}$. Substituting~(\ref{eq:6}) we can see 
@@ -230,12 +230,12 @@ then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by
             0 & 2
         \end{bmatrix}
         \begin{bmatrix}
-            -\frac{5}{3}\cos(\sqrt{7}t) - \sin(\sqrt{7}t) \\
-            -\frac{4}{3}\cos(\sqrt{2}t) - \sin(\sqrt{2}t)
+            \cos(\sqrt{7}t) + \frac{3}{5}\sin(\sqrt{7}t) \\
+            -\frac{1}{5}\sin(\sqrt{2}t)
         \end{bmatrix} \\
         &= \boxed{\begin{bmatrix}
-            -\frac{35}{3}\cos(\sqrt{7}t) - 7\sin(\sqrt{7}t) \\
-            -\frac{8}{3}\cos(\sqrt{2}t) - 2\sin(\sqrt{2}t)
+            7\cos(\sqrt{7}t) + \frac{21}{5}\sin(\sqrt{7}t) \\
+            -\frac{2}{5}\sin(\sqrt{2}t)
         \end{bmatrix} = \mathbf{x}(t)}
     \end{align*}
 \end{solution}
