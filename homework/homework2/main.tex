@@ -1,0 +1,495 @@
+\documentclass{exam}
+\usepackage{../../shah292}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Homework \#2}{Jeevan Shah}
+\runningheader{Differential Equations \\ Homework \#2}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+\colorbox{red}{\underline{2.5.2:}}
+\begin{solution}
+    If $v(x) = \tan(x)$ then $x'(t) = v(x) = \tan(x)$. By Barrows formula we have that 
+    \begin{align*}
+        t(x) &= 0 + \int_{x_0}^{x} \frac{1}{\tan z}\,dz \\
+        &= \int_{x_0}^{x} \cot z \, dz \\
+        &= \ln|\sin x|\big|_{x_{0}}^{x} = \ln\left|\frac{\sin x}{\sin x_0}\right|.
+    \end{align*}
+    Thus, 
+    \begin{align*}
+        t(x) &= \ln\left|\frac{\sin x}{\sin x_0}\right| \\
+        &= e^{t}\sin x_0 = \sin x \\
+        &\Rightarrow \boxed{\arcsin(e^t\sin x_0) = x(t)}
+    \end{align*}
+    Since $\arcsin(x)$ is continunous for $x \in (1, 1)$ we must have 
+    \begin{align*}
+        -1 \leq e^t\sin x_0 \leq 1 &\Rightarrow \frac{-1}{\sin x_0} \leq e^t \leq \frac{1}{\sin x_0} \\
+        &\Rightarrow \ln\left(\frac{-1}{\sin x_0}\right) \leq t \leq \ln\left(\frac{1}{\sin x_0}\right).
+    \end{align*}
+    Which is the interval for which the solution is defined.
+\end{solution}
+
+\colorbox{red}{\underline{2.5.3:}}
+\begin{solution}
+    \begin{parts}
+        \part If $v(x) = (1-x^4)^{1/2}$ then $x'(t) = (1-x^4)^{1/2}$. By Barrows Theorem, a solution exists and is defined for all $t \in \RR$ if, and only if, 
+        \[
+            \int_{-1}^{0} \frac{1}{|\sqrt{1-x^4}|}\, dx = \int_{0}^{1} \frac{1}{|\sqrt{1-x^4}|}\, dx = \infty 
+        \]
+        since $(-1, 1)$ is a maximal interval for $v$. But, for $x \in (-1, 0]$
+        \[
+            T_a \int_{-1}^{0} \frac{1}{\sqrt{1-x^4}}\, dx \leq \int_{-1}^{0} \frac{1}{2\sqrt{1+x}}\, dx = T,
+        \]
+        and for $x \in [0, 1)$
+        \[
+            T_b = \int_{0}^{1} \frac{1}{\sqrt{1-x^4}}\, dx \leq \int_{0}^{1} \frac{1}{2\sqrt{1-x}}\, dx = T.
+        \]
+        For some $T, T_a, T_b \in \RR$. Thus, the solutions only exists within $(-1, 1)$ for $t \in (T_a, T_b)$.
+
+        \part If $v(x) = (1-x^4)^2$ then $x'(t) = (1-x^4)^2$. By Barrows Theorem, a solution exists within $(-1, 1)$ if, and only if
+        \[
+            \int_{-1}^{0} \frac{1}{|(1-x^4)^2|}\, dx = \int_{0}^{1} \frac{1}{|(1-x^4)^2|}\, dx = \infty.
+        \]
+        It is clear that these integrals diverge since $\lim_{x\to\infty} \frac{1}{|(1-x^4)^2|} = \infty$. Thus, the solution does exist and remains within $(-1, 1)$ for all $t\in\RR$.
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{2.5.10:}
+\begin{solution}
+    \begin{parts}
+        \part Consider the derivative of $H(x(t), x'(t))$
+        \begin{align*}
+            \frac{d}{dt} H(x(t), x'(t)) &= \frac{d}{dt}\left(\frac{1}{2}(x'(t))^2 + v(x(t))\right) \\
+            &= x'(t)x''(t) + v'(x(t))x'(t) \\
+            &= -x'(t)v'(x(t)) + v'(x(t))x'(t) \\
+            &= 0.
+        \end{align*}
+        So, $H(x, y)$ must be a constant function. It follows that 
+        \[
+            \boxed{
+                H(x(t), x'(t)) = H(x(t_0), x'(t_0)).
+            } 
+        \]
+        If $H(v_0, x_0)$ is constant then 
+        \begin{align*}
+            &H(v_0, x_0) = \frac{1}{2}(x')^2 + v(x) \\
+            \Rightarrow&\, 2(H(v_0, x_0) - v(x)) = (x')^2 \\
+            \Rightarrow&\, \boxed{\sqrt{2(H(v_0, x_0) - v(x))} = x'}
+        \end{align*}
+        which was to be shown.
+
+        \part If $x_0 = 1$ and $v_0 = 0$, then $H(0, 1) = \frac{1}{2}$. So, 
+        \begin{align}
+            &x' = \pm \sqrt{1 - x^2} \label{eq:1}\\
+            \Rightarrow&\, \int \frac{1}{\sqrt{1-x^2}}\,dx = \int dt \nonumber \\
+            \Rightarrow&\, \arcsin(x) = t + C \\
+            \Rightarrow&\, x = \sin(t + C).
+        \end{align}
+        Without the loss of generality, take $t_0 = 0$. Then, if $x(0) = x_0 = 1$ we have that $C = \frac{\pi}{2}$. But
+        \[
+            x = \sin\left(t + \frac{\pi}{2}\right) = \cos t.
+        \]
+        From~(\ref{eq:1}) we know that 
+        \[
+            (x')^2 + x^2 = 1 
+        \]
+        which has equilibrium points at $x = \pm 1$ since
+        \[
+            (x')^2 + (\pm 1)^2 = 1 \Rightarrow x'= 0.
+        \]
+        Thus, $x(t) = 1$ for $t \in [0, T_1]$ since it is at rest for some arbitrary time $T_1 \geq 0$. For $t \in (T_1, T_2)$, $x(t)$ will follow a cosine wave until reaching $x = -1$ at which point it will stay at $x=-1$ for $x \in [T_2, T_3]$ with $T_3 \geq 0$ before following the cosine wave again to $x = 1$. \\ The only solution to be differentiable is $x(t) = \cos t$ for if $x '' = -v'(x) = -x$, then $x'' = -1$ when $x = 1$. But if the particle is at rest at $x = 1$, then $x'' = 0$. Since $0 \neq 1$ this is a contradiction and the only way for $x''$ to exist is if the particle is never at rest.
+
+        \part The equilibrium points of $(x')^2 + x^4 = 1$ are $x = \pm 1$. Similar to $(b)$ at $x = 1$, $x' = 0$, so we may stay at $x=1$ for any choosen time $T$ meaning there are infinitely many solutions. For a solution to be twice differntiable (when $x' \neq 0)$, 
+        \[
+            2x'x'' - 4x^3x' = 0 \Rightarrow 2x'(x'' + 2x^3) = 0 \Rightarrow x'' = -2x^3.
+        \]
+        Once again, without the loss of generality take $t_0 = 1$ so that $x$ is at rest. Then $x'' = 0$ since $x$ is at rest but $x'' = -2$ which is a contradiction. Thus, there is only a single solution that is twice differentiable, when $x$ is never at rest.
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{3.5.2:}}
+\begin{solution}
+    \begin{parts}
+        \part If $\mathbf{x}'(t) = \mathbf{v}(\mathbf{x}(t))$, we can find $\mathbf{w}$ such that $\mathbf{u}'(t) = \mathbf{w}(\mathbf{u}(t))$. Since $\mathbf{w}(\mathbf{u}(t)) = \mathbf{u}'(t)$ we know that 
+        \[
+            \mathbf{w}(\mathbf{u}(t)) = \begin{pmatrix}
+                u' \\ v'
+            \end{pmatrix}
+        \]
+        and thus it will suffice to find $u'$ and $v'$. For $u'(\mathbf{x}(t))$ we have, 
+        \begin{align*}
+            u'(x, y) &= \frac{\partial u}{\partial x}x' + \frac{\partial u}{\partial y}y' \\
+            &= \frac{1}{2}\left(\frac{(x-y)-(x+y)}{(x-y)^2}\right)x' + \frac{1}{2}\left(\frac{(x-y)- (-1)(x+y)}{(x-y)^2}y'\right) \\
+            &= \frac{-y}{(x - y)^2} + \frac{x}{(x-y)^2}.
+        \end{align*}
+        From $\mathbf{x}'(t) = \mathbf{v}(\mathbf{x}(t))$, 
+        \begin{equation}{\label{eq:2}}
+            \mathbf{x}'(t) = \begin{pmatrix}
+                x'(t) \\ y'(t)
+            \end{pmatrix}
+            = \begin{pmatrix}
+                x - y\sqrt{x^2 - y^2} \\
+                y - x\sqrt{x^2 - y^2}
+            \end{pmatrix}
+            = \mathbf{v}(\mathbf{x}(t)),
+        \end{equation}
+        so, 
+        \begin{align*}
+            v'(x, y) &= \frac{-y}{(x-y)^2}(x - y\sqrt{x^2 - y^2}) + \frac{x}{(x-y)^2}(y - x\sqrt{x^2 - y^2}) \\
+            &= \frac{-xy + y^2\sqrt{x^2 - y^2} + xy - x^2\sqrt{x^2 - y^2}}{(x-y)^2} \\
+            &= \frac{\sqrt{x^2 - y^2}(y^2 - x^2)}{(x - y)^2} \\
+            &= \frac{-\sqrt{x^2 - y^2}(x^2 - y^2)}{(x - y)^2} \\
+            &= \frac{-\sqrt{x^2 - y^2}(x - y)(x+y)}{(x - y)^2} \\
+            &= \frac{-\sqrt{x^2 - y^2})(x+y)}{x - y} \\
+            &= -2u.
+        \end{align*}
+        For $\mathbf{v}(\mathbf{x}(t))$ we have 
+        \begin{align*}
+            v'(x, y) &= \frac{\partial v}{\partial x}x' + \frac{\partial v}{\partial y}y' \\
+            &= \frac{x}{\sqrt{x^2 - y^2}}x' + \frac{-y}{\sqrt{x^2 - y^2}}y' \\
+            &= \frac{1}{\sqrt{x^2 - y^2}}(x(x - y\sqrt{x^2 - y^2}) - y(y - x\sqrt{x^2 - y^2})) \tag{by~\ref{eq:2}} \\
+            &= \frac{1}{\sqrt{x^2 - y^2}}(x^2 - y^2) \\
+            &= \frac{1}{v}v^2 = v.
+        \end{align*}
+        Thus, 
+        \[
+            \boxed{
+                \mathbf{w}(\mathbf{u}(t)) = \begin{pmatrix}
+                    u'(\mathbf{x}(t)) \\ v'(\mathbf{x}(t))
+                \end{pmatrix} = \begin{pmatrix}
+                    -2uv \\ v
+                \end{pmatrix}
+            }
+        \]
+
+        \part We first notice that $\mathbf{w}(\mathbf{u}(t))$ represents a coupled system. Since $\mathbf{u}(0) \in V$, let $\mathbf{u}(0) = (u_0, v_0)$. Then, 
+        \[
+            v' = v \Rightarrow v(t) = v_0 e^{t}.
+        \]
+        Substituting this into the equation for $u$ and solving, 
+        \begin{align*}
+            u'(t) = -2uv &\Rightarrow u' = -2v_{0}ue^t \\
+            &\Rightarrow \int_{u_0}^{u} \frac{1}{z}\, dz = \int_{0}^{t_{0}} -2v_0 e^{t}\, dt \\
+            &\Rightarrow u(t) = u_0 e^{-2v_{0}e^{t}}.
+        \end{align*}
+        Thus, the general solution is 
+        \[
+            \boxed{
+                \mathbf{u}(t) = \begin{pmatrix}
+                    u_0 e^{-2v_{0}e^{t}} \\
+                    v_0 e^t
+                \end{pmatrix}
+            }
+        \]
+
+        \part In order to solve $\mathbf{x}'(t) = \mathbf{w}(\mathbf{u}(t))$, we will convert the solutions from $(b)$ back into the $xy$-coordinate system. Define 
+        \[
+            \alpha = 2u_0 e^{-2v_0 e^t}
+        \]
+        such that 
+        \begin{align*}
+            2u = \alpha &\Rightarrow \frac{x+y}{x-y} = \alpha \\
+            &\Rightarrow x+y = \alpha x - \alpha y \\
+            &\Rightarrow x(\alpha - 1) = y(\alpha + 1) \\
+            &\Rightarrow x = \frac{y(\alpha + 1)}{(\alpha - 1)}.
+        \end{align*}
+        Thus, 
+        \begin{align*}
+            v^2 = x^2 - y^2 &\Rightarrow v_{0}^{2}e^{t^2} = \frac{y^2(\alpha + 1)^2}{(\alpha - 1)^2} - y^2 \\
+            &\Rightarrow v_{0}^{2}e^{t^{2}} = y^2\left(\frac{(\alpha + 1)^2}{(\alpha - 1)^2} - 1\right) \\
+            &\Rightarrow v_{0}^{2}e^{t^{2}} = y^2\left(\frac{(\alpha + 1)^2 - (\alpha - 1)^2}{(\alpha - 1)^2}\right) \\
+            &\Rightarrow v_{0}^{2}e^{t^2} = y^2\left(\frac{4\alpha}{(\alpha - 1)^2}\right) \\
+            &\Rightarrow y^2 = \frac{(\alpha - 1)^2v_{0}^2e^{t^{2}}}{4\alpha} \\
+            &\Rightarrow y = \frac{(\alpha - 1)v_{0}e^{t}}{2\sqrt{\alpha}}.
+        \end{align*}
+        So, 
+        \begin{align*}
+            x = \frac{y(\alpha + 1)}{(\alpha - 1)} &= \left(\frac{\alpha + 1}{\alpha - 1}\right)\left(\frac{(\alpha - 1)v_{0}e^{t}}{2\sqrt{\alpha}}\right) \\
+            &= \frac{(\alpha + 1)v_{0}e^{t}}{2\sqrt{\alpha}(\alpha - 1)}.
+        \end{align*}
+        Substituting in $\alpha$, 
+        \begin{align*}
+            x &= \frac{(2u_0 e^{-2v_0 e^t} + 1)v_{0}e^{t}}{2\sqrt{2u_0 e^{-2v_0 e^t}}(2u_0 e^{-2v_0 e^t} - 1)} \\
+            y &= \frac{(2u_0 e^{-2v_0 e^t} - 1)v_{0}e^{t}}{2\sqrt{2u_0 e^{-2v_0 e^t}}}.
+        \end{align*}
+        So, 
+        \[
+            \boxed{
+                \Psi_{t}\left(\mathbf{x}\right) = \left(
+                    \frac{(2u_0 e^{-2v_0 e^t} + 1)v_{0}e^{t}}{2\sqrt{2u_0 e^{-2v_0 e^t}}(2u_0 e^{-2v_0 e^t} - 1)}, \frac{(2u_0 e^{-2v_0 e^t} - 1)v_{0}e^{t}}{2\sqrt{2u_0 e^{-2v_0 e^t}}}
+                \right)
+            }
+        \]
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{3.5.4:}}
+\begin{solution}
+    \begin{parts}
+        \part We start by finding the eigenvalues of $A$ using the characteristic equation for $2 \times 2$ matrix:
+        \[
+            \lambda^2 + 5\lambda - 6 = 0 \Rightarrow \lambda_1 = -6, \lambda_2 = 1.
+        \]
+        Then, the eigenvalues are 
+
+        \begin{minipage}{0.45\linewidth}
+            \begin{align*}
+                A + 6I &= \begin{pmatrix}
+                    2 & 2 \\
+                    5 & 5
+                \end{pmatrix} \\
+                &\Rightarrow \vec{u}_1 = \begin{pmatrix}
+                    -1 \\ 1
+                \end{pmatrix} 
+            \end{align*} 
+        \end{minipage}
+        and \hfill
+        \begin{minipage}{0.45\linewidth}
+            \begin{align*}
+                A - I &= \begin{pmatrix}
+                    -5 & 2 \\
+                    5 & -2
+                \end{pmatrix} \\
+                &\Rightarrow \vec{u}_2 = \begin{pmatrix}
+                    2 \\ 5
+                \end{pmatrix} 
+            \end{align*} 
+        \end{minipage}
+        Thus, the general solution has the form 
+        \begin{equation}{\label{eq:3}}
+            \mathbf{x}(t) = a_1 e^{-6t}(-1, 1) + a_2 e^{t}(2, 5)
+        \end{equation}
+        for $a_1, a_2 \in \RR$. We can solve for $a_1$ and $a_2$ using the initial condition $\mathbf{x}(t) = (x_0, y_0)$. If 
+        \[
+            V = \begin{pmatrix}
+                \vec{u}_1 \\ \vec{u}_2
+            \end{pmatrix} 
+            = \begin{pmatrix}
+                -1 & 2 \\
+                1 & 5
+            \end{pmatrix}
+            \Rightarrow V^{-1} = \frac{1}{7}\begin{pmatrix}
+                -5 & 2 \\
+                1 & 1
+            \end{pmatrix}.
+        \]
+        So, 
+        \[
+            (a_1, a_2) = \frac{1}{7}\begin{pmatrix}
+                -5 & 2 \\
+                1 & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                x_0 \\ y_0
+            \end{pmatrix}
+            = \frac{1}{7}(-5x_0 + 2y_0, x_0 + y_0).
+        \]
+        Thus, 
+        \begin{align*}
+            \mathbf{x}(t) &= \frac{1}{7}\left((-5x_0 + 2y_0)e^{-6t}\begin{pmatrix}
+                -1 \\ 1
+            \end{pmatrix} + (x_0 + y_0)e^{t}\begin{pmatrix}
+                2 \\ 5
+            \end{pmatrix}\right) \\
+            &= \frac{1}{7}\left((5x_0 - 2y_0)e^{6t} + 2(x_0 + y_0)e^{t}, (-5x_0 + 2y_0)e^{-6t} + 5(x_0 + y_0)e^{t}\right) \\
+            &= \frac{1}{7}\left(x_0(5e^{-6t} + 2e^t) + y_0(-2e^{-6t} + 2e^{t}), x_0(-5e^{-6t} + 5e^{t}) + y_0(2e^{-6t} + 5e^{t})\right) \\
+            &= \boxed{\frac{1}{7}\begin{pmatrix}
+                5e^{-6t} + 2e^t & -2e^{-6t} + 2e^{t} \\
+                -5e^{-6t} + 5e^t & 2e^{-6t} + 5e^{t}
+            \end{pmatrix}
+            \begin{pmatrix}
+                x_0 \\ y_0 
+            \end{pmatrix} = e^{tA}\mathbf{x_0}}
+        \end{align*}
+        From~(\ref{eq:3}) we can clearly see that 
+        \[
+            \lim_{t \to \infty} e^{-6t} = 0 \quad\text{and}\quad \lim_{to \to \infty} e^t = \infty
+        \]
+        so, for $\lim_{t \to \infty} \mathbf{x}(t) = \mathbf{0}$ we must have $\mathbf{x_0} = k(-1, 1)$ for $k \in \RR$.
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{3.5.5:}}
+\begin{solution}
+    \begin{parts}
+        \part We start by finding the eigenvalues of $A$ using the characteristic equation: 
+        \[
+            \lambda^2 - 6\lambda + 9 = 0 \Rightarrow \lambda = 3.
+        \]
+        Then the associated eigenvector is 
+        \[
+            A - 3I = \begin{pmatrix}
+                2 & -1 \\
+                4 & -2
+            \end{pmatrix}
+            \xrightarrow{}
+            \begin{pmatrix}
+                2 & - 1 \\
+                0 & 0 
+            \end{pmatrix}
+            \Rightarrow \vec{u} = \begin{pmatrix}
+                1 \\ 2
+            \end{pmatrix}.
+        \]
+        Because there is only a single eigenvector, we follow the process used in example 31 to preform a change of variables. Let 
+        \[
+            V = \begin{pmatrix}
+                \vec{u} & \vec{u}^{\perp}
+            \end{pmatrix} 
+            = \begin{pmatrix}
+                1 & -2 \\
+                2 & 1
+            \end{pmatrix}.
+        \]
+        Then 
+        \[
+            V^{-1}AV = \begin{pmatrix}
+                3 & -5 \\
+                0 & 3
+            \end{pmatrix}
+        \]
+        which represents a recursively coupled system
+        \[
+            \mathbf{y}'(t) = (V^{-1}AV)\mathbf{y}(t).
+        \]
+        Take $\mathbf{y}(t) = (u(t), v(t))$ so $v'(t) = 3v(t)$ thus 
+        \[
+            v(t) = v_0 e^{3t}.
+        \]
+        It follows that 
+        \begin{align*}
+            & u'(t) = 3u(t) - 5v(t) \\
+            \Rightarrow&\, u'(t) = 3u(t) - 5v_0 e^{3t} \\
+            \Rightarrow&\, u'(t)e^{-3t} - 3u(t)e^{-3t} = -5v_{0} \\
+            \Rightarrow&\, (u(t)e^{-3t})' = -5v_0 \\
+            \Rightarrow&\, u(t) = (-5v_0t + u_0)e^{3t}.
+        \end{align*}
+        So, 
+        \[
+            \mathbf{y}(t) = e^{3t}(-5v_0 + u_0, v_0) = e^{3t}\begin{pmatrix}
+                1 & -5t \\
+                0 & 1
+            \end{pmatrix}\mathbf{y_0}.
+        \]
+        Let $\mathbf{y_0} = \mathbf{x_0}$ and $\mathbf{x}(t) = V^{-1}\mathbf{y}$. Then, 
+        \begin{align*}
+            \mathbf{x}(t) &= V^{-1}e^{3t}\begin{pmatrix}
+                1 & -5t \\
+                0 & 1
+            \end{pmatrix}
+            V\mathbf{x_0} \\
+            &= \frac{e^{3t}}{5}\begin{pmatrix}
+                1 & 2 \\
+                -2 & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & -5t \\
+                0 & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & -2 \\
+                2 & 1
+            \end{pmatrix}
+            \mathbf{x_0} \\
+            &= \boxed{e^{3t} \begin{pmatrix}
+                1-2t & -t \\
+                4t & 2t+1
+            \end{pmatrix}
+            \mathbf{x_0} = e^{tA}\mathbf{x_0}}
+        \end{align*}
+
+        \part Similar to part $(b)$ before, we can see that $\lim_{t\to\infty} e^{3t} = \infty$ for all $t$, so $\lim_{t\to\infty} \mathbf{x}(t) = \mathbf{0}$ if, and only if $\mathbf{x_0} = (0, 0)$.
+    \end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{3.5.6:}}
+\begin{solution}
+    \begin{parts}
+        \part We start by finding the eigenvectors of $A$ using the characteristic equation: 
+        \[
+            \lambda^{2} + 5\lambda - 14 = 0 \Rightarrow \lambda_1 = -7, \lambda_2 = 2.
+        \]
+        The eigenvalues are 
+
+
+        \begin{minipage}{0.45\linewidth}
+            \begin{align*}
+                A + 7I &= \begin{pmatrix}
+                    3 & 2 \\
+                    9 & 6
+                \end{pmatrix} \\
+                &\xrightarrow{} \begin{pmatrix}
+                    3 & 2 \\ 
+                    0 & 0 
+                \end{pmatrix} \\
+                &\Rightarrow \vec{u}_1 = \begin{pmatrix}
+                    -2 \\ 3
+                \end{pmatrix}
+            \end{align*}
+        \end{minipage}
+        and \hfill
+        \begin{minipage}{0.45\linewidth}
+            \begin{align*}
+                A - 2I &= \begin{pmatrix}
+                    -6 & 2 \\
+                    9 & -3
+                \end{pmatrix}
+                &\xrightarrow{}
+                \begin{pmatrix}
+                    -3 & 1 \\
+                    0 & 0
+                \end{pmatrix} \\
+                &\Rightarrow \vec{u}_2 = \begin{pmatrix}
+                    1 \\ 3
+                \end{pmatrix}.
+            \end{align*}
+        \end{minipage}
+        Take 
+        \[
+            M(t) = \begin{pmatrix}
+                e^{-7t}(-2, 3) & e^{2t}(1, 3)
+            \end{pmatrix} = \begin{pmatrix}
+                -2e^{-7t} & e^{2t} \\
+                3e^{-7t} & 3e^{2t}
+            \end{pmatrix}
+        \]
+        so that 
+        \[
+            M(0) = \begin{pmatrix}
+                -2 & 1 \\
+                3 & 3
+            \end{pmatrix}
+            \Rightarrow M(0)^{-1} = \frac{1}{9} \begin{pmatrix}
+                -3 & 1 \\
+                3 & 2
+            \end{pmatrix}.
+        \]
+        Thus, 
+        \begin{align*}
+            \mathbf{x}(t) = M(t)M(0)^{-1}\mathbf{x_0} &= \begin{pmatrix}
+                -2e^{-7t} & e^{2t} \\
+                3e^{-7t} & 3e^{2t}
+            \end{pmatrix}
+            \frac{1}{9}\begin{pmatrix}
+                -3 & 1 \\
+                3 & 2
+            \end{pmatrix}
+            \mathbf{x_0} \\
+            &= \boxed{\frac{1}{9}\begin{pmatrix}
+                6e^{-7t} + 3e^{2t} & -2e^{-7t} + 2e^{2t} \\
+                -9e^{-7t} + 9e^{2t} & 3e^{-7t} + 6e^{2t}
+            \end{pmatrix} = \frac{1}{9}e^{tA}\mathbf{x_0}}
+        \end{align*}
+
+        \part Similar to before it is clear that $\lim_{t \to \infty}e^{7t} = 0$ and $\lim_{t\to\infty} e^{2t} = \infty$ so for $\lim_{t \to \infty} \mathbf{x}(t) = \mathbf{0}$ we must have $\mathbf{x_0} = k(-2, 3)$
+    \end{parts}
+\end{solution}
+\end{document}
