@@ -70,9 +70,9 @@ and
     \mathbf{x}''(t) = -K\mathbf{x}(t), \quad \mathbf{x}(0) = (1, 2), \quad \mathbf{x}'(t) = (1, 1)
 \]
 and for $j = 1, 2, 3, 4$ we have that $\mathbf{x}_j(t)$ is a solution to 
-\[
+\begin{equation}{\label{eq:0.1}}
     \mathbf{x}''(t) = -K\mathbf{x}(t) + \mathbf{f}_j(t), \quad \mathbf{x}(0) = (0, 0), \quad \mathbf{x}'(t) = (0, 0),
-\]
+\end{equation}
 then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by 
 \[
     \mathbf{x}(t) = \sum_{j=0}^{4}\mathbf{x}_j(t).
@@ -239,6 +239,229 @@ then the solution of~(\ref{eq:1}) and~(\ref{eq:2}) is given by
         \end{bmatrix} = \mathbf{x}(t)}
     \end{align*}
 \end{solution}
+
+Now, for any $\mathbf{x}_j(t)$ that is a solution to~(\ref{eq:0.1}) we know that for $\mathbf{v}_1, \mathbf{v}_2$ eigenvectors of $K$ 
+\begin{equation}
+    \mathbf{x}(t) = y_1(t)\mathbf{v}_1 + y_2(t)\mathbf{v}_2
+\end{equation}
+since $K$ is a symmetric matrix. Then, 
+\begin{align*}
+    \mathbf{x}''(t) = -K\mathbf{x}(t) + \mathbf{f} &\Rightarrow \mathbf{x}''(t) + K\mathbf{x}(t) = \mathbf{f} \\
+    &\Rightarrow \left(y_1(t)\mathbf{v}_1 + y_2(t)\mathbf{v}_2\right)'' + K\left(y_1(t)\mathbf{v}_1 + y_2\mathbf{v}_2\right) = \mathbf{f} \\
+    &\Rightarrow y''_1(t)\mathbf{v}_1 + y''_2(t)\mathbf{v}_2 + 7y_1(t)\mathbf{v}_1 + 2y_2(t)\mathbf{v}_2 = \mathbf{f} \tag{Since $K\mathbf{v}_i = \lambda_i\mathbf{v}_i$} \\
+    &\Rightarrow \mathbf{v}_1(y_1''(t) + 7y_1(t)) + \mathbf{v}_2(y_2''(t) + 2y_2(t)) = \mathbf{f}.
+\end{align*}
+Thus, we have the equations 
+\[
+    y_1''(t) + 7y_1(t) = f_1 \quad\text{and}\quad y_2''(t) + 2y_2(t) = f_2.
+\]
+For an equation of the form $y'' + \lambda y = f$, we may guess that the solution is of the form 
+\begin{align}
+    y(t) &= A\cos(\sqrt{\lambda}t) + B\sin(\sqrt{\lambda}t) + C\cos(\omega t) \quad\text{or} \label{eq:10} \\
+    y(t) &= A\cos(\sqrt{\lambda}t) + B\sin(\sqrt{\lambda}t) + C\sin(\omega t). \nonumber
+\end{align}
+Consider the first case in which the final term is $\cos(\omega t)$ and $f = \alpha \cos(\omega t)$ term. Then,
+\[
+    y''(t) = -\lambda(A\cos(\sqrt{\lambda}t) + B\sin(\sqrt{\lambda}t)) - \omega^2 C\cos(\omega t).
+\]
+Adding $\lambda y(t)$ to both sides shows that 
+\[
+    y''(t) + \lambda y(t) = \lambda C\cos(\omega t) - \omega^2 C \cos(\omega t) = (\lambda - \omega^2)C\cos(\omega t).
+\]
+It follows that
+\[
+    (\lambda - \omega^2)C\cos(\omega t) = \alpha \cos(\omega t) \Rightarrow C = \frac{\alpha}{\lambda - \omega^2}.
+\]
+Applying the initial conditions, we can see that 
+\begin{align*}
+    &y(t) = A\cos(\sqrt{\lambda}t) + B\sin(\sqrt{\lambda}t) + \frac{\alpha}{\lambda - \omega^2}\cos(\omega t) \\
+    \Rightarrow&\, y(0) = 0 = A + \frac{\alpha}{\lambda - \omega^2} \Rightarrow A = -\frac{\alpha}{\lambda - \omega^2} \\
+    \Rightarrow&\, y'(0) = 0 = B.
+\end{align*}
+So, the solution in the case in which $f_i = \alpha\cos(\omega t)$ is 
+\begin{equation}
+    y(t) = \frac{\alpha}{\lambda - \omega^2}\left(\cos(\omega t) - \cos(\sqrt{\lambda}t)\right).
+\end{equation}
+Returning to~(\ref{eq:10}) and considering the other case in which the final term is $\sin(\omega t)$ and $f = \beta\sin(\omega t)$ term, we have 
+\[
+    y''(t) = -\lambda(A\cos(\sqrt{\lambda}t) + B\sin(\sqrt{\lambda}t)) - \omega^2 C\cos(\omega t).
+\]
+Then, 
+\[
+    y''(t) + \lambda y(t) = \lambda C\sin(\omega t) - \omega^2 C \sin(\omega t) = (\lambda - \omega^2)C\sin(\omega t).
+\]
+Just like in the first case we can see that 
+\[
+    (\lambda - \omega^2)C\sin(\omega t) = \beta\sin(\omega t) \Rightarrow C = \frac{\beta}{\lambda - \omega^2}.
+\]
+Applying initial conditions shows 
+\begin{align*}
+    &y(t) = A\cos(\sqrt{\lambda}t) + B\sin(\sqrt{\lambda}t) + \frac{\beta}{\lambda - \omega^2}\sin(\omega t) \\
+    \Rightarrow&\, y(0) = 0 = A \\
+    \Rightarrow&\, y'(0) = 0 = \sqrt{\lambda}B + \frac{\beta\omega}{\lambda - \omega^2} \Rightarrow B = -\frac{\beta\omega}{\sqrt{\lambda}(\lambda - \omega ^2)}.
+\end{align*}
+So, the solution in the case in which $f = \beta\sin(\omega t)$ is 
+\begin{equation}{\label{eq:11}}
+    y(t) = \frac{\beta}{\lambda - \omega^2}\left(\sin(\omega t) - \frac{\omega}{\sqrt{\lambda}}\sin(\sqrt{\lambda}t)\right).
+\end{equation}
+
+\question Compute $\mathbf{x}_1(t)$
+\begin{solution}
+    For $\mathbf{x}_1$ we have that $\mathbf{f}_1 = (1, 3)\cos(\omega_1 t)$. Once again, consider the change of variables $\mathbf{y} = V^{-1}\mathbf{x}$. Then, 
+    \begin{align*}
+        \mathbf{y}'' = V^{-1}\mathbf{x}'' &= V^{-1}(-K\mathbf{x} + \mathbf{f}) \\
+        &= V^{-1}(-VDV^{-1})\mathbf{x} + V^{-1}\mathbf{f} \\
+        &= -D\mathbf{y} + V^{-1}\mathbf{f} \\
+        &= -\begin{bmatrix}
+            7 & 0 \\
+            0 & 2
+        \end{bmatrix}\mathbf{y} + \frac{1}{5}\begin{bmatrix}
+            7\cos(\omega_1 t) \\
+            \cos(\omega_1 t).
+        \end{bmatrix}
+    \end{align*}
+    It follows that $\alpha = \frac{7}{5}$ and $\beta = \frac{1}{5}$, so for 
+    \[
+        \mathbf{x}_1(t) = y_1\mathbf{v}_1 + y_2\mathbf{v_2} 
+    \]
+    we have 
+    \begin{align*}
+        y_1(t) &= \frac{7}{5(7-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{7}t)), \text{ and} \\
+        y_2(t) &= \frac{1}{5(2-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{2}t)).
+    \end{align*}
+    Thus, 
+    \[
+        \boxed{
+            \mathbf{x}_1(t) = \frac{7}{5(7-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{7}t))\begin{bmatrix}
+                1 \\ 2
+            \end{bmatrix} + \frac{1}{5(2-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{2}t))\begin{bmatrix}
+                2 \\ -1
+            \end{bmatrix}
+        } 
+    \]
+\end{solution}
+
+\question Compute $\mathbf{x}_2(t)$. 
+\begin{solution}
+    We follow a similar process for $\mathbf{x}_2$. For $\mathbf{f}_2 = (1, -1)\sin(\omega_2 t)$, 
+    \[
+        V^{-1}\mathbf{f}_2 =  \frac{1}{5}\begin{bmatrix}
+            1 & 2 \\
+            -2 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            \sin(\omega_2 t) \\
+            -\sin(\omega_2 t)
+        \end{bmatrix}
+        = \frac{1}{5}\begin{bmatrix}
+            -\sin(\omega_2 t) \\
+            -3\sin(\omega_2 t)
+        \end{bmatrix},
+    \]
+    thus $\alpha = -1$ and $\beta = -3$. It follows that 
+    \[
+        \boxed{
+            \mathbf{x_2}(t) = \frac{-1}{5(7-\omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{7}}\sin(\sqrt{7})\right)\begin{bmatrix}
+                1 \\ 2
+            \end{bmatrix}
+            - \frac{3}{5(2 - \omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{2}}\begin{bmatrix}
+                2 \\ -1
+            \end{bmatrix}\right)
+        }
+    \]
+\end{solution}
+
+\question Compute $\mathbf{x}_3$.
+\begin{solution}
+    For $\mathbf{x}_3$ we have $\mathbf{f}_3 = (3, -1)\sin(\omega_3 t)$ so 
+    \[
+        V^{-1}\mathbf{f}_3 = \frac{1}{5}\begin{bmatrix}
+            1 & 2 \\
+            -2 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            3\sin(\omega_3 t) \\
+            -\sin(\omega t)
+        \end{bmatrix}
+        = \frac{1}{5}\begin{bmatrix}
+            \sin(\omega_3 t) \\
+            -7\sin(\omega_3 t)
+        \end{bmatrix},
+    \]
+    thus $\alpha = \frac{1}{5}$ and $\beta = \frac{-7}{5}$. It follows that 
+    \[
+        \boxed{
+            \mathbf{x_3}(t) = \frac{1}{5(7-\omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{7}}\sin(\sqrt{7})\right)\begin{bmatrix}
+                1 \\ 2
+            \end{bmatrix}
+            - \frac{7}{5(2 - \omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{2}}\begin{bmatrix}
+                2 \\ -1
+            \end{bmatrix}\right)
+        }
+    \]
+\end{solution}
+
+\question Compute $\mathbf{x}_4$.
+\begin{solution}
+    For $\mathbf{x}_4$ we have $\mathbf{f}_4 = (1, 0)\cos(\omega_4 t)$ so 
+    \[
+        V^{-1}\mathbf{f}_4 = \frac{1}{5}\begin{bmatrix}
+            1 & 2 \\ 
+            -2 & 1
+        \end{bmatrix} 
+        \begin{bmatrix}
+            \cos(\omega_4 t) \\
+            0
+        \end{bmatrix}
+        = \frac{1}{5}\begin{bmatrix}
+            \cos(\omega_4 t) \\
+            -2\cos(\omega_4 t)
+        \end{bmatrix},
+    \]
+    thus $\alpha = \frac{1}{5}$ and $\beta = \frac{-2}{5}$. It follows that 
+    \[
+        \boxed{
+            \mathbf{x}_4(t) = \frac{1}{5(7-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{7}t))\begin{bmatrix}
+                1 \\ 2
+            \end{bmatrix} - \frac{2}{5(2-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{2}t))\begin{bmatrix}
+                2 \\ -1
+            \end{bmatrix}
+        } 
+    \]
+\end{solution}
+
+\question Write the solutions to~(\ref{eq:1}) and~(\ref{eq:2}). For which values of $\omega_1, \omega_2, \omega_3$, and $\omega_4$ does the system exhibit resonance. 
+\begin{solution}
+    From exercise $1$, we know that 
+    \[
+        \mathbf{x}(t) = \sum_{j=0}^{4}\mathbf{x}_j(t) = \mathbf{x}_0(t) + \sum_{j=1}^{4}\mathbf{x}_j(t).
+    \]
+    so
+    \[
+        \begin{aligned}
+            x(t) &= \begin{bmatrix} 7 \cos(\sqrt{7}t) + \frac{21}{5} \sin(\sqrt{7}t) \\ -\frac{2}{5} \sin(\sqrt{2}t) \end{bmatrix} \\
+            &+ \frac{7}{5(7-\omega_1^2)}(\cos(\omega_1t) - \cos(\sqrt{7}t)) \begin{bmatrix} 1 \\ 2 \end{bmatrix} + \frac{1}{5(2-\omega_1^2)}(\cos(\omega_1t) - \cos(\sqrt{2}t)) \begin{bmatrix} 2 \\ -1 \end{bmatrix} \\
+            &+ \frac{-1}{5(7-\omega_2^2)}\left(\sin(\omega_2t) - \frac{\omega_2}{\sqrt{7}}\sin(\sqrt{7}t)\right) \begin{bmatrix} 1 \\ 2 \end{bmatrix} - \frac{3}{5(2-\omega_2^2)}\left(\sin(\omega_2t) - \frac{\omega_2}{\sqrt{2}}\sin(\sqrt{2}t)\right) \begin{bmatrix} 2 \\ -1 \end{bmatrix} \\
+            &+ \frac{1}{5(7-\omega_3^2)}\left(\sin(\omega_3t) - \frac{\omega_3}{\sqrt{7}}\sin(\sqrt{7}t)\right) \begin{bmatrix} 1 \\ 2 \end{bmatrix} - \frac{7}{5(2-\omega_3^2)}\left(\sin(\omega_3t) - \frac{\omega_3}{\sqrt{2}}\sin(\sqrt{2}t)\right) \begin{bmatrix} 2 \\ -1 \end{bmatrix} \\
+            &+ \frac{1}{5(7-\omega_4^2)}(\cos(\omega_4t) - \cos(\sqrt{7}t)) \begin{bmatrix} 1 \\ 2 \end{bmatrix} - \frac{2}{5(2-\omega_4^2)}(\cos(\omega_4t) - \cos(\sqrt{2}t)) \begin{bmatrix} 2 \\ -1 \end{bmatrix}.
+        \end{aligned}
+    \]
+    The system will exhibit resonance for $\omega_i = \sqrt{7}$ or $\omega_i = \sqrt{2}$ because $y'' + \lambda y = 0$ for either of these values of $\omega$.
+\end{solution}
+
+\question Of the four given values of $\omega_1$, choose the one that creates a signficantly larger term in the solution, so the solution can be approximated by only the main term. 
+\begin{solution}
+    For $\omega_1 = 2.65 \approx \sqrt{7}$ we have that 
+    \[
+        \frac{1}{7-\omega_1^2} \approx -44.5 
+    \] 
+    which is much larger than any of the other terms. Thus, the main component is 
+    \[
+        \boxed{\frac{7}{5(7 - \omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{7}t))\begin{bmatrix}
+            1 \\ 2
+        \end{bmatrix}}
+    \]
+\end{solution} 
 \end{questions}
 
 \footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH292/blob/main/challengeProblems/challengeProblems3/main.tex}{\underline{here}}}
