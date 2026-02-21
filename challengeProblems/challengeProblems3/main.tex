@@ -364,9 +364,9 @@ So, the solution in the case in which $f = \beta\sin(\omega t)$ is
             \mathbf{x_2}(t) = \frac{-1}{5(7-\omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{7}}\sin(\sqrt{7})\right)\begin{bmatrix}
                 1 \\ 2
             \end{bmatrix}
-            - \frac{3}{5(2 - \omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{2}}\begin{bmatrix}
+            - \frac{3}{5(2 - \omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{2}}\right)\begin{bmatrix}
                 2 \\ -1
-            \end{bmatrix}\right)
+            \end{bmatrix}
         }
     \]
 \end{solution}
@@ -381,7 +381,7 @@ So, the solution in the case in which $f = \beta\sin(\omega t)$ is
         \end{bmatrix}
         \begin{bmatrix}
             3\sin(\omega_3 t) \\
-            -\sin(\omega t)
+            -\sin(\omega_3 t)
         \end{bmatrix}
         = \frac{1}{5}\begin{bmatrix}
             \sin(\omega_3 t) \\
@@ -391,12 +391,12 @@ So, the solution in the case in which $f = \beta\sin(\omega t)$ is
     thus $\alpha = \frac{1}{5}$ and $\beta = \frac{-7}{5}$. It follows that 
     \[
         \boxed{
-            \mathbf{x_3}(t) = \frac{1}{5(7-\omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{7}}\sin(\sqrt{7})\right)\begin{bmatrix}
+            \mathbf{x_3}(t) = \frac{1}{5(7-\omega_3^2)}\left(\sin(\omega_3 t) - \frac{\omega_3}{\sqrt{7}}\sin(\sqrt{7})\right)\begin{bmatrix}
                 1 \\ 2
             \end{bmatrix}
-            - \frac{7}{5(2 - \omega_2^2)}\left(\sin(\omega_2 t) - \frac{\omega_2}{\sqrt{2}}\begin{bmatrix}
+            - \frac{7}{5(2 - \omega_3^2)}\left(\sin(\omega_3 t) - \frac{\omega_3}{\sqrt{2}}\right)\begin{bmatrix}
                 2 \\ -1
-            \end{bmatrix}\right)
+            \end{bmatrix}
         }
     \]
 \end{solution}
@@ -421,9 +421,9 @@ So, the solution in the case in which $f = \beta\sin(\omega t)$ is
     thus $\alpha = \frac{1}{5}$ and $\beta = \frac{-2}{5}$. It follows that 
     \[
         \boxed{
-            \mathbf{x}_4(t) = \frac{1}{5(7-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{7}t))\begin{bmatrix}
+            \mathbf{x}_4(t) = \frac{1}{5(7-\omega_4^2)}(\cos(\omega_4 t) - \cos(\sqrt{7}t))\begin{bmatrix}
                 1 \\ 2
-            \end{bmatrix} - \frac{2}{5(2-\omega_1^2)}(\cos(\omega_1 t) - \cos(\sqrt{2}t))\begin{bmatrix}
+            \end{bmatrix} - \frac{2}{5(2-\omega_4^2)}(\cos(\omega_4 t) - \cos(\sqrt{2}t))\begin{bmatrix}
                 2 \\ -1
             \end{bmatrix}
         } 
