@@ -1,0 +1,349 @@
+\documentclass{exam}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{nicematrix}
+\usepackage{extpfeil}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage[x11names]{xcolor}
+\usepackage[most]{tcolorbox}
+
+\pgfplotsset{compat=1.18}
+\printanswers
+
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\braces}[1]{\ensuremath{\left\{#1 \right\}}}
+\newcommand{\Span}[1]{\ensuremath\text{Span}\braces{#1}}
+\newcommand{\ee}{\mathbf{e}}
+
+\title{Challenge Problems 1}
+\author{Jeevan Shah}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Challenge Problems \#3}{Jeevan Shah}
+\runningheader{Differential Equations \\ Challenge Problems \#3}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+For the second order system 
+\begin{align*}
+    x'' &= -x \\
+    y'' &= -y
+\end{align*}
+we introduce the variables 
+\[
+    a = x \quad b = x' \quad c = y \quad d = y'
+\]
+such that for the vector $\mathbf{a}(t) = (a(t), b(t), c(t), d(t)) \in \RR^{4}$,
+\begin{equation}{\label{eq:1}}
+    \frac{d}{dt}(a, b, c, d) = (b, -a, d, -c)
+\end{equation}
+in order to study the \textit{phase curves} of the system. We will define $(a(t), b(t), c(t), d(t))$ as a solution of~(\ref{eq:1}) where $(a(0), b(0), c(0), d(0)) = (a_0, b_0, c_0, d_0) = \mathbf{a}_0$.
+\begin{questions}
+    \question Define 
+    \[
+        r(a, b, c, d) = a^2 + b^2, \quad s(a, b, c, d) = c^2 + d^2 \quad \text{and},\quad q(a, b, c, d) = ac + bd.
+    \]
+    Show that $r(\mathbf{a}), s(\mathbf{a})$, and $q(\mathbf{a})$ are all independent of $t$. 
+    \begin{solution}
+        If $r, s$, and $q$ are independent of $t$, then their derivatives with respect to $t$ should be $0$. Since
+        \begin{align*}
+            \frac{d}{dt}(r(\mathbf{a})) &= 2aa' + 2bb' = 2ab - 2b(a) = 0 \\
+            \frac{d}{dt}(s(\mathbf{a})) &= 2cc' + 2dd' = 2cd - 2cd = 0 \\
+            \frac{d}{dt}(q(\mathbf{a})) &= a'c + ac' + b'd + bd' = bc + ad - ad - bc = 0,
+        \end{align*}
+        it follows that $r, s$, and $q$ are independent of $t$.
+    \end{solution}
+
+Now we define 
+\[
+    \mathbf{v}(t) = (a(t), b(t)) \quad \text{and} \quad \mathbf{w}(t) = (c(t), d(t))
+\]
+with 
+\[
+    r_0 = \|\mathbf{v}(0)\| > 0 \quad \text{and} \quad s_0 = \|\mathbf{w}(0)\| > 0.
+\]
+
+    \question Show that the angle between $\mathbf{v}(t)$ and $\mathbf{w}(t)$ is independent of $t$, and then show that there is some angle $\theta$ so that 
+    \[
+        s_0\mathbf{v}(t) = \begin{bmatrix}
+            \cos \theta & -\sin\theta \\
+            \sin \theta & \cos\theta 
+        \end{bmatrix} 
+        r_0\mathbf{w}(t)
+    \]
+    for all $t$. 
+    \begin{solution}
+        The cosine of the angle between $\mathbf{v}$ and $\mathbf{w}$ can be found by 
+        \[
+            \cos \theta = \frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \|\mathbf{w}\|}.
+        \]
+        Similar to~(\ref{question@1}) we will show that the derivative of this expression is $0$.
+        So
+        \begin{align*}
+            \frac{d}{dt}(\cos \theta) = \frac{d}{dt}\left(\frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \|\mathbf{w}\|}\right) &= \frac{d}{dt}\left(\frac{ac + bd}{\sqrt{a^2 + b^2}\sqrt{c^2 + d^2}}\right) \\
+            &= \frac{d}{dt}\left(\frac{q}{\sqrt{rs}}\right) \\
+            &= \frac{1}{rs}\left(q'\sqrt{rs} - q\left(\frac{r's + s'r}{2\sqrt{rs}}\right)\right).
+        \end{align*}
+        But, from~(\ref{question@1}) we know that $r' = s' = q' = 0$ and thus 
+        \[
+            \frac{d}{dt}\cos \theta = 0
+        \]
+        so the magnitude of $\theta$ is $0$. Now in order to show that the direction of $\theta$ is constant (or alternating in opposite directions) we consider the system of polar coordinates 
+        \[
+            \begin{cases}
+                r_1^2 &= a^2 + b^2 \\
+                \phi_1 &= \tan^{-1}\left(\frac{b}{a}\right)
+            \end{cases} 
+            \quad \text{and} \quad
+            \begin{cases}
+                r_2^2 &= c^2 + d^2 \\
+                \phi_2 &= \tan^{-1}\left(\frac{d}{c}\right)
+            \end{cases}
+        \]
+        so that the maps 
+        \[
+            (a, b) \mapsto (r_1, \phi_1) \quad\text{and}\quad (c, d) \mapsto (r_2, \phi_2)
+        \]
+        are continuously differentiable and invertible away from zero. Then, $\phi_1 - \phi_2$ is also continuously differentiable which implies that the angle $\theta$ has constant magnitude and sign and is not dependent on $t$.
+    \end{solution}
+    
+    Now for $\theta$ just found and $r = \sqrt{r_0^2 + s_0^2}$ we define the vectors $\braces{\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3, \mathbf{u}_4}$ as 
+    \begin{align*}
+        \mathbf{u}_1 &= \frac{1}{r}(s_0, 0, -r_0 \cos \theta, r_0 \sin \theta) \\
+        \mathbf{u}_2 &= \frac{1}{r}(0, s_0, -r_0 \sin \theta, -r_0 \cos\theta) \\
+        \mathbf{u}_3 &= \frac{1}{r}(r_0, 0, s_0 \cos \theta, -s_0 \sin \theta) \\
+        \mathbf{u}_4 &= \frac{1}{r}(0, r_0, s_0 \sin \theta, s_0 \cos \theta).
+    \end{align*}
+    \question Show that $\braces{\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3, \mathbf{u}_4}$ is orthonormal in $\RR^{4}$ and that 
+    \[
+        \mathbf{a}(t) \cdot \mathbf{u}_1 = \mathbf{a}(t) \cdot \mathbf{u}_2 = 0. 
+    \]
+    for all $t$. Then show that for $\alpha(t)$ and $\beta(t)$ continuously differentiable, 
+    \[
+        \mathbf{a}(t) = \alpha(t)\mathbf{u}_3 + \beta(t)\mathbf{u}_4 
+    \]
+    and 
+    \[
+        \alpha^2(t) + \beta^2(t) = r^2 
+    \]
+    for all $t$. Finally, show that 
+    \begin{align*}
+        \alpha'(t) &= \beta(t) \\
+        \beta'(t) &= -\alpha(t).
+    \end{align*}
+    \begin{solution}
+        To show that $\braces{\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3, \mathbf{u}_4}$ is orthonormal in $\RR^4$ we must show that $\mathbf{u}_i \cdot \mathbf{u}_j = 0$ for all $i$ and $j$ with $i \neq j$ and $\|\mathbf{u}_i\| = 1$ for all $i = 1, 2, 3, 4$. We first show orthogonality by direct calculation: 
+        \begin{align*}
+            \mathbf{u}_1 \cdot \mathbf{u}_2 &= \frac{1}{r}(r^2 \cos \theta \sin \theta - r^2 \cos \theta \sin \theta) = 0 \\
+            \mathbf{u}_1 \cdot \mathbf{u}_3 &= \frac{1}{r}(s_0 r_0 - s_0 r_0 \cos^2 \theta - s_0 r_0 \sin^2 \theta) = 0 \\
+            \mathbf{u}_1 \cdot \mathbf{u}_4 &= \frac{1}{r}(s_0 r_0 \sin \theta \cos \theta - s_0 r_0 \sin \theta \cos \theta) = 0 \\
+            \mathbf{u}_2 \cdot \mathbf{u}_3 &= \frac{1}{r}(-s_0 r_0 \sin \theta \cos \theta + s_0 r_0 \sin \theta \cos \theta) = 0 \\
+            \mathbf{u}_2 \cdot \mathbf{u}_4 &= \frac{1}{r}(s_0 r_0 - s_0 r_0 \sin^2 \theta - s_0 r_0 \cos^2 \theta) = 0 \\
+            \mathbf{u}_3 \cdot \mathbf{u}_4 &= \frac{1}{r}(s_0^2 \cos \theta \sin \theta - s_0^2 \cos \theta \sin \theta) = 0.
+        \end{align*}
+        Now for every $\mathbf{u}_i$ the coefficients in front of the $\sin \theta$ and $\cos \theta$ are equal in magnitude and thus when squared we are able to factor and apply the pythagorean identity to drop the sine and cosine from the magnitude. So, for $\mathbf{u}_i$ we have 
+        \[
+            \| \mathbf{u}_i \| = \frac{s_0^2 + r_0^2}{r^2} = \frac{s_0^2 + r_0^2}{r_0^2 + s_0^2} = 1
+        \]
+        for $i = 1, 2, 3, 4$. \\
+        We can now show that $\mathbf{a}(t) \cdot \mathbf{u}_1 = \mathbf{a}(t) \cdot \mathbf{u}_2 = 0$ by direct calculation. But
+        \begin{align*}
+            &\mathbf{a}(t) \cdot \mathbf{u}_1 = (x, x', y, y') \cdot \frac{1}{r}(s_0, 0, -r_0\cos\theta, r_0 \sin \theta) = \frac{1}{r}(xs_0 - r_0 y\cos \theta + r_0 y' \sin \theta) \\
+            &\Rightarrow \frac{1}{r}(r_0 y \cos \theta - r_0 y' \sin \theta - r_0 y \cos \theta + r_0 y' \sin \theta) = 0 \\
+            &\mathbf{a}(t) \cdot \mathbf{u}_2 = (x, x', y, y') \cdot \frac{1}{r}(0, s_0, -r_0 \sin \theta, -r_0 \cos \theta) = \frac{1}{r}(s_0 x' - r_0 y \sin \theta - r_0 y' \cos \theta) \\
+            &\Rightarrow \frac{1}{r}(r_0 y \sin \theta + r_0 y' \cos \theta - r_0 y \sin \theta - r_0 y' \cos \theta) = 0
+        \end{align*}
+        since 
+        \[
+            s_0\begin{bmatrix}
+                x \\ x'
+            \end{bmatrix} 
+            = r_0\begin{bmatrix}
+                y\cos \theta & -y'\sin \theta \\
+                y\sin \theta & y'\cos \theta
+            \end{bmatrix}.
+        \]
+        Now, since $\braces{\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3, \mathbf{u}_4}$ is an orthonormal basis in $\RR^{4}$, we have that 
+        \[
+            \mathbf{a}(t) = (\mathbf{a} \cdot \mathbf{u}_1)\mathbf{u}_1 + (\mathbf{a} \cdot \mathbf{u}_2)\mathbf{u}_2 + (\mathbf{a} \cdot \mathbf{u}_3)\mathbf{u}_3 + (\mathbf{a} \cdot \mathbf{u}_4)\mathbf{u}_4.
+        \]
+        But, since the first two terms go to zero we have that 
+        \[
+            \mathbf{a}(t) = (\mathbf{a} \cdot \mathbf{u}_3)\mathbf{u}_3 + (\mathbf{a} \cdot \mathbf{u}_4)\mathbf{u}_4.
+        \]
+        Now, let $\alpha(t) = \mathbf{a} \cdot \mathbf{u}_3$ and $\beta(t) = \mathbf{u}_4 \cdot \mathbf{u}_4$ so 
+        \[
+            \mathbf{a}(t) = \alpha(t)\mathbf{u}_3 + \beta(t)\mathbf{u}_4.
+        \]
+        From earlier we know that $\mathbf{a}(t)$ has constant magnitude because
+        \[
+            \| \mathbf{a}(t) \|^2 = a^2 + b^2 + c^2 + d^2 = r(\mathbf{a}) + s(\mathbf{a}) \Rightarrow \frac{d}{dt} \| \mathbf{a}(t) \|^2 = 0 \Rightarrow \frac{d}{dt} \| \mathbf{a}(t)\| = 0.
+        \]
+        Then, 
+        \[
+            \| \mathbf{a} \|^2  = r_0^2 + s_0^2 = r^2
+        \]
+        Now, because $\mathbf{u}_3$ and $\mathbf{u}_4$ are orthonormal we can apply the pythagorean theorem of the subspace to see that 
+        \begin{align*}
+            \|\mathbf{a}\|^2 &= \|\alpha(t)\mathbf{u}_3 + \beta(t)\mathbf{u}_4\|^2 \\
+            &= (\alpha(t)\mathbf{u}_3 + \beta(t)\mathbf{u}_4) \cdot (\alpha(t)\mathbf{u}_3 + \beta(t)\mathbf{u}_4) \\
+            &= \alpha^2(\mathbf{u}_3 \cdot \mathbf{u}_3) + 2\alpha\beta(\mathbf{u}_3 \cdot \mathbf{u}_4) + \beta^2(\mathbf{u}_4 \cdot \mathbf{u}_4) \\
+            &= \alpha^2 + \beta^2 = r^2
+        \end{align*}
+        since $\mathbf{u}_3$ and $\mathbf{u}_4$ are orthonormal vectors. \\
+        Now recall that 
+        \[
+            \alpha(t) = \mathbf{a} \cdot \mathbf{u}_3 \quad\text{and}\quad \beta(t) = \mathbf{a} \cdot \mathbf{u}_4
+        \]
+        so 
+        \[
+            \alpha'(t) = \mathbf{a}' \cdot \mathbf{u}_3 \quad\text{and}\quad \beta'(t) = \mathbf{a}' \cdot \mathbf{u}_4.
+        \]
+        It follows that 
+        \begin{align*}
+            \alpha(t) &= (a, b, c, d) \cdot \frac{1}{r}(r_0, 0, s_0\cos\theta, -s_0\sin\theta) = \frac{1}{r}(ar_0 + cs_0\cos\theta - ds_0\sin\theta), \\
+            \alpha'(t) &= (b, -a, d, -c) \cdot \frac{1}{r}(r_0, 0, s_0\cos\theta, -s_0\sin\theta) = \frac{1}{r}(br_0 + ds_0\cos\theta + cs_0\sin\theta), \\
+            \beta(t) &= (a, b, c, d) \cdot \frac{1}{r}(0, r_0, s_0\sin\theta, s_0\sin\theta) = \frac{1}{r}(br_0 + ds_0\cos\theta + cs_0\sin\theta), \text{ and}\\
+            \beta'(t) &= (b, -a, d, -c) \cdot \frac{1}{r}(0, r_0, s_0\sin\theta, s_0\sin\theta) = \frac{1}{r}(-ar_0 - cs_0\cos\theta + ds_0\sin\theta).
+        \end{align*}
+        It is clear that 
+        \[
+            \alpha'(t) = \beta(t) \quad\text{and}\quad \beta'(t) = -\alpha(t)
+        \]
+        as was to be shown.
+    \end{solution}
+
+    \question Explicitly solve for the phase curve $\mathbf{a}(t)$ when 
+    \[
+        \mathbf{a}(0) = (1, 0, 1, \sqrt{3}).
+    \]
+    \begin{solution}
+        We can start by finding 
+        \begin{align*}
+            r_0 &= \sqrt{a_0^2 + b_0^2} = \sqrt{1} = 1 \quad\text{and} \\
+            s_0 &= \sqrt{c_0^2 + d_0^2} = \sqrt{1 + 3} = 2, \quad\text{so} \\
+            r &= \sqrt{r_0^2 + s_0^2} = \sqrt{1 + 4} = \sqrt{5}.
+        \end{align*}
+        Now, recalling the equation for the angle between $\mathbf{v}(t)$ and $\mathbf{w}(t)$ defined in~(\ref{question@2}), we have 
+        \[
+            2\begin{bmatrix}
+                1 \\ 0
+            \end{bmatrix} 
+            = 
+            \begin{bmatrix}
+                \cos\theta - \sqrt{3}\sin\theta \\
+                \sin\theta + \sqrt{3}\cos\theta
+            \end{bmatrix}
+        \]
+        so 
+        \[
+            \begin{cases}
+                2 &= \cos\theta - \sqrt{3}\sin\theta \\
+                0 &= \sin\theta + \sqrt{3}\cos\theta
+            \end{cases}.
+        \]
+        From the second equation we can clearly see that 
+        \begin{align*}
+            0 = \sin\theta + \sqrt{3}\cos\theta &\Rightarrow -\sin\theta = \sqrt{3}\cos\theta \\
+            &\Rightarrow \tan\theta = -\sqrt{3} \\
+            &\Rightarrow \theta = \arctan(-\sqrt{3}) \\
+            &\Rightarrow \theta = -\frac{\pi}{3}.
+        \end{align*}
+        With $r_0$, $s_0$, and $\theta$ we can see that 
+        \begin{align*}
+            \mathbf{u}_3 &= \frac{1}{\sqrt{5}}(1, 0, 1, \sqrt{3}) \\
+            \mathbf{u}_4 &= \frac{1}{\sqrt{5}}(0, 1, -\sqrt{3}, -1).
+        \end{align*}
+        Also, from the earlier sets of challenge problems, we know that if 
+        \[
+            \alpha'(t) = \beta(t) \quad\text{and}\quad \beta'(t) = -\alpha(t)
+        \]
+        then 
+        \begin{align*}
+            \alpha(t) &= A\cos t + B\sin t \\
+            \beta(t) &= B\cos t - A\sin t
+        \end{align*}
+        for some $A, B \in \RR$. We can solve for the constants by applying the initial conditions:
+        \begin{align*}
+            \alpha(0) &= A = \mathbf{a}(0) \cdot \mathbf{u}_3 = \sqrt{5} \\
+            \beta(0) &= B = \mathbf{a}(0) \cdot \mathbf{u}_4 = 0
+        \end{align*}
+        thus 
+        \begin{align*}
+            \alpha(t) &= \sqrt{5}\cos t \\
+            \beta(t) &= -\sqrt{5}\sin t.
+        \end{align*}
+        So, 
+        \begin{alignat*}{2}
+            &\, \mathbf{a}(t)\, &= \alpha(t)\mathbf{u}_3 + \beta(t)\mathbf{u}_4 &= \sqrt{5}\cos(t)\mathbf{u}_3 - \sqrt{5}\sin(t)\mathbf{u}_4 \\
+            &&&= \sqrt{5}\cos(t)\left(\frac{1}{\sqrt{5}}\right)\begin{bmatrix}
+                1 \\ 0 \\ 1 \\ \sqrt{3}
+            \end{bmatrix} - \sqrt{5}\sin(t)\left(\frac{1}{\sqrt{5}}\right)\begin{bmatrix}
+                0 \\ 1 \\ \sqrt{3} \\ -1
+            \end{bmatrix} \\
+            &&&= \cos(t)\begin{bmatrix}
+                1 \\ 0 \\ 1 \\ \sqrt{3}
+            \end{bmatrix} - \sin(t)\begin{bmatrix}
+                0 \\ 1 \\ \sqrt{3} \\ -1
+            \end{bmatrix}.
+        \end{alignat*}
+        It follows that 
+        \[
+            x(t) = a(t) = \cos t \quad\text{and}\quad y(t) = c(t) = \cos t - \sqrt{3}\sin t.
+        \]
+    \end{solution}
+
+    Consider the case in which $r = 1$ so that the phase curves are great circles on $S^3$, the three dimensional unit sphere on $\RR^4$. Since we are working in $S^3$ we have that 
+    \[
+        a^2 + b^2 + c^2 + d^1 = 1 \Rightarrow r + s = 1 \Rightarrow s = 0.
+    \]
+
+    \question Now, define $p(a, b, c, d)$ by 
+    \[
+        p(a, b, c, d) = ad - bc.
+    \]
+    Show that for any phase curve $\mathbf{a}(t)$ of our system, $p(\mathbf{a}(t))$ is independent of $t$. Show also that $r, s, q$, and $p$ are related by 
+    \[
+        (2p(\mathbf{a}))^2 + (2q(\mathbf{a}))^2 + (r(\mathbf{a}) - s(\mathbf{a}))^2 = 1 
+    \]
+    for all $\mathbf{a} \in S^3$.
+    \begin{solution}
+        Once again we will show that the derivative of $p$ with respect to $t$ is zero in order to demonstrate its independence: 
+        \begin{align*}
+            \frac{\mathrm{d}}{\mathrm{d}t}(p(\mathbf{a}(t))) &= (a'd + ad') - (b'c + bc') \\
+            &= (bd - ac) - (-ac + bd) \\
+            &= 0.
+        \end{align*}
+        Thus, $p(\mathbf{a}(t))$ is independent of $t$. \\
+        We can now show that the relation between $p, q, r$, and $s$ is true by direction calculation:
+        \begin{align*}
+        (2p(\mathbf{a}))^2 + (2q(\mathbf{a}))^2 + (r(\mathbf{a}) - s(\mathbf{a}))^2 &= (2ad - 2bc)^2 + (2ad + 2bc)^2 + (r - s)^2 \\
+        &= 4(a^2 d^2 + b^2 c^2 + a^2 c^2 + b^2 d^2) + (r - s ^2) \\
+        &= 4(a^2 + b^2)(c^2 + d^2) + (r - s)^2 \\
+        &= 4rs + r^2 - 2rs + s^2 \\
+        &= r^2 + 2rs + s^2 \\
+        &= (r + s)^2 = 1
+        \end{align*}
+        which was to be shown.
+    \end{solution}
+\end{questions}
+\footnotetext{\LaTeX\, code for this document can be found on github \href{https://github.com/jeevanshah07/MATH292/blob/main/challengeProblems/challengeProblems4/main.tex}{\underline{here}}}
+\end{document}
