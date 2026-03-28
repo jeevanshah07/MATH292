@@ -1,0 +1,270 @@
+\documentclass{exam}
+\usepackage{../../shah292}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Homework \#4}{Jeevan Shah}
+\runningheader{Differential Equations \\ Homework \#4}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+\colorbox{red}{\underline{5.5.1:}}
+\begin{solution}
+    We can start by finding the exact solution using seperation of variables:
+    \begin{align*}
+        x' = 2t(1+x) &\Rightarrow \int\frac{1}{1+x}\,\mathrm{d}x = \int 2t\,\mathrm{d}t \\
+        &\Rightarrow \ln\left|1+x\right| = t^2 + C \\
+        &\Rightarrow x = Ce^{t^2} - 1 \\
+        &\Rightarrow 0 = C - 1 \Rightarrow C = 1 \\
+        &\Rightarrow \boxed{x(t) = e^t - 1}
+    \end{align*}
+    Now, using Picard Iterations we can find $X_1$ through $X_4$ given $X_0 = 0$: 
+    \begin{align*}
+        X_0 = 0 &\Rightarrow X_1 = \int_{0}^{t}2s(1+0)\,\mathrm{d}s = \int_0^t 2s\,\mathrm{d}s = t^2 \\
+        &\Rightarrow X_2 = \int_0^t 2s(1+X_1(s))\,\mathrm{d}s = \int_0^t 2s(1+s^2)\,\mathrm{d}s = t^2 + \frac{t^4}{2} \\
+        &\Rightarrow X_3 = \int_0^t 2s(1+X_2(s))\,\mathrm{d}s = \int_0^t 2s\left(1+s^2 + \frac{s^4}{2}\right)\,\mathrm{d}s = t^2 + \frac{t^4}{2} + \frac{t^6}{6} \\
+        &\Rightarrow X_4 = \int_0^t 2s(1+X_3(s))\,\mathrm{d}s = \int_0^t 2s\left(1+s^2 + \frac{s^4}{2} + \frac{s^6}{6}\right)\,\mathrm{d}s = t^2 + \frac{t^4}{2} + \frac{t^6}{6} + \frac{t^8}{24}\\
+    \end{align*}
+    Looking at the Taylor series of the exact solution, 
+    \[
+        e^{t^2} - 1 = \sum_{k=0}^{\infty} \frac{t^{2k}}{k\bf{!}} = t^2 + \frac{t^4}{2} + \frac{t^6}{6} + \frac{t^8}{24} + \cdots
+    \]
+    it is clear that the $n$-th Picard iteration is equal to the $n$-th partial sum of the Taylor series.
+\end{solution}
+
+\colorbox{red}{\underline{5.5.2:}}
+\begin{solution}
+    Let $X_0 = \vec{x}_0 = \left(\begin{smallmatrix} a \\ b \end{smallmatrix}\right)$. Then
+    \begin{align*}
+        X_1(t) &= \vec{x}_0 + \int_{s}^{t} A(\tau)x_0\,\mathrm{d}\tau \\
+        &= \begin{pmatrix}
+            a \\ b
+        \end{pmatrix}
+        + \int_s^t \begin{pmatrix}
+            b \\
+            a\tau^{-2} - b\tau^{-1}
+        \end{pmatrix}\,\mathrm{d}\tau \\
+        &= \begin{pmatrix}
+            a \\ b
+        \end{pmatrix}
+        + \begin{pmatrix}
+            b(t-s) \\
+            a\left(\frac{1}{s} - \frac{1}{t}\right) - b\ln\left(\frac{t}{s}\right)
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            a + b(t-s) \\
+            b + a\left(\frac{1}{s} - \frac{1}{t}\right) - b\ln\left(\frac{t}{s}\right).
+        \end{pmatrix}.
+    \end{align*}   
+    It follows that 
+    \begin{align*}
+        X_2(t) &= \vec{x}_0 + \int_s^t A(\tau)X_1(\tau)\,\mathrm{d}\tau \\
+        &= \int_s^t \begin{pmatrix}
+            b + a\left(\frac{1}{s} - \frac{1}{\tau}\right) - b\ln\left(\frac{\tau}{s}\right) \\
+            \frac{2a}{\tau^2} - \frac{a}{s\tau} - \frac{bs}{\tau^{2}} + \frac{b}{\tau}\ln\left(\frac{\tau}{s}\right)
+        \end{pmatrix}\,\mathrm{d}\tau \\
+        &= \begin{pmatrix}
+            a + 2b(t - s) + \frac{a}{s}\left(t-s\right) - (a + bt)\ln\left(\frac{t}{s}\right) \\
+            b + 2a\left(\frac{1}{s} - \frac{1}{t} \right) - \frac{a}{s}\ln\left(\frac{t}{s}\right) + b\left(1 - \frac{s}{t}\right) + \frac{b}{2}\ln\left(\frac{t}{s}\right)^2
+        \end{pmatrix}.
+    \end{align*}
+    So, 
+    \begin{align*}
+        X_3 &= \vec{x}_0 + \int_s^t A(\tau)X_2(\tau)\,\mathrm{d}\tau \\
+        &= \begin{pmatrix}
+            \left(\frac{3t}{s} - 2 + \left(2 + \frac{t}{s}\right)\ln\left(\frac{s}{t}\right)\right)a + \left((t-s)\left(1 + \ln\left(\frac{s}{t}\right)\right) + \frac{t}{2}\ln\left(\frac{s}{t}\right)^2\right)b \\
+            \left(\frac{(t-s)\left(1 + \ln\left(\frac{s}{t}\right)\right)}{st} + \frac{1}{2s}\ln\left(\frac{s}{t}\right)^2\right)a + \left(\frac{3s}{t} - 2 - 2\ln\left(\frac{s}{t}\right) - \frac{1}{2}\ln\left(\frac{s}{t}\right)^2 + \frac{1}{6}\ln\left(\frac{s}{t}\right)^3\right)b
+        \end{pmatrix}.
+    \end{align*}
+    It is clear that the Picard solutions converge to the exact solution (for $t \neq 0$). Formally, 
+    \[
+        X_n(t) = \Phi_{t,s}^{(n)}\vec{x}_0 \to \Phi_{t,s}\vec{x}_0 \quad \text{as } n \to \infty 
+    \]
+    where $X_n(t) = \Phi_{t, s}^{(n)}\vec{x}_0$.
+\end{solution}
+
+\colorbox{red}{\underline{5.5.3:}}
+\begin{solution}
+    Start by defining $x_1 = x$ and $x_2 = x'$ so 
+    \[
+        x_1' = x_2 \quad\text{and}\quad x_2' = x'' = \frac{2x}{t^2} + \frac{3}{t^3} = \frac{2x_1}{t^2} + \frac{3}{t^3}. 
+    \]
+    Thus, 
+    \[
+        \vec{x}'(t) = \begin{pmatrix}
+            0 & 1 \\
+            \frac{2}{t^2} & 0 
+        \end{pmatrix}\vec{x}(t) + \begin{pmatrix}
+            0 \\ \frac{3}{t^3}
+        \end{pmatrix}, \quad \vec{x}(1) = \begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix}
+    \]
+    where 
+    \[
+        A(t) = \begin{pmatrix}
+            0 & 1 \\
+            \frac{2}{t^2} & 0 
+        \end{pmatrix}
+        \quad\text{and}\quad 
+        \vec{b}(t) = \begin{pmatrix}
+            0 \\ \frac{3}{t^3}
+        \end{pmatrix}, \quad t_0 = 1.
+    \]
+    Next, we solve the homogenous system 
+    \[
+        \vec{x}' = A(t)\vec{x} \Rightarrow t^2 x'' - 2x = 0.
+    \]
+    This has solutions $x = t^2$ and $x = t^{-1}$ so 
+    \[
+        M(t) = \begin{pmatrix}
+            t^2 & t^{-1} \\
+            2t & -t^{-2}
+        \end{pmatrix}.
+    \]
+    Considering $\Phi_{t,s} = M(t)M^{-1}(s)$ at $s = t_0 = 1$ we have 
+    \[
+        M(1) = \begin{pmatrix}
+            1 & 1 \\
+            2 & -1
+        \end{pmatrix}
+        \Rightarrow M(1)^{-1} = -\frac{1}{3}\begin{pmatrix}
+            -1 & -1 \\
+            -2 & 1
+        \end{pmatrix} 
+        = \begin{pmatrix}
+            1/3 & 1/3 \\
+            2/3 & -1/3
+        \end{pmatrix}
+    \]
+    so 
+    \[
+        \Phi_{t, 1} = \begin{pmatrix}
+            t^2 & t^{-1} \\
+            2t & -t^{-2}
+        \end{pmatrix}
+        \begin{pmatrix}
+            1/3 & 1/3 \\
+            2/3 & -1/3
+        \end{pmatrix}
+        = \begin{pmatrix}
+            \frac{t^2}{3} + \frac{2}{3t} & \frac{t^2}{3} - \frac{1}{3t} \\
+            \frac{2t}{3} - \frac{2}{3t^2} & \frac{2t}{3} + \frac{1}{3t^2}
+        \end{pmatrix}.
+    \]
+    Note that we also have 
+    \[
+        M(s)^{-1} = -\frac{1}{3}\begin{pmatrix}
+            -s^{-2} & -s^{-1} \\
+            -2s & s^2
+        \end{pmatrix}
+        = \begin{pmatrix}
+            \frac{1}{3s^2} & \frac{1}{3s} \\
+            \frac{2s}{3} & -\frac{s^2}{3}
+        \end{pmatrix}.
+    \]
+    So, 
+    \[
+        \vec{x}(t) = \Phi_{t, t_0}\vec{x}_0 + \int_{t_0}^{t} \Phi_{t, s}\vec{b}(s)\,\mathrm{d}s = \Phi_{t, 1}\vec{x}_0 + \int_1^t \begin{pmatrix}
+            t^2s^{-4} - t^{-1}s^{-1} \\
+            2ts^{-4} +t^{-2}s^{-1}
+        \end{pmatrix} \mathrm{d}s.
+    \]
+    Since $\vec{x}(t) = \left(\begin{smallmatrix} x \\ x' \end{smallmatrix}\right)$, we only need to integrate the first row to find $x$: 
+    \begin{align*}
+        x(t) &= \left(\frac{t^2}{3} + \frac{2}{3t} + \frac{2t^2}{3} - \frac{2}{3t}\right) + \int_1^t t^2s^{-4} - t^{-1}s^{-1} \, \mathrm{d}s \\
+        &= t^2 + \left(\frac{t^2}{3} - \frac{1}{2t} - \frac{\ln t}{t}\right) \\
+        &= \boxed{
+            \frac{4t^2}{3} - \frac{1}{3t} - \frac{\ln t}{t}
+        }
+    \end{align*}
+\end{solution}
+
+\colorbox{red}{\underline{5.5.7:}}
+\begin{solution}
+    Start by defining $X(t) = \left(\begin{smallmatrix} x \\ x' \end{smallmatrix}\right)$. Then, we have 
+    \[
+        X'(t) = AX(t) + \vec{b}(t) 
+    \]
+    with 
+    \[
+        A = \begin{pmatrix}
+            0 & 1 \\
+            6 & 1
+        \end{pmatrix}
+        \quad\text{and}\quad \vec{b}(t) = \begin{pmatrix}
+            0 \\ e^t
+        \end{pmatrix}.
+    \]
+    We start by solving the homogenous system $X' = AX$ which is equivalent to
+    \[
+        x'' - x' - 6x = 0.
+    \]
+    This has solutions $x=e^{3t}$ and $x=e^{-2t}$. So, the fundamental matrix is 
+    \[
+        M(t) = \begin{pmatrix}
+            e^{3t} & e^{-2t} \\
+            3e^{3t} & -2e^{-2t}
+        \end{pmatrix}.
+    \]
+    We have that $\Phi_{t, s} = M(t)M(s)^{-1}$ with 
+    \[
+        M(s)^{-1} = \frac{1}{5}\begin{pmatrix}
+            2e^{-3s} & e^{-3s} \\
+            3e^{2s} & -e^{2s}
+        \end{pmatrix}.
+    \]
+    Then, 
+    \begin{align*}
+        \Phi_{t, s} &= \frac{1}{5}\begin{pmatrix}
+            e^{3t} & e^{-2t} \\
+            3e^{3t} & -2e^{-2t}
+        \end{pmatrix}
+        \begin{pmatrix}
+            2e^{-3s} & e^{-3s} \\
+            3e^{2s} & -e^{2s}
+        \end{pmatrix} \\
+        &= \frac{1}{5}\begin{pmatrix}
+            2e^{3(t-s)} + 3e^{-2(t-s)} & e^{3(t-s)} - e^{-2(t-s)} \\
+            6e^{3(t-s)} - 6e^{-2(t-s)} & 3e^{3(t-s)} + 2e^{-2(t-s)}
+        \end{pmatrix}.
+    \end{align*}
+    Since
+    \[
+        X(t) = \Phi_{t, s}X(s) + \int_s^t \Phi_{t, \tau}\begin{pmatrix}
+            0 \\ e^{\tau}
+        \end{pmatrix}\, \mathrm{d}\tau
+    \]
+    but recall that 
+    \[
+        X(t) = \begin{pmatrix}
+            x \\ x'
+        \end{pmatrix}
+    \]
+    so we can solve for $x$ using just the first row. So, the particular solution is 
+    \begin{align*}
+        x_p = \int_s^t \Phi_{t, \tau}\begin{pmatrix}
+            0 \\ e^\tau
+        \end{pmatrix}\,\mathrm{d}\tau &= \frac{1}{5}\int_{s}^{t} (e^{3(t-\tau)} - e^{-2(t-\tau)})e^\tau\,\mathrm{d}\tau \\
+        &= \frac{1}{5}\left(\frac{e^{3t}}{2}(e^{-2s} - e^{-2t}) -\frac{e^{-2t}}{3}(e^{3t} - e^{3s})\right) \\
+        &= \frac{e^{3t-2s}}{10} + \frac{e^{3s - 2t}}{15} - \frac{e^{t}}{6}.
+    \end{align*}
+    Since the first two terms are homogenous, they can be absorbed into constants, leaving 
+    \[
+        x_p(t) = -\frac{e^{t}}{6} 
+    \]
+    so
+    \[
+        \boxed{
+            x(t) = C_1e^{3t} + C_2e^{-2t} - \frac{1}{6}e^t
+        } 
+    \]
+\end{solution}
+\end{document}

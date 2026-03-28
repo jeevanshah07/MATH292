@@ -1,0 +1,466 @@
+\documentclass{exam}
+\usepackage{../../shah292}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Homework \#3}{Jeevan Shah}
+\runningheader{Differential Equations \\ Homework \#3}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+\colorbox{red}{\underline{3.5.9}}
+\begin{solution}
+    We start by finding the eigenvalues for $A$:
+    \begin{align*}
+        \det(A-\lambda I) = \begin{vmatrix}
+            5 - \lambda & -3 & -2 \\
+            8 & -5-\lambda & -4 \\
+            -4 & 3 & 3 - \lambda
+        \end{vmatrix}
+        &\xrightarrow{R_3 \to R_1 + R_3}
+        \begin{vmatrix}
+            5 - \lambda & -3 & -2 \\
+            8 & -5-\lambda & -4 \\
+            1 - \lambda & 0 & 1 - \lambda
+        \end{vmatrix} \\
+        &\xrightarrow{R_1 \to 2R_1 - R_2}
+        \begin{vmatrix}
+            2 - 2\lambda & -3 & 0 \\
+            8 & -5-\lambda & -4 \\
+            1 - \lambda & 0 & 1 - \lambda
+        \end{vmatrix} \\
+        &\xrightarrow{C_1 \to C_1 + 2C_3}
+        \begin{vmatrix}
+            2 - 2\lambda & -3 & 0 \\
+            0 & -5-\lambda & -4 \\
+            3 - 3\lambda & 0 & 1 - \lambda
+        \end{vmatrix} \\
+        &\Rightarrow (\lambda -1)^3 = 0 \Rightarrow \lambda_{1, 2, 3} = 1.
+    \end{align*}
+    The associated eigenvector is 
+    \[
+        A - I = \begin{pmatrix}
+            4 & -3 & -2 \\
+            8 & -6 & -4 \\
+            -4 & 3 & 2
+        \end{pmatrix} 
+        \xrightarrow{}
+        \begin{pmatrix}
+            4 & -3 & -2 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0 
+        \end{pmatrix} 
+        \Rightarrow \vec{u} = \begin{pmatrix}
+            1 \\ 0 \\ -2
+        \end{pmatrix}.
+    \]
+    Now since 
+    \[
+        (A-I)^2 = \mathbf{0}
+    \]
+    every nonzero vector in $\RR^3$ is a generalized eigenvector of eigenvalue 1. Then,
+    \begin{align*}
+        e^{tA} = e^t\left(I + t \begin{pmatrix}
+            4 & -3 & -2 \\
+            8 & -6 & -4 \\
+            -4 & 3 & 2
+        \end{pmatrix}\right) = \boxed{
+            e^t\begin{pmatrix}
+                1 + 4t & -3t & -2t \\
+                8t & 1-6t & -4t \\
+                -4t & 3t & 1 + 2t
+            \end{pmatrix}
+        }
+    \end{align*}
+\end{solution}
+
+\colorbox{red}{\underline{3.5.11:}}
+\begin{solution}
+    We start by finding the eigenvalues of $A$: 
+    \begin{align*}
+        \det(A - \lambda I) = \begin{vmatrix}
+            4 - \lambda & -1 & 2 \\
+            1 & 2 - \lambda & 2 \\
+            -2 & 2 & 1 - \lambda
+        \end{vmatrix}
+        &\xrightarrow{R_2 \to R_2 - R_1}
+        \begin{vmatrix}
+            4 - \lambda & -1 & 2 \\
+            \lambda - 3 & 3 - \lambda & 0 \\
+            -2 & 2 & 1 - \lambda
+        \end{vmatrix} \\
+        &\xrightarrow{C_2 \to C_2 + C_1}
+        \begin{vmatrix}
+            4 - \lambda & 3-\lambda & 2 \\
+            \lambda - 3 & 0 & 0 \\
+            -2 & 0 & 1 - \lambda
+        \end{vmatrix} \\
+        &\Rightarrow (\lambda - 3)^2(1 - \lambda) \Rightarrow \lambda_{1, 2} = 3 \text{ and } \lambda_3 = 1.
+    \end{align*}    
+    The corresponding eigenvectors are 
+    \begin{align*}
+        A - 3I &= \begin{pmatrix}
+            1 & -1 & 2 \\
+            1 & -1 & 2 \\
+            -2 & 2 & -2 
+        \end{pmatrix}
+        \to
+        \begin{pmatrix}
+            1 & -1 & 2 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0
+        \end{pmatrix}
+        \Rightarrow \vec{u_1} = \begin{pmatrix}
+            1 \\ 1 \\ 0
+        \end{pmatrix} \\
+        A - I &= \begin{pmatrix}
+            3 & -1 & 2 \\
+            1 & 1 & 2 \\
+            -2 & 2 & 0 
+        \end{pmatrix}
+        \to \begin{pmatrix}
+            1 & 1 & 2 \\
+            3 & -1 & 2 \\
+            -2 & 2 & 0
+        \end{pmatrix}
+        \to \begin{pmatrix}
+            1 & 1 & 2 \\
+            0 & -4 & -4 \\
+            0 & 4 & 4
+        \end{pmatrix}
+        \to \begin{pmatrix}
+            1 & 1 & 2 \\
+            0 & -4 & -4 \\
+            0 & 0 & 0
+        \end{pmatrix}
+        \Rightarrow \vec{u_3} = \begin{pmatrix}
+            -1 \\ -1 \\ 1
+        \end{pmatrix}.
+    \end{align*}
+    We must also find a generalized eigenvector since $\lambda = 3$ has a multiplicity of $2$ but the dimension of its eigenspace is $1 < 2$. We can find the generalized eigenvector by solving the equation
+    \[
+        0 = (A-3I)^2\vec{w} = \begin{pmatrix}
+            -4 & 4 & -4 \\
+            -4 & 4 & -4 \\
+            4 & -4 & 4
+        \end{pmatrix}\vec{w}
+        \to \begin{pmatrix}
+            -1 & 1 & 1 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0
+        \end{pmatrix}
+        \Rightarrow \vec{w} = \begin{pmatrix}
+            -1 \\ 0 \\ 1
+        \end{pmatrix}.
+    \]
+    Then, 
+    \[
+        P = \begin{pmatrix}
+            \vec{u_1} & \vec{u_3} & \vec{w}
+        \end{pmatrix} = \begin{pmatrix}
+            -1 & 1 & -1 \\
+            -1 & 1 & 0 \\
+            1 & 0 & 1
+        \end{pmatrix}
+    \]
+    so the Jordan form is 
+    \[
+        J = \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 3 & 1 \\
+            0 & 0 & 3
+        \end{pmatrix}.
+    \]
+    For the $2 \times 2$ Jordan block $J_2(3) = 3I + N$ where 
+    \[
+        N = \begin{pmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{pmatrix},
+        \quad N^2 = 0.
+    \]
+    Also 
+    \[
+        e^{tJ_{2}(3)} = e^{t(3I+N)} = e^{3t}e^{tN} = e^{3t}(I + tN) = e^{3t}\begin{pmatrix}
+            1 & t \\ 0 & 1
+        \end{pmatrix},
+    \]
+    so 
+    \[
+        e^{tJ} = \begin{pmatrix}
+            e^t & 0 & 0 \\
+            0 & e^{3t} & te^{3t} \\
+            0 & 0 & e^{3t}
+        \end{pmatrix}.
+    \]
+    Since $e^{tA} = Pe^{tJ}P^{-1}$, we have 
+    \[
+        \boxed{
+            e^{tA} = e^{3t}\begin{pmatrix}
+                2 - t & t - 1 & 1 \\
+                1 - t & t & 1 \\
+                -1 & 1 & 0
+            \end{pmatrix}
+            + e^t \begin{pmatrix}
+                -1 & 1 & -1 \\
+                -1 & 1 & -1 \\
+                0 & -1 & 1
+            \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\colorbox{red}{\underline{4.5.2:}}
+\begin{solution}
+    We start by finding $e^{tA}$. The eigenvalues of $A$ are given by the characteristic polynomial so 
+    \[
+        \lambda^2 - 10\lambda + 16 \Rightarrow (\lambda -8)(\lambda - 2) = 0 \Rightarrow \lambda_1 = 8, \lambda_2 = 2.
+    \]
+    The associated eigenvectors are 
+    \begin{align*}
+        A - 8I &= \begin{pmatrix}
+            -3 & 3 \\
+            3 & -3
+        \end{pmatrix}
+        \to \begin{pmatrix}
+            -1 & 1 \\
+            0 & 0
+        \end{pmatrix}
+        \Rightarrow \vec{u_1} = \begin{pmatrix}
+            1 \\ 0
+        \end{pmatrix} \\
+        A - 2I &= \begin{pmatrix}
+            3 & 3 \\
+            3 & 3
+        \end{pmatrix}
+        \to \begin{pmatrix}
+            1 & 1 \\ 
+            0 & 0 
+        \end{pmatrix}
+        \Rightarrow \vec{u_2} = \begin{pmatrix}
+            -1 \\ 1
+        \end{pmatrix}.
+    \end{align*}
+    Then, 
+    \begin{align*}
+        V = \begin{pmatrix}
+            1 & -1 \\
+            1 & 1
+        \end{pmatrix} 
+        \Rightarrow V^{-1} = \frac{1}{2}\begin{pmatrix}
+            1 & 1 \\
+            -1 & 1
+        \end{pmatrix}
+        \Rightarrow e^{tA} &= \begin{pmatrix}
+            1 & -1 \\
+            1 & 1 
+        \end{pmatrix}
+        \begin{pmatrix}
+            e^{8t} & 0 \\
+            0 & e^{2t}
+        \end{pmatrix}
+        \frac{1}{2}
+        \begin{pmatrix}
+            1 & 1 \\
+            -1 & 1
+        \end{pmatrix}\\
+        &= \frac{1}{2}\begin{pmatrix}
+            e^{8t} + e^{2t} & e^{8t} - e^{2t} \\
+            e^{8t} - e^{2t} & e^{8t} + e^{2t}
+        \end{pmatrix}\vec{x}.
+    \end{align*}
+    So, 
+    \begin{align*}
+        \vec{x}'(t) = A\vec{x}(t) + \vec{g}(t) \Rightarrow (e^{-tA}\vec{x})' = e^{-tA}\vec{g} &\Rightarrow e^{-tA}\vec{x} - e^{-t_0 A}\vec{x}_0 = \int_{t_0}^{t}e^{sA}\vec{g}(s)\,\mathrm{d}s \\
+        &\Rightarrow \vec{x}(t) = e^{t - t_0}\vec{x_0} + \int_{t_0}^{t}e^{(t-s)A}\vec{g}(s)\,\mathrm{d}s.
+    \end{align*}
+    But, 
+    \[
+        \vec{g}(s) = e^{-8s}(s, s) = se^{-8s}(1, 1) 
+    \]
+    and 
+    \[
+        e^{(t-s)A}(1, 1) = e^{8(t-s)}(1, 1)
+    \]
+    since $8$ is an eigenvalue of $A$. So 
+    \begin{align*}
+        \int_{0}^{t} e^{(t-s)A}e^{-8s}(s, s)^{T}\,\mathrm{d}s &= \int_{0}^{t}se^{-8s}e^{8(t-s)}\,\mathrm{d}s \,(1, 1)^{T} \\
+        &= e^{8t}\left(\int_{0}^{t}se^{-16s}\,\mathrm{d}s\right)\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix} \\
+        &= e^{8t}\left(\frac{1}{256} - e^{-16t}\left(\frac{t}{16} + \frac{1}{256}\right)\right)\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}\\ 
+        &= \frac{e^{8t} - (16t + 1)e^{-8t}}{256}\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}
+    \end{align*}
+    Since 
+    \[
+        e^{tA}{\vec{x}_0}  = \begin{pmatrix}
+            \frac{e^{8t} - e^{2t}}{2} \\
+            \frac{e^{8t} + e^{2t}}{2}
+        \end{pmatrix}
+    \]
+    we have 
+    \[
+        \boxed{
+            \vec{x}(t) = \begin{pmatrix}
+            \frac{e^{8t} - e^{2t}}{2} \\
+            \frac{e^{8t} + e^{2t}}{2}
+        \end{pmatrix} + \frac{e^{8t} - (16t + 1)e^{-8t}}{256}\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\colorbox{red}{\underline{4.5.8:}}
+\begin{solution}
+    \begin{parts}
+    \part We must solve the system $\vec{v}(x, y) = \vec{0}$ to the equilibrium points. This is equivalent to 
+    \begin{align*}
+        0 &= (x + y)(x - y - 1) \Rightarrow x + y = 0 \quad\text{or}\quad x - y - 1 = 0 \\
+        0 &= (x + y - 2)(x - y + 1) \Rightarrow x + y - 2 = 0 \quad\text{or}\quad x - y + 1 = 0.
+    \end{align*}
+    The equilibrium points will lie at the intersection between pairs of these equations. One can see that the only consistent pairs are 
+    \begin{align*}
+        &x + y = 0 \quad\text{and}\quad x - y + 1 = 0 \Rightarrow (x, y) = \left(-\frac{1}{2}, \frac{1}{2}\right) \\
+        &x - y - 1 = 0 \quad\text{and}\quad x + y - 2 = 0 \Rightarrow (x, y) = \left(\frac{3}{2}, \frac{1}{2}\right).
+    \end{align*}
+    Linearizing we see that 
+    \[
+        f(x, y) = (x + y)(x - y - 1) \quad\text{and}\quad g(x, y) = (x + y - 2)(x - y +1)
+    \]
+    so 
+    \[
+        D_v(x, y) = \begin{pmatrix}
+            f_x & f_y \\
+            g_x & g_y
+        \end{pmatrix} 
+        = \begin{pmatrix}
+            2x - 1 & -2y - 1 \\
+            2x - 1 & -2y + 3
+        \end{pmatrix}.
+    \]
+    Then 
+    \begin{align*}
+        D_v\left(-\frac{1}{2}, \frac{1}{2}\right) &= \begin{pmatrix}
+            -2 & -2 \\
+            -2 & 2
+        \end{pmatrix}
+        \Rightarrow \det(D_v) = - 8 < 0 \\
+        D_v\left(\frac{3}{2}, \frac{1}{2}\right) &= \begin{pmatrix}
+            2 & -2 \\
+            2 & 2
+        \end{pmatrix}
+        \Rightarrow \lambda_{1, 2} = 2 \pm 2i.
+    \end{align*}
+    It follows that \textbf{both equilibrium points are unstable.}
+    
+    \part We know from part $(a)$ that the equilibrium points lie at 
+    \[
+        \left(-\frac{1}{2}, \frac{1}{2}\right) \quad\text{and}\quad \left(\frac{3}{2}, \frac{1}{2}\right).
+    \]
+    Then, 
+    \[
+        f(x, y) = (x + y - 2)(x - y + 1) \quad\text{and}\quad g(x, y) = (x + y)(x - y - 1)
+    \]
+    so 
+    \[
+        D_v(x, y) = \begin{pmatrix}
+            f_x & f_y \\
+            g_x & g_y
+        \end{pmatrix} 
+        = \begin{pmatrix}
+            2x - 1 & -2y + 3 \\
+            2x - 1 & -2y - 1
+        \end{pmatrix}.
+    \]
+    Then 
+    \begin{align*}
+        D_v\left(-\frac{1}{2}, \frac{1}{2}\right) &= \begin{pmatrix}
+            -2 & 2 \\
+            -2 & -2
+        \end{pmatrix}
+        \Rightarrow \lambda_{1, 2} = -2 \pm 2i \\
+        D_v\left(\frac{3}{2}, \frac{1}{2}\right) &= \begin{pmatrix}
+            2 & 2 \\
+            2 & -2
+        \end{pmatrix}
+        \Rightarrow \det(D_v) = -8 < 0
+    \end{align*}
+    It follows that $\left(-\frac{1}{2}, \frac{1}{2}\right)$ \textbf{is stable} and $\left(\frac{3}{2}, \frac{1}{2}\right)$ \textbf{is unstable}.
+    
+\end{parts}
+\end{solution}
+
+\colorbox{red}{\underline{4.5.9:}}
+\begin{solution}
+    \begin{parts}
+        \part Just like in $(4.5.8)$ we start by solving $\vec{v}(x, y) = \vec{0}$. This is equivalent to 
+        \begin{align*}
+            x - xy &= x(1-y) = 0 \Rightarrow x = 0 \quad\text{or}\quad y = 1  \\
+            y + 2xy &= y(1 + 2x) \Rightarrow x = -\frac{1}{2} \quad\text{or}\quad y = 0.
+        \end{align*}
+        So the equilibrium points are $(0, 0)$ and $\left(-\frac{1}{2}, 1\right)$. Then, 
+        \[
+            f(x, y) = x - xy \quad\text{and}\quad g(x, y) = y + 2xy 
+        \]
+        so
+        \[
+            D_v(x, y) = \begin{pmatrix}
+                1 - y & -x \\
+                2y & 1 + 2x
+            \end{pmatrix}.
+        \]
+        Thus, 
+        \begin{align*}
+            D_v(0, 0) &= \begin{pmatrix}
+                1 & 0 \\
+                0 & 1
+            \end{pmatrix}
+            \Rightarrow \lambda_{1, 2} = 1 \\
+            D_v\left(-\frac{1}{2}, 1\right) &= \begin{pmatrix}
+                0 & \frac{1}{2} \\
+                2 & 0 
+            \end{pmatrix}
+            \Rightarrow \det(D_v) = - 1 < 0.
+        \end{align*}
+        It follows that \textbf{both equilibrium points are unstable}. 
+
+        \part From $(a)$ we know that $(0, 0)$ and $\left(-\frac{1}{2}, 1\right)$ are equilibrium points. Then 
+        \[
+            f(x, y) = y + 2xy \quad\text{and}\quad g(x, y) = x - xy 
+        \]
+        so
+        \[
+            D_v(x, y) = \begin{pmatrix}
+                2y & 1 + 2x \\
+                1 - y & -x 
+            \end{pmatrix}.
+        \]
+        Thus, 
+        \begin{align*}
+            D_v(0, 0) &= \begin{pmatrix}
+                0 & 1 \\
+                1 & 0
+            \end{pmatrix}
+            \Rightarrow \det(D_v) = -1 < 0 \\
+            D_v\left(-\frac{1}{2}, 1\right) &= \begin{pmatrix}
+                2 & 0 \\
+                0 & \frac{1}{2}
+            \end{pmatrix}
+            \Rightarrow \lambda_{1} = 2, \lambda_{2} = \frac{1}{2} \Rightarrow \mathfrak{R}(\lambda_1) > 0, \mathfrak{R}(\lambda_2) > 0.
+        \end{align*}
+        It follows that \textbf{both equilibrium points are unstable}. 
+    \end{parts}
+\end{solution}
+\end{document}
