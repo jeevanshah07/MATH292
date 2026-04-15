@@ -1,0 +1,177 @@
+\documentclass{exam}
+\usepackage[left=0.25in,right=0.25in,top=1in,bottom=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{nicematrix}
+\usepackage{extpfeil}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage[x11names]{xcolor}
+\usepackage[most]{tcolorbox}
+
+\pgfplotsset{compat=1.18}
+\printanswers
+
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\braces}[1]{\ensuremath{\left\{#1 \right\}}}
+\newcommand{\Span}[1]{\ensuremath\text{Span}\braces{#1}}
+\newcommand{\ee}{\mathbf{e}}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Formula Sheet}{Jeevan Shah}
+\runningheader{Differential Equations \\ Challenge Problems \#6}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+    \underline{Picard Iteration:} For an IVP with 
+    \[
+        x'(t) = v(x(t), t), \quad x(t_0) = x_0 
+    \]
+    define 
+    \[
+        X_0 = x_0,\,
+        X_1 = x_0 + \int_{t_0}^{t} v(x_0(s), s)\, \mathrm{d}s, \,\ldots,\,
+        X_n = x_0 + \int_{t_0}^{t} v(x_{n-1}(s), s)\, \mathrm{d}s.
+    \]
+    The solution to the IVP is then $\lim_{n\to\,\infty} X_n$ 
+
+    \underline{Supremum Distance:} For $f, g$ continuous functions on $[a, b]$ define 
+    \[
+        d(f, g) = \max_{t \in [a, b]} |f(t) - g(t)|.
+    \]
+    Tip: Square the distance to remove the absolute value bars
+
+    \underline{Second Order ODEs:} For an equation in the form 
+    \[
+        ax''(t) + bx'(t) + cx(t) = f(t) 
+    \]
+    start by solving the homogenous equation where $f(t) = 0$ and $a, b, c \in \RR$ , with the characteristic equation $ar^2 + br + c = 0$. 
+
+    \begin{minipage}{0.45\linewidth} 
+        \begin{itemize}
+            \item If $r_1 \neq r_2$ then $x_h = C_{1}e^{r_{1}t}+ C_{2}e^{r_{2}t}$
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \begin{itemize}
+            \item If $r_1 = r_2$ then $x_h = (C_1 + C_2t)e^{r_{1}t}$
+        \end{itemize}
+    \end{minipage}
+
+    Then solve for the particular solution by guessing:
+
+    \begin{itemize}
+        \item $g(x) = e^{\alpha t} \Rightarrow x_p = Ce^{\alpha t}$
+        \item $g(x)$ is an $n$-degree polynomial $\Rightarrow x_p = A_{n}t^{n} + \cdots + A_{1}t + A_0$ (can ommit constant term based on context)
+        \item $g(x) = A\cos bt$ or $A\sin bt \Rightarrow x_p = C \cos bt + D \sin bt$.
+    \end{itemize}        
+    If the $x_p$ guess is already accounted for in the homogenous solution, multiply by $t$ until it is unique. The final solution is then $x = x_p + x_h$.
+
+    \underline{Cauchy-Euler Equations}: For an equation in the form 
+    \[
+        t^2 x'' + at x' + bx = g(t) 
+    \]
+    guess $x_1 = t^{\alpha}$ so that $x_1' = \alpha t^{\alpha -1}$ and $x_1'' = \alpha(\alpha - 1)t^{\alpha - 2}$.
+
+    \begin{minipage}{0.45\linewidth}
+        \begin{itemize}
+            \item If $\alpha_1 \neq \alpha_2$ then $x_h = C_1 t^{\alpha_{1}} + C_2 t^{\alpha_{2}}$
+        \end{itemize}    
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \begin{itemize}
+            \item If $\alpha_1 = \alpha_2$ then $x_h = C_1 t^{\alpha_{1}} + C_2 t^{\alpha_{1}} \ln t$
+        \end{itemize}    
+    \end{minipage}
+
+    Then find the particular solution by guessing or variation of parameters. The final solution is then $x = x_1 + x_p$.
+
+    \underline{Variation of Parameters:} If $x_1(t)$ and $x_2(t)$ are solutions to the homogenous equation then a particular solution is 
+    \[
+        x_p = \int_{t_{0}}^{t} = \frac{\det(N(t, s))}{\det(M(s))}f(s)\,\mathrm{d}s
+    \]
+    for 
+    \[
+        N(t, s) = \begin{pmatrix}
+            x_1(s) & x_2(s) \\
+            x_1(t) & x_2(t)
+        \end{pmatrix}    
+        \quad\text{and}\quad
+        M(s) = \begin{pmatrix}
+            x_1(s) & x_2(s) \\
+            x_1'(s) & x_2'(s) 
+        \end{pmatrix}
+    \]
+
+    \underline{Solution Space Dim:} A $n$th order differential equation has a solution space with order $n$. Thus, any solution set with more than $n$ solutions, must contain at least one linearly dependent solution.
+
+    \underline{Good to know formulas:}
+
+    \begin{minipage}{0.45\linewidth}
+        \[
+            e^{t} = \sum_{k=0}^{\infty} \frac{t^{k}}{k\mathbf{!}} = 1 + t + \frac{t^2}{2\mathbf{!}} + \frac{t^2}{3\mathbf{!}} + \cdots 
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \[
+            te^{t} = \sum_{k=0}^{\infty} \frac{t^{k+1}}{k\mathbf{!}} = t + t^2 + \frac{t^3}{2\mathbf{!}} + \frac{t^3}{3\mathbf{!}} + \cdots 
+        \]
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \sin t = \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k + 1)\mathbf{!}}t^{2k + 1} = t - \frac{t^3}{3\mathbf{!}} + \frac{t^5}{5\mathbf{!}} + \cdots 
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \cos t = \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k +)\mathbf{!}}t^{2k} = 1 - \frac{t^3}{3\mathbf{!}} + \frac{t^4}{4\mathbf{!}} + \cdots 
+        \]
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \sin 2t = 2 \sin t \cos t
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \cos 2t = \cos^2 t - \sin^2 t
+        \]
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \sin(\alpha \pm \beta) = \sin \alpha \cos \beta \pm \cos\alpha \sin\beta
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \cos(\alpha \pm \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta
+        \]
+    \end{minipage}
+    \[
+        \frac{1}{1-t} = \sum_{t=0}^{\infty} t^n = 1 + t + t^2 + \cdots 
+    \]
+\end{document}
