@@ -1,0 +1,124 @@
+\documentclass{exam}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{nicematrix}
+\usepackage{extpfeil}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage[x11names]{xcolor}
+\usepackage[most]{tcolorbox}
+
+\pgfplotsset{compat=1.18}
+\printanswers
+
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\braces}[1]{\ensuremath{\left\{#1 \right\}}}
+\newcommand{\Span}[1]{\ensuremath\text{Span}\braces{#1}}
+\newcommand{\ee}{\mathbf{e}}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shen \\ Differential Equations}{Challenge Problems \#7}{Jeevan Shah}
+\runningheader{Differential Equations \\ Challenge Problems \#7}{}{Shah}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+
+\begin{document}
+    \begin{questions}
+        \question Show that (assuming p is strictly positive), that all eigenvalues of L for Neumann
+boundary conditions must be non-positive
+        \begin{solution}
+            \begin{proof}
+                Start with $\mathcal{L}u = \lambda$ and multiply by $u$ beofre integrating to see 
+                \begin{align*}
+                    \int_a^b \mathcal{L}u\cdot\,u\,\mathrm{d}x = \int_a^b \lambda|u|^2\,\mathrm{d}x &\Rightarrow \int_a^b (pu')'u\,\mathrm{d}x = \lambda\int_a^b |u|^2\,\mathrm{d}x \\
+                    &\Rightarrow pu'u\big|_{a}^{b} - \int_a^b pu' \cdot u'\,\mathrm{d}x = \lambda\int_a^b |u|^2\,\mathrm{d}x \\
+                    &\Rightarrow -\int_a^b p|u'|^2\,\mathrm{d}x = \lambda\int_a^b |u|^2\,\mathrm{d}x.
+                \end{align*}
+                It that $\lambda \leq 0$ since $p > 0$ and $u$ is nontrivial. 
+            \end{proof}
+        \end{solution}
+
+        \question Show that at any critical point $x_0 \in [a, b]$ of $u_\lambda, u_\lambda(x_0) \neq 0, u_\lambda''(x_0) \neq 0$, and $u_\lambda''(x_0)$ has the opposite sign to $u_\lambda(x_0)$.
+        \begin{solution}
+            \begin{proof}
+                If $u(x_0) = 0$ and $u'(x_0) = 0$ and $u$ solves $\mathcal{L}u = \lambda u$, then $u$ must be the unique solution. Thus, since $u_{\lambda}(x_0)$ and $u_{\lambda}''(x_0)$ are non trivial, they cannot be zero. \\ At a critical point $x_0$, we have $u'(x_0) = 0$ so equation $(0.3)$ becomes 
+                \begin{align*}
+                    &u''(x_0) + \frac{p'}{p}(x_0) \cdot 0 - \frac{\lambda}{p(x_0)} u(x_0) = \\
+                    &\Rightarrow u''(x_0) = \frac{\lambda}{p(x_0)}u_\lambda(x_0)
+                \end{align*}
+                Since $\lambda < 0$ (we assume $\lambda \neq 0$) and $p > 0$, the term $\lambda / p(x_0) < 0$. It follows that $u''(x_0) \neq 0$ because $u_\lambda(x_0) \neq 0$. It is also clear that $u_\lambda''(x_0)$ has the opposite sign of $u_\lambda(x_0)$.
+            \end{proof}
+        \end{solution}
+
+        \question Show that the restriction $u_{\lambda}|_{[x_1, x_2]}$ of $u_\lambda$ to the subinterval $[x_1, x_2] \subset [a, b]$ is an eignefunction of $\mathcal{L}$ with Neumann boundary conditions, and 
+        \[
+            \int_{x_1}^{x_2} u_\lambda(x)\,\mathrm{d}x = 0. 
+        \]
+        Then use this to show that between every pair of critical points of $u_\lambda$, there is a zero of $u_\lambda$.
+        \begin{solution}
+            \begin{proof}
+                Since $x_1$ and $x_2$ are critical points its follows that
+                \[
+                    u_\lambda'(x_1) = u_\lambda'(x_2) = 0 
+                \]
+                which is exactly the Neumann boundary conditions on $[x_1, x_2]$. Also, because $u_\lambda$ satisfies the equation $\mathcal{L}u = \lambda u$ for all $x \in [a, b]$, it follows that $u_\lambda$ satisfies it for all $x \in [x_1, x_2] \subset [a, b]$. Hence $u_\lambda|_{[x_1, x_2]}$ is an eigenfunction of $\mathcal{L}$ on $[x_1, x_2]$ with eigenvalue $\lambda$. Because $1$ is always an eigenfunction with eigenvalues $0$ (since $\mathcal{L}(1) = (p\cdot\,0)' = 0$), and eigenfunctions with distinct eigenvalues are orthogonal we have that 
+                \[
+                    \int_{x_1}^{x_2} u_\lambda(x) \cdot 1 \,\mathrm{d}x = 0.
+                \]
+                Now, suppose for contradiction that $u_\lambda$ has no zero between $(x_1, x_2)$. By the intermediate value theorem $u_\lambda$ must be either strictly positive or negative on the interval. However, if $u_\lambda$ was strictly positive or negative then 
+                \[
+                    \int_{x_1}^{x_2} u_\lambda(x) \,\mathrm{d}x \neq 0 
+                \]
+                since $u_\lambda(x)$ is nontrivial. This is a contradiction to our earlier statement and so $u_\lambda$ must have at least one zero in $(x_1, x_2)$.
+            \end{proof}
+        \end{solution}
+
+        \question Set $\mathcal{L}u(x) = ((1+x)u'(x))'$, so that $V_\lambda = \frac{1}{4}\frac{1}{(1+x)^2} - \frac{\lambda}{1+x}$ for Dirichlet boundary conditions on $[x_1, x_2]$. Assume $x_1, x_2 > 0$. Use the theorem to provide an upper and lower bound for $\lambda_2$.
+        \begin{solution}
+            \begin{proof}
+                Since $x_1, x_2 > 0$, the function $1/(1+x)$ is strictly decreasing, so $V_\lambda$ is also strictly decreasing on $[x_1, x_2]$. Therefore 
+                \begin{align*}
+                    m^2 &= V_\lambda(x_2) = \frac{1}{4(1+x_2)^2} - \frac{\lambda^2}{1+x_2} \\
+                    M^2 &= V_\lambda(x_1) = \frac{1}{4(1+x_1)^2} - \frac{\lambda_2}{1+x_1}.
+                \end{align*}
+                It follows from the theorem that 
+                \[
+                    \frac{\pi}{M} \leq x_2 - x_1 \leq \frac{\pi}{m} \Rightarrow \frac{\pi^2}{M^2} \leq (x_2 - x_1)^2 \leq \frac{\pi^2}{m^2} \Rightarrow m^2 \leq \frac{\pi^2}{(x_2 - x_1)^2} \leq M^2.
+                \]
+                Seperating the inequalities and simplifying we see 
+                \begin{align*}
+                    m^2 \leq \frac{\pi^2}{(x_2 - x_1)^2} &\Rightarrow \frac{1}{4(1 + x_2)^2} - \frac{\lambda_2}{1+x_2} \leq \frac{\pi^2}{(x_2 - x_1)^2} \\
+                    &\Rightarrow \frac{1}{4}(1+x_2) - \lambda_2 \leq \frac{\pi^2(1+x_2)}{(x_2 - x_1)^2} \\
+                    &\Rightarrow \lambda_2 \geq \frac{1}{4(1+x_2)} - \frac{\pi^2(1+x_2)}{(x_2 - x_1)^2}
+                \end{align*}
+                and 
+                \begin{align*}
+                    M^2 \geq \frac{\pi^2}{(x_2 - x_1)^2} &\Rightarrow \frac{1}{4(1+x_1)^2} - \frac{\lambda_2}{1 + x_1} \geq \frac{\pi^2}{(x_2 - x_1)^2} \\
+                    &\Rightarrow \frac{1}{4(1+x_1)} - \lambda_2 \geq \frac{\pi^2(1+x_1)}{(x_2 - x_1)^2} \\
+                    &\Rightarrow \lambda_2 \leq \frac{1}{4(1+x_1)} - \frac{\pi^2(1+x_1)}{(x_2 - x_1)^2}.
+                \end{align*}
+                Thus, we can bound $\lambda_2$ by 
+                \[
+                    \frac{1}{4(1+x_2)} - \frac{\pi^2(1+x_2)}{(x_2 - x_1)^2} \leq \lambda_2 \leq \frac{1}{4(1+x_1)} - \frac{\pi^2(1+x_1)}{(x_2 - x_1)^2}
+                \]
+            \end{proof}
+        \end{solution}
+    \end{questions}
+\end{document}
