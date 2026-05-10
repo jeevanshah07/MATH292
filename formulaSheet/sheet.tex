@@ -33,7 +33,7 @@
 \firstpageheadrule
 \runningheadrule
 \firstpageheader{Prof. Shen \\ Differential Equations}{Formula Sheet}{Jeevan Shah}
-\runningheader{Differential Equations \\ Challenge Problems \#6}{}{Shah}
+\runningheader{Differential Equations \\ Formula Sheet}{}{Shah}
 \firstpagefooter{}{\thepage}{}
 \runningfooter{ }{\thepage}{ }
 
@@ -41,6 +41,52 @@
 
 
 \begin{document}
+    \underline{Matrix Exponential:} Given a square matrix $A$ the matrix exponential, $e^{tA}$, can be calculated by diagonalizing $A$ into $A=PDP^{-1}$ such that if $A$ has eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$ with corresponding eigenvectors $u_1, u_2, \ldots, u_n$ then 
+    \[
+        e^{tA} = Pe^{tD}P^{-1} = \begin{pmatrix}
+            u_1 & u_2 & \cdots & u_n
+        \end{pmatrix}  
+        \begin{pmatrix}
+            e^{t\lambda_1} & 0 & \cdots & 0 \\
+            0 & e^{t\lambda_2} & \cdots & 0 \\
+            \vdots & & \ddots &  \vdots \\
+            0 & \cdots & 0 & e^{\lambda_n}
+        \end{pmatrix}
+        \begin{pmatrix}
+            u_1 & u_2 & \cdots & u_n
+        \end{pmatrix}^{-1}
+    \]
+    If $A$ has a repeated eigenvalue $\lambda$, with corresponding eigenvector $v_1$, then the generalized eigenvector can be found by solving $(A - \lambda I)^{k}v_2 = v_1$ for some $k$. Standardly we have $(A - \lambda I)v_2 = v_1$ where $v_2$ is the generalized eigenvector. As well, the Jordan form will change to 
+    \[
+        J = \begin{pmatrix}
+            \lambda & 1 \\
+            0 & \lambda
+        \end{pmatrix} 
+        \Rightarrow e^{tJ} = \begin{pmatrix}
+            e^{\lambda} & te^{\lambda} \\
+            0 & e^{\lambda}
+        \end{pmatrix}
+    \]
+    We also have that for 
+    \[
+        \mathbf{x}'(t) = A\mathbf{x}(t), \quad \mathbf{x}(0) = \mathbf{x}_0
+    \]
+    the general solution is 
+    \[
+        \mathbf{x}(t) = e^{tA}\mathbf{x}_0
+    \]
+    with $e^{tA}$ the matrix exponential.
+
+    \underline{Duhamels Formula:} For the non-autonomous equation 
+    \[
+        \mathbf{x}'(t) = A\mathbf{x}(t) + \mathbf{g}(t)
+    \]
+    \textit{Duhamels Formula} provides the general solution: 
+    \[
+        \mathbf{x}(t) = e^{(t - t_0)A}\mathbf{x}_0 + \int_{t_0}^t e^{(t-s)A}\mathbf{g}(s)\,\mathrm{d}s
+    \]
+    for the initial value $\mathbf{x}(t_0)= \mathbf{x}_0$.
+
     \underline{Picard Iteration:} For an IVP with 
     \[
         x'(t) = v(x(t), t), \quad x(t_0) = x_0 
@@ -86,11 +132,16 @@
     \end{itemize}        
     If the $x_p$ guess is already accounted for in the homogenous solution, multiply by $t$ until it is unique. The final solution is then $x = x_p + x_h$.
 
+    \newpage 
+
     \underline{Cauchy-Euler Equations}: For an equation in the form 
     \[
         t^2 x'' + at x' + bx = g(t) 
     \]
-    guess $x_1 = t^{\alpha}$ so that $x_1' = \alpha t^{\alpha -1}$ and $x_1'' = \alpha(\alpha - 1)t^{\alpha - 2}$.
+    guess $x_1 = t^{\alpha}$ for the homogenous equation so that $x_1' = \alpha t^{\alpha -1}$ and $x_1'' = \alpha(\alpha - 1)t^{\alpha - 2}$. It follows that 
+    \[
+        \alpha(\alpha-1) + a\alpha + b = 0    
+    \]
 
     \begin{minipage}{0.45\linewidth}
         \begin{itemize}
@@ -125,6 +176,22 @@
 
     \underline{Solution Space Dim:} A $n$th order differential equation has a solution space with order $n$. Thus, any solution set with more than $n$ solutions, must contain at least one linearly dependent solution.
 
+
+    \underline{Inner Product Spaces:} A function $f$ defined on $[a, b]$ is in $L^{2}[a, b]$, the inner product space of all square integrable functions, if, and only if, 
+    \[
+        \int_{a}^{b} |f(x)|^2\,\mathrm{d}x < \infty 
+    \]
+
+    \underline{Approximation in Inner Product Spaces:} To find coefficents $c_0, c_1, c_2, \ldots, c_k$ to approximation some function $f$ in $L^{2}[a, b]$ given a set of basis functions $\braces{\phi_1, \phi_2, \ldots \phi_k}$, we must minimize 
+    \[
+        \left\|f - (c_0 + c_1\phi_1 + c_2\phi_2 + \cdots + c_k\phi_k)\right\|^2 = \int_{a}^{b} (f - c_0 - c_1\phi_1 - c_2\phi_2 - \cdots - c_k\phi_k)^2\,\mathrm{d}x.
+    \]
+    We can find the smallest such $c_k$ by computing the projection: 
+    \[
+        c_k = \frac{\langle f, \phi_k\rangle}{\langle \phi_k, \phi_k \rangle} 
+    \]
+    where the inner product $\langle f, g \rangle = \int_{a}^{b} f(x)g(x)\,\mathrm{d}x$ provided the basis functions are all orthogonal (i.e. $\langle f, g \rangle = \int_{a}^{b} f(x)g(x)\,\mathrm{d}x = 0$ for all basis functions).
+    
     \underline{Good to know formulas:}
 
     \begin{minipage}{0.45\linewidth}
@@ -174,4 +241,37 @@
     \[
         \frac{1}{1-t} = \sum_{t=0}^{\infty} t^n = 1 + t + t^2 + \cdots 
     \]
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \cos^{2}(x) = \frac{1+\cos(2x)}{2}
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \[
+            \sin^{2}(x) = \frac{1-\cos(2x)}{2}
+        \]
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \[
+            A = \begin{pmatrix}
+                a & b \\
+                c & d
+            \end{pmatrix}
+            \Rightarrow A^{-1} = \frac{1}{ad - bc}\begin{pmatrix}
+                d & -b \\
+                -c & a
+            \end{pmatrix}
+        \]
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \[
+            A = \begin{pmatrix}
+                a & b \\
+                c & d
+            \end{pmatrix} 
+            \Rightarrow \lambda^2 - (a + d)\lambda + (ad - bc) = 0
+        \]
+    \end{minipage}
 \end{document}
